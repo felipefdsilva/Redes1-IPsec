@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+    <style type="text/css">
+        body{
+        margin-left: auto;
+        margin-right:auto;
+        border: 30px;
+        width: 70%;
+        }
+        #toc_container {
+            /*background: #f9f9f9 none repeat scroll 0 0;*/
+            /*border: 1px solid #aaa;*/
+            display: table;
+            /*font-size: 95%;*/
+            margin-bottom: 1em;
+            padding: 20px;
+            width: auto;
+        }
+
+        .toc_title {
+        }
+
+        #toc_container li, #toc_container ul, #toc_container ul li{
+            list-style: outside none none !important;
+        }
+      </style>
+
+    <body>
+
+        <center>
+            <h1>Internet Protocol Security - IPSec</h1>
+            <h3>Felipe Ferreira, Silvia Caroline, William Macedo</h3>
+            <h4>Redes de Computadores I - 2018.1</h4>
+            <h4>Engenharia Eletr&ocirc;nica e de Computação</h4>
+            <h4>Departamento de Engenharia Eletr&ocirc;nica</h4>
+        </center>
+        
+        <div id="toc_container">
+                <p class="toc_title"><h2>Índice</h2></p>
+                <ul class="toc_list">
+                    <li><a href="#intro">1</a> - Introdução</li>
+                    <li><a href="#conceitos">2</a> - Conceitos Básicos
+                        <ul>
+                            <li><a href="#rede">2.1</a> - A Camada de Rede</li>
+                            <li><a href="#segrede">2.2</a> - Segurança na Camada de Rede</li>
+                        </ul>
+                    </li>
+                    <li><a href="#ipsec">3</a> - Internet Security Protocol
+                        <ul>
+                            <li><a href="#ha">3.1</a> - Cabeçalho de Autenticação</li>
+                            <li><a href="#esp">3.2</a> - Encapsulamento de Dados de Segurança</li>
+                            <li><a href="#ike">3.3</a> - Internet Key Exchange</li>
+                            <li><a href="#modos">3.4</a> - Modos de Operação</li>
+                        </ul>
+                    </li>
+                    <li><a href="#aplicacoes">4</a> - Aplicações
+                        <ul>
+                            <li><a href="#vpns">4.1</a> - Redes Privadas Virtuais</li>
+                        </ul>
+                    </li>
+                    <li><a href="#finais">5</a> - Considerações Finais</li>
+                    <li><a href="#referencias">6</a> - Referências</li>
+                </ul>
+        </div>
+
+        <div>
+            <h2 id="intro">1. Introdução</h2>
+            <p>A Internet, na sua concepção originária, foi projetada de forma 
+            a ser a mais simples e genérica possível, possibilitando assim a sua rápida expansão e crescimento.
+            Toda essa simplicidade é, de fato, percebida na facilidade de desenvolvimento e integração entre 
+            diversas redes. Contudo, grandes modificações no kernel da Internet não são possíveis de serem
+            feitas. Dessa forma, projetos atuais que levam em consideração requisitos que não foram 
+            inicialmente pensados na concepção da Internet, como por exemplo Segurança da Informação e 
+            Mobilidade de Hosts, possuem passos adicionais para serem implementados de forma 
+            satisfatória, como a utilização de outros protocolos.</p>
+            <p>Com o avanço da Globalização, grandes volumes de dados sensíveis trafegam diariamente por 
+            todo o planeta através da Internet, como transações financeiras, dados bancários, informações 
+            governamentais secretas, controle remoto de armas militares, etc. Começou-se a pensar, então, 
+            em métodos e protocolos para evitar que tais informações fossem capturadas indevidamente.</p>
+            <p>O protocolo de Internet (IP) versão 6 (IPv6), quando em desenvolvimento, tinha como principais 
+            objetivos a expansão do número possível de hosts e aumentar a segurança na camada de Rede. 
+            Percebeu-se então, que estas técnicas de segurança também poderiam ser aplicadas ao IPv4, 
+            que é largamente difundido e utilizado, além de que sua substituição pelo IPv6 está se dando 
+            a passos lentos. </p>
+            <p>O principal protocolo de segurança desenvolvido foi o IP Security Protocol (IPSec). 
+            Sua maior vantagem é o fato de prover serviço seguros de forma transparente, tanto para as aplicações, 
+            quanto para os usuários. Além disso, as aplicações que usam IPSec, não precisam ser modificadas 
+            de nenhuma forma. Isso é particularmente importante, quando se trabalha na segurança de uma 
+            determinada aplicação, porém não se possui o seu código fonte, fato bem comum atualmente. 
+            O IPsec integra sistemas de autenticação, gestão e distribuição de chaves de forma a estabelecer 
+            conexões mais seguras, como veremos nos tópicos a seguir.</p>
+        </div>
+
+        <div>
+            <h2 id="conceitos">2. Conceitos Básicos</h2>
+
+            <h3 id="rede">2.1. Camada de Rede</h3>
+
+            <h3 id="segrede">2.2. Segurança na Camada de Rede</h3>
+
+        </div>
+
+        <div>
+            <h2 id="ipsec">3. Internet Security Protocol</h2>
+            <p>O IPsec é uma plataforma aberta formada por um conjunto de protocolos que são designados a 
+            prover segurança para comunicações IP a nível de rede, proporcionando proteção a ataques de repetição
+            por meio do uso de inúmeras sequências. O método padrão é o fornecimento de privacidade, integridade 
+            e autenticidade das informações transferidas através de redes IP. Para redes LANs, WANs públicas, 
+            privadas e Internet a tecnologia.  A aplicação mais comum do IPsec é a criação de redes virtuais 
+            privadas VPN, e seus serviços podem ser manuseados por quaisquer protocolos das camadas superiores 
+            como: TCP, UDP, ICMP, BGP. </p>
+            <p>O IPsec permite a construção de túneis seguros sobre redes internet ou intranet. Todas as 
+            informações passadas através da rede são abreviadas pelo gateway IPsec solvido pelo outro ponto 
+            da comunicação. Sendo o resultado da Rede Privada Virtual VPN. O IPsec pode ser utilizado para 
+            proteger os dados que rodeiam entre dois computadores; um servidor de aplicações e um servidor 
+            de base de dados. Tornando-se totalmente transparente para as aplicações pelo fato dos serviços 
+            serem criptografados, terem integridades e autenticação nas implementações no nível de transporte.</p>
+            <p>As aplicações continuam a comunicar-se umas com as outras, da maneira habitual, usando as portas 
+            TCP e UDP. Em um modelo ponto-a-ponto que permite a troca de informações entre dois computadores de 
+            maneira segura, perante um conjunto comum de regras e de definições do protocolo. “Com o uso do IPSec 
+            e das tecnologias associadas, os dois computadores são capazes de se autenticar mutuamente e manter 
+            uma comunicação segura, mesmo usando um meio não seguro como a Internet”. </p>
+            <p>O objetivo do IPsec é garantir a privacidade para o usuário, integridade dos dados e autenticação 
+            das informações transferindo-as através de redes IP pela internet. O uso do IPsec em conjunto com 
+            o L2TP é considerado uma das opções mais indicadas para criação de conexões de VPN.</p>
+            <p>Os protocolos IPSec foram desenvolvidos pelo IETF (Internet Engineering Task Force) e são 
+            implementados tanto em IPv4 como IPv6. Quase todos os fornecedores de soluções de firewall ou 
+            software de segurança suportam o IPsec. </p>
+            <p>No IPsec a criptografia e autenticação de pacotes são realizadas na camada de rede, fornecendo 
+            uma solução de segurança fim-a-fim, garantindo a integridade, confidencialidade e autenticidade dos dados.</p>
+            <p>O IPSec fornece três protocolos principais: autenticação, referenciada como Authentication Header (AH), 
+            autenticação/criptografia chamada Encapsulating Security Payload (ESP), e IKE (Internet Key Exchange) 
+            troca de chave. Além dessas estruturas, o IPsec utiliza o conceito de Associação de Segurança (Security 
+            Asociation - SA), permitindo a comunicação entre duas ou mais entidades comunicantes descrevendo todos 
+            os mecanismos de segurança a serem utilizados; algoritmo e modo de autenticação a aplicar no cabeçalho 
+            de autenticação, chaves usadas nos algoritmos de autenticação e criptografia, tempo de vida da chave, 
+            tempo de vida da associação de segurança, nível de sensibilidade dos dados protegidos. Quando uma entidade 
+            desejar estabelecer uma associação de segurança, utilizará um SPI (Security Parameter Index) e um endereço 
+            de destino enviando as informações à entidade com que deseja estabelecer o canal de segurança. Dessa maneira, 
+            para cada sessão de comunicação autenticada serão necessários dois SPIs, ou seja, um para cada sentido, 
+            sendo necessário pelo fato da associação de segurança ser unidirecional. Como padrão, os algoritmos 
+            utilizados são HMAC-MD5 e HMAC-SHA-1 para autenticação e DESC-CBC para a criptografia do cabeçalho. 
+            Existe uma importância em destacar que os cabeçalhos utilizados são de extensão e irão ser adicionados 
+            a um cabeçalho IP. Assim, os encaminhadores do pacote poderão interpretá-lo como se fossem parte 
+            integrante dos dados, permitindo que equipamentos que conheçam IP e desconhecem IPsec possam ser utilizados 
+            normalmente.</p>
+            <h3 id="ha">3.1. Cabeçalho de Autenticação</h3>
+            <p>O protocolo AH, oferece serviço de autenticação para o pacote, uma proteção. Ele não altera a mensagem, 
+            ele adiciona um cabeçalho do tipo AH ao pacote IP contendo um hash de dados e uma sequência numérica. Pode-se 
+            verificar a integridade dos dados e a autenticidade do emissor do pacote. Ele é composto por um campo chamado 
+            numseq, que contem um contador que é incrementado automaticamente e é usado para proteção contra replays. 
+            Possui um campo chamado Dados Autenticação que é um campo de tamanho variável que contém o código de integridade 
+            da mensagem para o pacote. O campo precisa ser múltiplo inteiro de 32 bits. O AH é mecanismo para controle de 
+            acesso baseado na distribuição de chaves criptográficas e gerenciamento do fluxo de trafego dos protocolos seguros. 
+            Podendo ser combinados ou usados separadamente. </p>
+            <p>O cabeçalho AH tem a funcionalidade de validação da identidade de entidades comunicantes, certificando que 
+            o emissor/receptor é realmente quem diz ser.  O cabeçalho é apenas adicionado ao datagrama IP, portanto, não 
+            oferece segurança contra ataques de análise de tráfego ou confidencialidade. Utiliza-se o cabeçalho ESP para 
+            assegurar a confidencialidade dos dados.</p>
+            <h3 id="esp">3.2. Encapsulamento de Dados de Segurança</h3>
+            <p>O cabeçalho de Encapsulamento de Dados de Segurança (ESP) é responsável pela criptografia dos dados que 
+            são inseridos entre o cabeçalho IP e o restante do datagrama. Os campos de dados são alterados após serem 
+            criptografados. Simultaneamente com o ESP, segue o SPI para informar ao recipiente do pacote como proceder 
+            para abertura apropriada do conteúdo do mesmo. Um contador no ESP informa quantas vezes o SPI foi utilizado 
+            para o mesmo endereço IP de destino. Esse mecanismo previne um tipo de ataque no qual os pacotes são copiados 
+            e enviados fora de ordem, confundindo assim os nós de comunicação.</p>
+            <p>Todo o pacote, com exceção a parte de autenticação, é criptografado antes de ser transmitido. O somatório 
+            de verificação (checksum) é computado sobre todo o ESP, com exceção do campo de autenticação, e o seu comprimento 
+            varia de acordo com o algoritmo utilizado. Os algoritmos de criptografia utilizados são o DES (Data Encryption 
+            Standard) e o 3 DES (Triple Data Encryption Standard). A autenticação do ESP é diferente realizada pelo AH, pois 
+            não realiza a proteção do cabeçalho IP que precede o ESP, apesar de que proteja um cabeçalho IP encapsulado no 
+            Modo Túnel. O AH, por sua vez, protege este cabeçalho externo, juntamente com todo o conteúdo do pacote ESP. 
+            E as duas autenticações não são utilizadas ao mesmo tempo por questão de economia de processamento.</p>
+
+            <h3 id="ike">3.3. Internet Key Exchange</h3>
+
+            <h3 id="modos">3.4. Modos de Operação</h3>
+            <p>O IPsec possui dois modos de funcionamento: o Modo Transporte e o Modo Túnel e dois tipos de protocolos: 
+            o Authentication Header (AH) e o Encapsulating Security Payload (ESP) para transferência segura de informação.
+            O terceiro protocolo é o Internet Key Exchange Protocol (IKE), sua função é realizar a autenticação das entidades 
+            envolvidas e gerir automaticamente as ligações IPsec. Transporte O IPsec trabalha em dois modos, modo de Transporte
+            e modo Túnel. No modo de Transporte, apenas o segmento da camada de transporte á processado, isto é, autenticado 
+            e criptografado. Este modo é aplicável para implementações em servidores e gateways, protegendo camadas superiores
+            de protocolos, além de cabeçalhos IP selecionados. O cabeçalho AH é inserido após o cabeçalho IP e antes do 
+            protocolo de camada superior (TCP, UDP, ICMP), ou antes de outros cabeçalhos que o IPsec tenha inserido. Os 
+            endereços de IP de origem e destinos ainda estão abertos para modificação, caso os pacotes sejam interceptados.</p>
+            <p>Modo transporte garante a segurança apenas dos dados provenientes das camadas superiores é utilizado para 
+            comunicação “fim-a-fim” entre computadores. O Modo Túnel que fornece segurança para a camada IP e é utilizado 
+            para comunicação entre roteadores. Ambos os protocolos AH e ESP podem funcionar no modo transporte e túnel.</p>
+
+            <h4 id="mtransporte">3.4.1. Modo Transporte</h4>
+            
+            <p>O Modo Transporte é utilizado para estabelecimento de ligações seguras entre hosts. Neste modo é mantido o 
+            header original dos pacotes IP e protegido apenas a informação das camadas superiores. Neste modo os hosts 
+            necessitam de suportar a funcionalidade IPsec.</p>
+            <ul>
+                <li>Protocolo AH realiza a autenticação e integridade dos dados do pacote IP original. 
+                É mantido o IP header original e inserido o header do protocolo AH para a proteção.</li>
+                <li>Protocolo ESP realiza autenticação, integridade e confidencialidade (encriptação) 
+                do conteúdo do pacote IP original. É mantido o cabeçalho IP original e inserido o cabeçalho e o 
+                tailer do protocolo ESP para a proteção </li>
+            </ul>
+            <p>Emissor e receptor devem possuir suporte ao IPsec. O cabeçalho IP mantém-se original, protegendo 
+            apenas os cabeçalhos superiores, pois o cabeçalho IPsec é adicionado imediatamente após o cabeçalho IP, 
+            antes dos cabeçalhos dos protocolos das camadas superiores.</p>
+
+            <h4 id="mtunel">3.4.1. Modo Túnel</h4>
+            
+            <p>O Modo Túnel todo o pacote IP é autenticado ou criptografado, resultando apenas o cabeçalho IP externos 
+            visíveis, transmitindo o destino do gateway (roteador, firewall, etc), permanecendo todo o conteúdo interno 
+            criptografado.Este método pode-se usar para evitar a análise de tráfego. Devido ao fato de o cabeçalho IP 
+            conter o endereço de destino e possivelmente as diretivas de roteamento e informação proveniente da opção 
+            salto-por-salto, não é possível transmitir o pacote IP criptografado dispondo prefixo de cabeçalho ESP, 
+            pois roteadores intermediários seriam incapazes de processar o pacote.</p>
+            <p>É necessário encapsular o bloco inteiro do cabeçalho ESP mais o pacote IP criptografado com um novo cabeçalho 
+            IP que deverá conter informações suficientes para o roteamento, mas não para a análise de tráfego. “Enquanto o 
+            modo de transporte é adequado para proteger conexões entre estações que suportam o modo ESP o modo túnel é útil 
+            numa configuração que inclua um firewall ou outro tipo de gateway de segurança que protege uma rede confiável 
+            das redes externas. No segundo caso, a criptografia acorre apenas entre uma estação externa e o gateway de 
+            segurança, ou entre dois gateways de segurança”. Liberando as estações da rede interna do processamento de 
+            criptografia e simplificando a tarefa de distribuição de chaves pela redução do número de chaves necessárias. 
+            Inibindo a análise de tráfego baseada no destino final.</p>
+            <ul>
+                <li>O protocolo AH realizada autenticação e integridade de todo o pacote IP original. Um novo IP header 
+                e o header do protocolo é inserido no AH para a proteção. O IP header original contém os endereços IP de 
+                origem e destino da mensagem, enquanto o novo IP header contem os endereços IP das gateways IPsec.</li>
+                <li>O protocolo ESP realiza autenticação, integridade e confidencialidade do pacote IP original. Um novo 
+                IP header é inserido no ESP header e um ESP Tailer para a proteção. Os endereços IPs de origem e destino 
+                da mensagem são inseridos o IP header original, enquanto o novo IP header contém os endereços IP das 
+                gateways IPsec. </li>
+            </ul>
+            <p>O Modo Túnel é o modo mais utilizado e serve para criar uma ligação segura VPN entre duas gateways ou 
+            entre uma gateway e um host. No método utilizado os equipamentos internos não precisam de suportar o IPsec, 
+            a encriptação e desencriptação ocorre nas IPsec Gateways. Um novo IP header é criado e o pacote IP original 
+            é totalmente protegido.</p>
+        </div>
+
+        <div>
+            <h2 id="aplicacoes">4. Aplicações</h2>
+
+            <h3 id="vpns">4.1. Redes Privadas Virtuais</h3>
+
+        </div>
+
+        <div>
+            <h2 id="finais">5. Considerações Finais</h2>
+        </div>
+        <div>
+            <h2 id="referencias">6. Referências</h2>
+            <ul>
+                <li>[1] FERGUSON, N.; SCHNEIER, B. A cryptographic evaluation of IPSec. Counterpane Internet Security, Inc, v. 3031, p. 14, 2000.</li>
+                <li>[2] KENT, S.; SEO, K. RFC 4301: Security architecture for the internet protocol. URL: https://tools.ietf.org/html/rfc4301, 2005.</li>
+                <li>[3] FRANKEL, S.; KENT, K.; LEWKOWSKI, R.; OREBAUGH, A. D.; RITCHEY, R. W.; SHARMA, S. R. Guide to IPSec VPNs. NIST Special Publication, v. 800, 2005.</li>
+                <li>[4] OPPLIGER, R. Security at the internet layer. Computer, v. 31, n. 9, p.43{47, 1998.</li>
+                <li>[5] CAMILO, B. D. C. V. Análise da sobrecarga do ipsec no mapeamento de redes virtuais. 2015. (Undergraduate Final Project) - Universidade Federal do Rio de Janeiro, 2015.</li>
+                <li>[6] FORTIO, R. M. S. Análise e implementação do protocolo de segurança IPsec na rede de acesso LTE. 2014 (Master Thesis) - Técnico Lisboa. 2014</li>
+                <li>[7] ALSHAMRANI, H. Internet Protocol Security (IPsec) Mechanisms. International Journal of Scientific & Engineering Research, v. 5, n. 5, p.85{87, 2014.</li>
+            </ul>
+        </div>
+
+        <hr>
+        <footer><p>"Este trabalho foi totalmente produzido pelos autores que declaram não terem violado os direitos autorais 
+                de terceiros, sejam eles pessoas físicas ou jurídicas. Havendo textos, tabelas e figuras transcritos de obras 
+                de terceiros com direitos autorais protegidos ou de domínio público tal como idéias e conceitos de terceiros, 
+                mesmo que sejam encontrados na Internet, os mesmos estão com os devidos créditos aos autores originais e estão 
+                incluídas apenas com o intuito de deixar o trabalho autocontido. O(s) autor(es) tem(êm) ciência dos Artigos 297 
+                a 299 do Código Penal Brasileiro e também que o uso do artifício de copiar/colar texto de outras fontes e outras 
+                formas de plágio é um ato ilícito, condenável e passível de punição severa. No contexto da Universidade a punição 
+                não precisa se restringir à reprovação na disciplina e pode gerar um processo disciplinar que pode levar o(s) 
+                aluno(s) à suspensão;"</p>
+        </footer>
+    </body>
+</html>
