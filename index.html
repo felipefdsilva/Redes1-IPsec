@@ -2,6 +2,7 @@
 <html>
     <style type="text/css">
         body{
+        text-align: justify;
         margin-left: auto;
         margin-right:auto;
         border: 30px;
@@ -23,9 +24,44 @@
         #toc_container li, #toc_container ul, #toc_container ul li{
             list-style: outside none none !important;
         }
-      </style>
+        #myBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: rgba(0, 0, 0, 0.651);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 35px;
+        }
+        #myBtn:hover {
+            background-color: #555;
+        }
+    </style>
 
     <body>
+        <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {scrollFunction()};
+            
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("myBtn").style.display = "block";
+                } else {
+                    document.getElementById("myBtn").style.display = "none";
+                }
+            }
+            
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
 
         <center>
             <h1>Internet Protocol Security - IPSec</h1>
@@ -34,7 +70,9 @@
             <h4>Engenharia Eletr&ocirc;nica e de Computação</h4>
             <h4>Departamento de Engenharia Eletr&ocirc;nica</h4>
         </center>
-        
+
+        <button onclick="topFunction()" id="myBtn" title="Volta para o topo">Voltar ao topo</button>
+
         <div id="toc_container">
                 <p class="toc_title"><h2>Índice</h2></p>
                 <ul class="toc_list">
