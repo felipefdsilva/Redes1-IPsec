@@ -1,2 +1,2 @@
 *.docx
-desktop.ini
+*.ini
