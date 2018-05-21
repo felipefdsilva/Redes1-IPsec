@@ -1,105 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <style type="text/css">
-        body{
-        text-align: justify;
-        margin-left: auto;
-        margin-right:auto;
-        border: 30px;
-        width: 70%;
-        }
-        #toc_container {
-            /*background: #f9f9f9 none repeat scroll 0 0;*/
-            /*border: 1px solid #aaa;*/
-            display: table;
-            /*font-size: 95%;*/
-            margin-bottom: 1em;
-            padding: 20px;
-            width: auto;
-        }
 
-        .toc_title {
-        }
-
-        #toc_container li, #toc_container ul, #toc_container ul li{
-            list-style: outside none none !important;
-        }
-        #myBtn {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 99;
-            border: none;
-            outline: none;
-            background-color: rgba(0, 0, 0, 0.651);
-            color: rgb(255, 255, 255);
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 35px;
-        }
-        #myBtn:hover {
-            background-color: #555;
-        }
-    </style>
-
-    <body>
-        <script>
-            // When the user scrolls down 20px from the top of the document, show the button
-            window.onscroll = function() {scrollFunction()};
-            
-            function scrollFunction() {
-                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                    document.getElementById("myBtn").style.display = "block";
-                } else {
-                    document.getElementById("myBtn").style.display = "none";
-                }
-            }
-            
-            // When the user clicks on the button, scroll to the top of the document
-            function topFunction() {
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-            }
-        </script>
-
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Custom fonts for this template -->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+        
+        <!-- Custom styles for this template -->
+        <link href="css/resume.css" rel="stylesheet">
+        
+        <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/0A478A80-E68D-2643-BA05-9F59C9FA973C/main.js" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/C379AF9C95F9-50AB-3462-D86E-08A874A0/abn/main.css"/>
+        
         <center>
-            <h1>Internet Protocol Security - IPSec</h1>
+            <h1>IPSec - Segurança na Camada de Rede</h1>
             <h3>Felipe Ferreira, Silvia Caroline, William Macedo</h3>
             <h4>Redes de Computadores I - 2018.1</h4>
-            <h4>Engenharia Eletr&ocirc;nica e de Computação</h4>
-            <h4>Departamento de Engenharia Eletr&ocirc;nica</h4>
+            <h4>Engenharia Eletrônica e de Computação</h4>
+            <h4>Departamento de Engenharia Eletrônica</h4>
         </center>
+    </head>
 
-        <button onclick="topFunction()" id="myBtn" title="Volta para o topo">Voltar ao topo</button>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                    <!--<span class="d-block d-lg-none">Start Bootstrap</span>-->
+                    <span class="fa-stack fa-3x">
+                        <i class="fa fa-circle-o-notch fa-inverse fa-stack-2x"></i>
+                        <!--i class="fa fa-car fa-stack-1x"></i-->
+                        <i class="fa fa-wifi fa-stack-1x"></i>
+                    </span>
+                </a>
 
-        <div id="toc_container">
-                <p class="toc_title"><h2>Índice</h2></p>
-                <ul class="toc_list">
-                    <li><a href="#intro">1</a> - Introdução</li>
-                    <li><a href="#conceitos">2</a> - Conceitos Básicos
-                        <ul>
-                            <li><a href="#rede">2.1</a> - A Camada de Rede</li>
-                            <li><a href="#segrede">2.2</a> - Segurança na Camada de Rede</li>
-                        </ul>
-                    </li>
-                    <li><a href="#ipsec">3</a> - Internet Security Protocol
-                        <ul>
-                            <li><a href="#ha">3.1</a> - Cabeçalho de Autenticação</li>
-                            <li><a href="#esp">3.2</a> - Encapsulamento de Dados de Segurança</li>
-                            <li><a href="#ike">3.3</a> - Internet Key Exchange</li>
-                            <li><a href="#modos">3.4</a> - Modos de Operação</li>
-                        </ul>
-                    </li>
-                    <li><a href="#aplicacoes">4</a> - Aplicações
-                        <ul>
-                            <li><a href="#vpns">4.1</a> - Redes Privadas Virtuais</li>
-                        </ul>
-                    </li>
-                    <li><a href="#finais">5</a> - Considerações Finais</li>
-                    <li><a href="#referencias">6</a> - Referências</li>
-                </ul>
-        </div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#intro">1. Introdução</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#conceitos">2. Conceitos Básicos</a>
+                                <ul>
+                                    <li><a class="nav-link js-scroll-trigger" href="#criptografia">2.1. Criptografia</a></li>
+                                    <li><a class="nav-link js-scroll-trigger" href="#fhash">2.2. Funções Hash criptográticas</a></li>
+                                    <li><a class="nav-link js-scroll-trigger" href="#autenticacaoMsg">2.3. Código de Autenticação de Mensagem</a></li>
+                                    <li><a class="nav-link js-scroll-trigger" href="#assinatura">2.4. Assinatura Digital</a></li>
+                                </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#ipsec">3. Arquitetura</a>
+                                <ul>
+                                    <li><a class="nav-link js-scroll-trigger" href="#ha">3.1. Cabeçalho de Autenticação</a></li>
+                                    <li><a class="nav-link js-scroll-trigger" href="#esp">3.2. Encapsulamento de Dados de Segurança</a></li>
+                                    <li><a class="nav-link js-scroll-trigger" href="#ike">3.3. Internet Key Exchange</a></li>
+                                    <li><a class="nav-link js-scroll-trigger" href="#modos">3.4. Modos de Operação</a></li>
+                                </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#aplicacoes">4. Aplicações</a>
+                            <ul>
+                                <li><a class="nav-link js-scroll-trigger" href="#vpns">4.1. Redes Privadas Virtuais</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#finais">5. Considerações Finais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#referencias">6. Referências</a>
+                        </li>
+                    </ul>
+                </div>
+        </nav>
 
         <div>
             <h2 id="intro">1. Introdução</h2>
@@ -131,15 +113,54 @@
 
         <div>
             <h2 id="conceitos">2. Conceitos Básicos</h2>
-
-            <h3 id="rede">2.1. Camada de Rede</h3>
-
-            <h3 id="segrede">2.2. Segurança na Camada de Rede</h3>
-
+            <p>Considerando que duas entidades queriam se comunicar de forma segura através de um meio público como a Internet,
+            algumas propriedade são desejáveis, conforme indicado em [1]:
+                <ul>
+                    <li><b>Confidencialidade</b> - apenas remetente e destinatário tem acesso a mensagem descodificada</li>
+                    <li><b>Integridade da Mensagem</b> - Confiança de que a mensagem não foi alterada durante a transmissão</li>
+                    <li><b>Autenticação de Ponto Final</b> - Remetente deve confirmar a identidade do destinatário e vice-versa</li>
+                    <li><b>Segurança Operacional</b> - O ambiente em que a mensagem é escrita deve estar bem protegido. Esta 
+                        característica não envolve o IPsec, e está além do escopo deste trabalho. Porém, é característica
+                        fundamental de uma comunicação segura.</li>
+                </ul>
+            </p>
+            <h3 id="criptografia">2.1. Criptografia</h3>
+            <p>Uma mensagem sem codificação, tem seu conteúdo em texto plano (também conhecido como texto claro ou aberto). 
+            Uma mensagem que passa por um algoritmo de criptografia passa a ter um conteúdo em texto cifrado, intelegível
+            para um interceptor na transmissão.</p>
+            <p>Técnicas e algoritmos de transmissão são publicados e padronizados na Internet (p.ex as RFCs 1321, 3447, 2420).
+            Independente da técnica usada, uma mensagem criptograda só pode ser descriptografada com uma <b>chave de segurança</b>.
+            Esta chave (que pode ser a mesma para ambos ou exclusiva de cada um) serve de parâmetro para que o algoritmo de 
+            decriptação possa transforma a mensagem em texto cifrado em uma mensagem em texto plano. A figura 1
+            ilustra os componentes básicos de um sistema de criptografia.</p>
+            <img src="img/criptografia.png">
+            <h3 id="fhash">2.2. Funções de Hash criptográficas</h3>
+            <p>Se diferem das funções hash comuns por ser uma função bijetora, ou seja, existe um único hash para a mensagem
+            escrita. Em outras palavras um invasor não consegue reproduzir o mesmo hash com uma mensagem diferente. Algoritmos 
+            de hash criptografados bem conhecidos são o MD5[RFC 1321] e o SHA-1[FIPS, 1995].</p>
+            <p>Funções hash criptografadas são usadas para atender a propriedade de integridade da mensagem em uma comunicação
+            segura.</p>
+            <h3 id="autenticacaoMsg">2.3. Código de Autenticação de Mensagem</h3>
+            <p>Nos cenários descritos, ainda é possível q o invasor crie uma mensagem qualquer, gere um hash válido e envie
+            para um receptor, falsificando sua identidade como remetente.</p>
+            <p>Portanto, emissor e receptor compartilham um segredo chamado de chave de autenticação de mensagem. Essa chave
+            é uma sequência de bits que é concatenada à mensagem original para o cálculo da função hash criptográfica.
+            O receptor, que possui o código de autenticação, calcula o hash da mensagem recebida concatenada de seu código. 
+            Se o valor do hash recebido for igual ao do hash calculado, a mensagem é autêntica. A figura 2 ilustra esse 
+            processo.</p>
+            <img src="img/MAC.png">
+            <h3 id="assinatura">2.4. Assinatura Digital</h3>
+            <p>Têm-se até aqui, garantias de confidencialidade e integridade. Resta identificar um usuário. Ou seja,
+            garantir que aquela mensagem válida foi enviada pelo usuário X e somente ele poderia ter enviado essa mensagem.
+            Neste caso, uma altenativa é usar um par de chaves (uma pública e uma privada). A chave pública conhecida por
+            todos, inclusive pelo destinatário. O remetente "assina" sua mensagem utilizando sua chave privada no hash citado 
+            na seção 2.2. O destinatário utliza a chave pública do remetente para chegar ao hash da mensagem e utiliza a
+            mensagem para chegar ao hash da mensagem (como explicado na seção 2.3). Caso o valor obtido nos dois processos
+            seja o mesmo, o remetente está identificado.</p> 
         </div>
 
         <div>
-            <h2 id="ipsec">3. Internet Security Protocol</h2>
+            <h2 id="ipsec">3. Arquitetura do IPsec</h2>
             <p>O IPsec é uma plataforma aberta formada por um conjunto de protocolos que são designados a 
             prover segurança para comunicações IP a nível de rede, proporcionando proteção a ataques de repetição
             por meio do uso de inúmeras sequências. O método padrão é o fornecimento de privacidade, integridade 
@@ -211,7 +232,47 @@
             E as duas autenticações não são utilizadas ao mesmo tempo por questão de economia de processamento.</p>
 
             <h3 id="ike">3.3. Internet Key Exchange</h3>
-
+            <p>O IKE (Internet Key Exchange, também conhecido como IKEv2) provê o gerenciamento da segurança para o 
+            Security Association. O IKE autentica cada ponto (host/gateways/servidores) de uma conexão IPsec, negocia 
+            políticas de segurança e manipula as trocas das chaves de sessão. </p>
+            <p>Além disso, é possível usar certificados X509v3 para a autenticação dos equipamento envolvidos 
+            durante a negociação do IKE. O gerenciamento dos certificados inclui o uso do SCEP (Simple Certificate 
+            Enrollment Protocol), que permite a comunicação com uma Autoridade Certificadora (CA – Certificate Authority). 
+            Este certificado suporta ainda estrutura hierárquica para o uso em uma infra estrutura de chaves públicas 
+            (PKI – Public Key Infrastructure)</p>
+            <p>Os componentes para isso incluem o uso do protocolo de chaves públicas Diffie-Hellman para estabelecer uma 
+            chave de sessão mesmo estando em um meio inseguro, como a Internet</p>
+            <p>Resumidamente o IKE provê quatro funcionalidades:</p>
+            <ul>
+                <li>Provê meios para as partes negociarem quais protocolos, algoritmos e chaves a serão usadas.</li>
+                <li>Garante a identidade das partes, tanto do cliente, quanto do servidor.</li>
+                <li>Gerencia as chaves após elas estarem em uso.</li>
+                <li>Garante que as trocas de mensagens que contém chaves sejam feitas por meios muito seguros.</li>
+            </ul>
+            <p>A Internet Key Exchange (IKE) é um protocolo de gestão de chaves que usa a porta 500 UDP, responsável 
+            pela criação, eliminação e alteração das chaves para autenticação e validação de informações, o IKE foi 
+            definido como regras de gestão o protocolo híbrido, constituído pelo ISAKMP e pelo Oakley, também denominado 
+            IKE. É usado para criar uma SA no IPSec, ou seja, negocia políticas de segurança e organiza as trocas das 
+            chaves de cada sessão (ANDREOLI, 2012).</p>
+            <p>Uma SA pode ser configurada manualmente em cada gateway por um administrador de segurança, ou pode ser 
+            alterada pelo protocolo IKE dinamicamente, para que possa garantir uma segurança ainda maior (SANT’ANNA, 2003)</p>
+            <p>A especificação do IPSec determina que a gerência de chaves pode ser implementada de modo manual ou automática. 
+            O protocolo IKE implementa a gerência automática de chaves. Trata-se de um protocolo híbrido constituído pelo ISAKMP 
+            e pelo OAKLEY. </p>
+            <p>O ISAKMP é responsável pelo estabelecimento, negociação, modificação e exclusão das AS’s. Ele define o formato dos 
+            pacotes e os procedimentos. O OAKLEY fornece o mecanismo de troca de chaves utilizado pelo ISAKMP. Ele é uma 
+            variação mais segura do algoritmo Diffie-Hellman.</p>
+            <p> O IKE age em duas fases. Na primeira fase, dois pares estabelecem um canal seguro para realizar as operações 
+            do ISAKMP (o ISAKMP SA). Na segunda fase, os dois pares ajustam os SA de propósito geral.</p>
+            <p>Para o estabelecimento de uma associacão segura IKE, o modo que inicia a negociação deve propor os seguintes itens:</p>
+            <ul>
+                <li>O algoritmo de criptografia para proteger os dados;</li>
+                <li>Um algoritmo de hash para assinatura digital;</li>
+                <li>Um método de autenticação para assinar o hash; </li>
+                <li>Informação sobre qual grupo a troca Diffie-Hellman deve feita; </li>
+                <li>Especificação da função pseudo randômica para fazer o hash de certos.</li>
+            </ul>
+            
             <h3 id="modos">3.4. Modos de Operação</h3>
             <p>O IPsec possui dois modos de funcionamento: o Modo Transporte e o Modo Túnel e dois tipos de protocolos: 
             o Authentication Header (AH) e o Encapsulating Security Payload (ESP) para transferência segura de informação.
@@ -286,13 +347,14 @@
         <div>
             <h2 id="referencias">6. Referências</h2>
             <ul>
-                <li>[1] FERGUSON, N.; SCHNEIER, B. A cryptographic evaluation of IPSec. Counterpane Internet Security, Inc, v. 3031, p. 14, 2000.</li>
-                <li>[2] KENT, S.; SEO, K. RFC 4301: Security architecture for the internet protocol. URL: https://tools.ietf.org/html/rfc4301, 2005.</li>
-                <li>[3] FRANKEL, S.; KENT, K.; LEWKOWSKI, R.; OREBAUGH, A. D.; RITCHEY, R. W.; SHARMA, S. R. Guide to IPSec VPNs. NIST Special Publication, v. 800, 2005.</li>
-                <li>[4] OPPLIGER, R. Security at the internet layer. Computer, v. 31, n. 9, p.43{47, 1998.</li>
-                <li>[5] CAMILO, B. D. C. V. Análise da sobrecarga do ipsec no mapeamento de redes virtuais. 2015. (Undergraduate Final Project) - Universidade Federal do Rio de Janeiro, 2015.</li>
-                <li>[6] FORTIO, R. M. S. Análise e implementação do protocolo de segurança IPsec na rede de acesso LTE. 2014 (Master Thesis) - Técnico Lisboa. 2014</li>
-                <li>[7] ALSHAMRANI, H. Internet Protocol Security (IPsec) Mechanisms. International Journal of Scientific & Engineering Research, v. 5, n. 5, p.85{87, 2014.</li>
+                <li>[1] KUROSE, James F. Redes de Computadores e a Internet - Uma abordagem Top  Down, 6/E. Pearson Education India, 2014.</li>
+                <li>[2] FERGUSON, N.; SCHNEIER, B. A cryptographic evaluation of IPSec. Counterpane Internet Security, Inc, v. 3031, p. 14, 2000.</li>
+                <li>[3] KENT, S.; SEO, K. RFC 4301: Security architecture for the internet protocol. URL: https://tools.ietf.org/html/rfc4301, 2005.</li>
+                <li>[4] FRANKEL, S.; KENT, K.; LEWKOWSKI, R.; OREBAUGH, A. D.; RITCHEY, R. W.; SHARMA, S. R. Guide to IPSec VPNs. NIST Special Publication, v. 800, 2005.</li>
+                <li>[5] OPPLIGER, R. Security at the internet layer. Computer, v. 31, n. 9, p.43{47, 1998.</li>
+                <li>[6] CAMILO, B. D. C. V. Análise da sobrecarga do ipsec no mapeamento de redes virtuais. 2015. (Undergraduate Final Project) - Universidade Federal do Rio de Janeiro, 2015.</li>
+                <li>[7] FORTIO, R. M. S. Análise e implementação do protocolo de segurança IPsec na rede de acesso LTE. 2014 (Master Thesis) - Técnico Lisboa. 2014</li>
+                <li>[8] ALSHAMRANI, H. Internet Protocol Security (IPsec) Mechanisms. International Journal of Scientific & Engineering Research, v. 5, n. 5, p.85{87, 2014.</li>
             </ul>
         </div>
 
