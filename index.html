@@ -133,13 +133,18 @@
             Esta chave (que pode ser a mesma para ambos ou exclusiva de cada um) serve de parâmetro para que o algoritmo de 
             decriptação possa transforma a mensagem em texto cifrado em uma mensagem em texto plano. A figura 1
             ilustra os componentes básicos de um sistema de criptografia.</p>
-            <img src="img/criptografia.png">
+            <figure>
+                <img src="img/criptografia.png">
+                <figcaption>Ideia geral de criptografia</figcaption>
+            </figure>
+
             <h3 id="fhash">2.2. Funções de Hash criptográficas</h3>
             <p>Se diferem das funções hash comuns por ser uma função bijetora, ou seja, existe um único hash para a mensagem
             escrita. Em outras palavras um invasor não consegue reproduzir o mesmo hash com uma mensagem diferente. Algoritmos 
             de hash criptografados bem conhecidos são o MD5[RFC 1321] e o SHA-1[FIPS, 1995].</p>
             <p>Funções hash criptografadas são usadas para atender a propriedade de integridade da mensagem em uma comunicação
             segura.</p>
+
             <h3 id="autenticacaoMsg">2.3. Código de Autenticação de Mensagem</h3>
             <p>Nos cenários descritos, ainda é possível q o invasor crie uma mensagem qualquer, gere um hash válido e envie
             para um receptor, falsificando sua identidade como remetente.</p>
@@ -148,7 +153,11 @@
             O receptor, que possui o código de autenticação, calcula o hash da mensagem recebida concatenada de seu código. 
             Se o valor do hash recebido for igual ao do hash calculado, a mensagem é autêntica. A figura 2 ilustra esse 
             processo.</p>
-            <img src="img/MAC.png">
+            <figure>
+                <img src="img/MAC.png">
+                <figcaption>...</figcaption>
+            </figure>
+
             <h3 id="assinatura">2.4. Assinatura Digital</h3>
             <p>Têm-se até aqui, garantias de confidencialidade e integridade. Resta identificar um usuário. Ou seja,
             garantir que aquela mensagem válida foi enviada pelo usuário X e somente ele poderia ter enviado essa mensagem.
@@ -161,61 +170,86 @@
 
         <div>
             <h2 id="ipsec">3. Arquitetura do IPsec</h2>
-            <p>O IPsec é uma plataforma aberta formada por um conjunto de protocolos que são designados a 
-            prover segurança para comunicações IP a nível de rede, proporcionando proteção a ataques de repetição
-            por meio do uso de inúmeras sequências. O método padrão é o fornecimento de privacidade, integridade 
-            e autenticidade das informações transferidas através de redes IP. Para redes LANs, WANs públicas, 
-            privadas e Internet a tecnologia.  A aplicação mais comum do IPsec é a criação de redes virtuais 
-            privadas VPN, e seus serviços podem ser manuseados por quaisquer protocolos das camadas superiores 
-            como: TCP, UDP, ICMP, BGP. </p>
-            <p>O IPsec permite a construção de túneis seguros sobre redes internet ou intranet. Todas as 
-            informações passadas através da rede são abreviadas pelo gateway IPsec solvido pelo outro ponto 
-            da comunicação. Sendo o resultado da Rede Privada Virtual VPN. O IPsec pode ser utilizado para 
-            proteger os dados que rodeiam entre dois computadores; um servidor de aplicações e um servidor 
-            de base de dados. Tornando-se totalmente transparente para as aplicações pelo fato dos serviços 
-            serem criptografados, terem integridades e autenticação nas implementações no nível de transporte.</p>
-            <p>As aplicações continuam a comunicar-se umas com as outras, da maneira habitual, usando as portas 
-            TCP e UDP. Em um modelo ponto-a-ponto que permite a troca de informações entre dois computadores de 
-            maneira segura, perante um conjunto comum de regras e de definições do protocolo. “Com o uso do IPSec 
-            e das tecnologias associadas, os dois computadores são capazes de se autenticar mutuamente e manter 
-            uma comunicação segura, mesmo usando um meio não seguro como a Internet”. </p>
-            <p>O objetivo do IPsec é garantir a privacidade para o usuário, integridade dos dados e autenticação 
-            das informações transferindo-as através de redes IP pela internet. O uso do IPsec em conjunto com 
-            o L2TP é considerado uma das opções mais indicadas para criação de conexões de VPN.</p>
-            <p>Os protocolos IPSec foram desenvolvidos pelo IETF (Internet Engineering Task Force) e são 
-            implementados tanto em IPv4 como IPv6. Quase todos os fornecedores de soluções de firewall ou 
-            software de segurança suportam o IPsec. </p>
-            <p>No IPsec a criptografia e autenticação de pacotes são realizadas na camada de rede, fornecendo 
-            uma solução de segurança fim-a-fim, garantindo a integridade, confidencialidade e autenticidade dos dados.</p>
-            <p>O IPSec fornece três protocolos principais: autenticação, referenciada como Authentication Header (AH), 
-            autenticação/criptografia chamada Encapsulating Security Payload (ESP), e IKE (Internet Key Exchange) 
-            troca de chave. Além dessas estruturas, o IPsec utiliza o conceito de Associação de Segurança (Security 
-            Asociation - SA), permitindo a comunicação entre duas ou mais entidades comunicantes descrevendo todos 
-            os mecanismos de segurança a serem utilizados; algoritmo e modo de autenticação a aplicar no cabeçalho 
-            de autenticação, chaves usadas nos algoritmos de autenticação e criptografia, tempo de vida da chave, 
-            tempo de vida da associação de segurança, nível de sensibilidade dos dados protegidos. Quando uma entidade 
-            desejar estabelecer uma associação de segurança, utilizará um SPI (Security Parameter Index) e um endereço 
-            de destino enviando as informações à entidade com que deseja estabelecer o canal de segurança. Dessa maneira, 
-            para cada sessão de comunicação autenticada serão necessários dois SPIs, ou seja, um para cada sentido, 
-            sendo necessário pelo fato da associação de segurança ser unidirecional. Como padrão, os algoritmos 
-            utilizados são HMAC-MD5 e HMAC-SHA-1 para autenticação e DESC-CBC para a criptografia do cabeçalho. 
-            Existe uma importância em destacar que os cabeçalhos utilizados são de extensão e irão ser adicionados 
-            a um cabeçalho IP. Assim, os encaminhadores do pacote poderão interpretá-lo como se fossem parte 
-            integrante dos dados, permitindo que equipamentos que conheçam IP e desconhecem IPsec possam ser utilizados 
-            normalmente.</p>
+            <p>O IPsec (Internet Protocol Security) é um modelo ponto-a-ponto permitindo a troca de informações 
+            através de dois computadores de maneira segura; um servidor de aplicações e um servidor de base de dados. 
+            Tornando-se totalmente transparente para as aplicações pelo fato dos serviços serem criptografados, terem 
+            integridades e autenticação nas implementações no nível de transporte obtendo um acordo sobre uma concessão 
+            de conjuntos de regras e de definições do protocolo. Com o uso do IPsec e das tecnologias associadas, os dois 
+            computadores serão capazes de autenticar-se mutuamente mantendo uma comunicação segura, mesmo usando um meio 
+            não seguro como a Internet.</p>
+            <p>Uma plataforma aberta formada por um conjunto de protocolos que são designados a prover segurança para 
+            comunicações IP a nível de rede, proporcionando proteção a ataques de repetição por meio do uso de inúmeras 
+            sequências. Fornece privacidade, integridade e autenticidade das informações transferidas através de redes 
+            IP para redes LANs (Local Área Networks), WANs, Públicas e Privadas. No IPsec a aplicação mais comum é a 
+            criação de redes virtuais privadas VPN (Virtual Private Network), seus serviços podem ser manuseados por 
+            quaisquer protocolos das camadas superiores como: TCP, UDP, ICMP, BGP. </p>
+            <p>O objetivo do IPsec é garantir a privacidade para o usuário, integridade dos dados e autenticação das 
+            informações transferindo-as através de redes IP pela internet. A construção de túneis seguros sobre redes 
+            de internet ou intranet é permitido no IPsec, todas as informações passadas através da rede são abreviadas 
+            pelo gateway IPsec, sendo assim, o IPsec juntamente com o L2TP (Layer 2 Tunneling Protocol) é considerado 
+            uma das opções mais indicadas para criação de conexões de VPN. Os protocolos IPsec foram desenvolvidos pelo 
+            IETF (Internet Engineering Task Force) e são implementados tanto em IPv4 como IPv6.</p>
+            <p>Quase todos os fornecedores de soluções de firewall ou software de segurança suportam o IPsec.</p>
+            <figure>
+                <img src="img/kurose-ipsec.png" align="center">
+                <figcaption>Figura 3.1: Rede Virtual Privada (VPN). Adaptado de [KUROSE]</figcaption>
+            </figure>
+            <p>No IPsec a criptografia e autenticação de pacotes são realizadas na camada de rede, fornecendo uma solução 
+            de segurança fim-a-fim, garantindo a integridade, confidencialidade e autenticidade dos dados. O IPsec fornece 
+            três protocolos principais: autenticação, referenciada como Authentication Header (AH), autenticação/criptografia 
+            chamada Encapsulating Security Payload (ESP), e IKE (Internet Key Exchange) troca de chave. Além dessas estruturas, 
+            o IPsec utiliza o conceito de Associação de Segurança (Security Association - SA) permitindo a comunicação entre 
+            duas ou mais entidades comunicantes descrevendo todos os mecanismos de segurança a serem utilizados; algoritmo e 
+            modo de autenticação a aplicar no cabeçalho de autenticação, chaves usadas nos algoritmos de autenticação e 
+            criptografia, tempo de vida da chave, tempo de vida da associação de segurança, nível de sensibilidade dos dados 
+            protegidos. Quando uma entidade desejar estabelecer uma associação de segurança, utilizará um SPI (Security Parameter 
+            Index) e um endereço de destino enviando as informações à entidade com que deseja estabelecer o canal de segurança. 
+            Dessa maneira, para cada sessão de comunicação autenticada serão necessários dois SPIs, ou seja, um para cada sentido, 
+            sendo necessário pelo fato da associação de segurança ser unidirecional. Como padrão, os algoritmos utilizados são 
+            HMAC-MD5 e HMAC-SHA-1 para autenticação e DESC-CBC para a criptografia do cabeçalho. Existe uma importância em destacar 
+            que os cabeçalhos utilizados são de extensão e irão ser adicionados a um cabeçalho IP. Assim, os encaminhadores do 
+            pacote poderão interpretá-lo como se fossem parte integrante dos dados, permitindo que equipamentos que conheçam IP 
+            e desconhecem IPsec possam ser utilizados normalmente.</p>
+            <figure align="center">
+                <img src="img/estrutura-geral.png">
+                <figcaption>Figura 3.2: Estrutura Geral do IPsec. Adaptado de [JAMHOUR].</figcaption>
+            </figure>
+            
             <h3 id="ha">3.1. Cabeçalho de Autenticação</h3>
-            <p>O protocolo AH, oferece serviço de autenticação para o pacote, uma proteção. Ele não altera a mensagem, 
-            ele adiciona um cabeçalho do tipo AH ao pacote IP contendo um hash de dados e uma sequência numérica. Pode-se 
-            verificar a integridade dos dados e a autenticidade do emissor do pacote. Ele é composto por um campo chamado 
-            numseq, que contem um contador que é incrementado automaticamente e é usado para proteção contra replays. 
-            Possui um campo chamado Dados Autenticação que é um campo de tamanho variável que contém o código de integridade 
-            da mensagem para o pacote. O campo precisa ser múltiplo inteiro de 32 bits. O AH é mecanismo para controle de 
-            acesso baseado na distribuição de chaves criptográficas e gerenciamento do fluxo de trafego dos protocolos seguros. 
-            Podendo ser combinados ou usados separadamente. </p>
-            <p>O cabeçalho AH tem a funcionalidade de validação da identidade de entidades comunicantes, certificando que 
-            o emissor/receptor é realmente quem diz ser.  O cabeçalho é apenas adicionado ao datagrama IP, portanto, não 
-            oferece segurança contra ataques de análise de tráfego ou confidencialidade. Utiliza-se o cabeçalho ESP para 
-            assegurar a confidencialidade dos dados.</p>
+            <p>O AH (Authentication Header) é um mecanismo para controle de acesso baseado na distribuição de chaves criptográficas 
+            e gerenciamento do fluxo de tráfego dos protocolos seguros. O protocolo AH, oferece serviço de autenticação para o 
+            pacote, uma proteção não alterando a mensagem, adicionando um cabeçalho do tipo AH ao pacote IP contendo um hash de 
+            dados e uma sequência numérica podendo verificar a integridade dos dados e a autenticidade do emissor do pacote. 
+            Composto por um campo chamado numseq, que contém um contador que é incrementado automaticamente e é usado para proteção 
+            contra replays. Possui um campo chamado dados de autenticação que é um campo de tamanho variável que contém o código de 
+            integridade da mensagem para o pacote. O campo necessita ser múltiplo inteiro de 32 bits.</p>
+            <figure align="center">
+                <img src="img/ah.png" style="width:400px">
+                <figcaption>Figura 3.3:  AH (Authentication Header). Adaptado de [RICCI]</figcaption>
+            </figure>
+            
+            <p>O cabeçalho AH possuí a funcionalidade de validação da identidade de entidades comunicantes, certificando que o 
+            emissor/receptor é realmente quem diz ser.  O cabeçalho é apenas adicionado ao datagrama IP, por consequência, 
+            não oferecendo segurança contra-ataques de análise de tráfego ou confidencialidade. O AH usa um algoritmo de 
+            hashing e números de sequência para garantir a integridade da informação até o seu destino. O algoritmo de 
+            hashing é responsável por criar um valor de integridade, sendo chamado de Valor de Checagem da Integridade 
+            – ICV. Ao realizar um hash das partes do cabeçalho de IP e das partes dos dados do pacote, somente os dados 
+            do cabeçalho serão utilizados, por serem incorporados somente no cabeçalho e não serem identificados até que 
+            sejam calculados.</p>
+            <p>Com a adição do cabeçalho, o IP Seguro - IPsec possui:</p>
+            <ul>
+                <li>Autenticação através do cabeçalho adicionado;</li>
+                <li>Garantia de integridade dos dados, verificando se não ocorreu nenhuma alteração durante o transporte;</li>
+            </ul>
+            <p>A partir daí o cabeçalho AH que foi preenchido e anexado ao cabeçalho IP do pacote original, obtém a integridade
+            de seus pacotes IP transmitidos através de uma assinatura digital. Para que ocorra uma garantida para a integridade 
+            dos pacotes após a transmissão dos mesmos, o destinatário realiza o cálculo na assinatura digital e, se estiver 
+            exatamente igual ao resultado recebido, comprovasse que o pacote não foi alterado durante a transmissão.</p>
+            <figure align="center">
+                <img src="img/headerah.png" style="width:400px">
+                <figcaption>Figura 3.4:  Cabeçalho do AH. Adaptado de [FRIEDL]</figcaption>
+            </figure>
+            
             <h3 id="esp">3.2. Encapsulamento de Dados de Segurança</h3>
             <p>O cabeçalho de Encapsulamento de Dados de Segurança (ESP) é responsável pela criptografia dos dados que 
             são inseridos entre o cabeçalho IP e o restante do datagrama. Os campos de dados são alterados após serem 
@@ -355,6 +389,9 @@
                 <li>[6] CAMILO, B. D. C. V. Análise da sobrecarga do ipsec no mapeamento de redes virtuais. 2015. (Undergraduate Final Project) - Universidade Federal do Rio de Janeiro, 2015.</li>
                 <li>[7] FORTIO, R. M. S. Análise e implementação do protocolo de segurança IPsec na rede de acesso LTE. 2014 (Master Thesis) - Técnico Lisboa. 2014</li>
                 <li>[8] ALSHAMRANI, H. Internet Protocol Security (IPsec) Mechanisms. International Journal of Scientific & Engineering Research, v. 5, n. 5, p.85{87, 2014.</li>
+                <li>[9] JAMHOUR, E. IPsec. Disponível em: <https://www.ppgia.pucpr.br/~jamhour/>. Acesso em: 21 maio.2018.</li>
+                <li>[10] RICCI, B. Rede Segura: VPN Linux, EDIÇÃO ????. Ciência Moderna, Rio de Janeiro, 2007.</li>
+                <li>[11] FRIEDL, S. J. An Illustrated Guide to IPsec. Disponível em: <htp://www.unixwiz.net/techtips/iguide-ipsec.html>. Acesso em: 21 maio.2018.</li>
             </ul>
         </div>
 
