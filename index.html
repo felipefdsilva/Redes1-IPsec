@@ -2,6 +2,7 @@
 <html>
 
     <head>
+        <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -27,21 +28,16 @@
         </center>
     </head>
 
-    <body>
+    <body id="page-top">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                    <!--<span class="d-block d-lg-none">Start Bootstrap</span>-->
-                    <span class="fa-stack fa-3x">
-                        <i class="fa fa-circle-o-notch fa-inverse fa-stack-2x"></i>
-                        <!--i class="fa fa-car fa-stack-1x"></i-->
-                        <i class="fa fa-wifi fa-stack-1x"></i>
-                    </span>
+                <a href="#page-top">
+                    <img src="img/ipseclogo.png" style="width:300px;">
                 </a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <span class="navbar-toggler-icon">IPsec</span>
+                </button-->
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
@@ -134,19 +130,19 @@
             <p>Técnicas e algoritmos de transmissão são publicados e padronizados na Internet (p.ex as RFCs 1321, 3447, 2420).
             Independente da técnica usada, uma mensagem criptograda só pode ser descriptografada com uma <b>chave de segurança</b>.
             Esta chave (que pode ser a mesma para ambos ou exclusiva de cada um) serve de parâmetro para que o algoritmo de 
-            decriptação possa transforma a mensagem em texto cifrado em uma mensagem em texto plano. A figura 1
+            decriptação possa transformar a mensagem em texto cifrado em uma mensagem em texto plano. A figura 2.1
             ilustra os componentes básicos de um sistema de criptografia.</p>
             <figure>
                 <img src="img/criptografia.png">
-                <figcaption>Ideia geral de criptografia</figcaption>
+                <figcaption>Figura 2.1 - Esquema geral de uma comunicação criptograda que é inteceptada por um invasor (imagem adaptada de [KUROSE])</figcaption>
             </figure>
 
             <h3 id="fhash">2.2. Funções de Hash criptográficas</h3>
-            <p>Se diferem das funções hash comuns por ser uma função bijetora, ou seja, existe um único hash para a mensagem
-            escrita. Em outras palavras um invasor não consegue reproduzir o mesmo hash com uma mensagem diferente. Algoritmos 
-            de hash criptografados bem conhecidos são o MD5[RFC 1321] e o SHA-1[FIPS, 1995].</p>
-            <p>Funções hash criptografadas são usadas para atender a propriedade de integridade da mensagem em uma comunicação
-            segura.</p>
+            <p>Funções hash criptográficas são usadas para atender a propriedade de integridade da mensagem em uma comunicação
+            segura, pois garante-se que a mensagem não foi alterada no meio do caminho.</p>
+            <p>Se diferem das funções hash comuns por serem funções bijetoras, ou seja, sempre há um único hash para a mensagem
+            escrita. Em outras palavras um invasor não consegue reproduzir o mesmo hash desconhecendo a mensagem em texto plano. 
+            Algoritmos de hash criptografados bem conhecidos são o MD5[RFC 1321] e o SHA-1[FIPS, 1995].</p>
 
             <h3 id="autenticacaoMsg">2.3. Código de Autenticação de Mensagem</h3>
             <p>Nos cenários descritos, ainda é possível q o invasor crie uma mensagem qualquer, gere um hash válido e envie
@@ -158,7 +154,8 @@
             processo.</p>
             <figure>
                 <img src="img/mac.png">
-                <figcaption>...</figcaption>
+                <figcaption>Sistema de empregando o código de autenticação de mensagem para garantir
+                a integridade da mensagem (imagem adaptada de [KUROSE])</figcaption>
             </figure>
 
             <h3 id="assinatura">2.4. Assinatura Digital</h3>
@@ -183,9 +180,9 @@
             <p>Uma plataforma aberta formada por um conjunto de protocolos que são designados a prover segurança para 
             comunicações IP a nível de rede, proporcionando proteção a ataques de repetição por meio do uso de inúmeras 
             sequências. Fornece privacidade, integridade e autenticidade das informações transferidas através de redes 
-            IP para redes LANs (Local Área Networks), WANs, Públicas e Privadas. No IPsec a aplicação mais comum é a 
-            criação de redes virtuais privadas VPN (Virtual Private Network), seus serviços podem ser manuseados por 
-            quaisquer protocolos das camadas superiores como: TCP, UDP, ICMP, BGP. </p>
+            IP para LANs (Local Área Networks) e WANs (Wide Area Networks), Públicas e Privadas. No IPsec a aplicação 
+            mais comum é a criação de redes virtuais privadas VPN (Virtual Private Network), seus serviços podem ser 
+            manuseados por quaisquer protocolos das camadas superiores como: TCP, UDP, ICMP, BGP. </p>
             <p>O objetivo do IPsec é garantir a privacidade para o usuário, integridade dos dados e autenticação das 
             informações transferindo-as através de redes IP pela internet. A construção de túneis seguros sobre redes 
             de internet ou intranet é permitido no IPsec, todas as informações passadas através da rede são abreviadas 
@@ -193,8 +190,8 @@
             uma das opções mais indicadas para criação de conexões de VPN. Os protocolos IPsec foram desenvolvidos pelo 
             IETF (Internet Engineering Task Force) e são implementados tanto em IPv4 como IPv6.</p>
             <p>Quase todos os fornecedores de soluções de firewall ou software de segurança suportam o IPsec.</p>
-            <figure>
-                <img src="img/kurose-ipsec.png" align="center">
+            <figure align="center">
+                <img src="img/vpn.png">
                 <figcaption>Figura 3.1: Rede Virtual Privada (VPN). Adaptado de [KUROSE]</figcaption>
             </figure>
             <p>No IPsec a criptografia e autenticação de pacotes são realizadas na camada de rede, fornecendo uma solução 
