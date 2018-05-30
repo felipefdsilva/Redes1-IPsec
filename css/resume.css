@@ -145,12 +145,19 @@ section.resume-section .resume-item .resume-date {
     color: #BD5D38 !important;
 }*/
 
-a {
+a.nav {
     color: rgb(255, 253, 253);
+    text-decoration: none;
 }
 
-a:hover, a:focus, a:active {
+a.nav:hover, a.nav:focus, a.nav:active {
     color: #b8b8b8;
+}
+a{
+    color: #00a0bd
+}
+a:hover, a:focus, a:active {
+    color: #8a008f
 }
 
 p {
