@@ -93,7 +93,7 @@
               <p>Com o avanço da Globalização, grandes volumes de dados sensíveis trafegam diariamente por todo o
               planeta através da Internet, como operações bancárias e dados governamentais. Começou-se a pensar,
               então, em métodos para evitar que tais informações fossem capturadas indevidamente.</p>
-  
+
               <p>O protocolo de Internet (IP) versão 6 (IPv6), quando em desenvolvimento, tinha como principais
               objetivos a expansão do número possível de hosts e aumentar a segurança na camada de Rede. Percebeu-se
               então, que estas técnicas de segurança também poderiam ser aplicadas ao IPv4, que é largamente difundido
@@ -571,6 +571,25 @@
         <div>
             <h2 id="finais">4. Considerações Finais</h2>
         </div>
+
+            <p>O IPsec, conforme pudemos observar, é um protocolo que opera na camada de rede e possibilita uma comunicação
+            segura entre dois terminais de rede, sendo segurança equivalente à transferência de pacotes com integridade,
+            autenticidade e possível confidencialidade. Vimos que uma comunicação neste protocolo se inicia com o
+            estabelecimento de chaves, algoritmos e protocolos que serão utilizados na sessão (SA IKE). Após isso, a associação
+            de segurança (SA IPsec) é estabelecida. Os principais métodos de proteção utilizados pelo IPsec são os protocolos AH
+            e ESP. O primeiro garante integridade (ou seja, que a mensagem não foi alterada) e autenticidade (garantia da autoria).
+            Já o segundo garante também confidencialidade, já que a carga útil trafega cifrada, e não em texto plano.</p>
+
+            <p>Dois modos de operação são possíveis no IPsec. No Modo Transporte, o cabeçalho IP original é mantido (camada de
+            transporte) e o resto do pacote é aplicado ao ESP. No Modo Túnel, o cabeçalho IP original é aplicado também ao
+            protocolo ESP. Um novo cabeçalho IP é anexado ao datagrama, de forma que o endereço final também está protegido.
+            A mesma explicação é válida para o caso de utilizarmos o protocolo AH, ou uma combinação de ambos.</p>
+
+            <p>Concluímos que o IPsec é um protocolo que fornece uma tecnologia poderosa em termos de segurança da informação
+            que trafega em uma rede IP. Sua arquitetura permite uma implementação de forma invisível para as camadas inferiores,
+            operando de forma transparente. Suas configurações permitem evitar que pessoas má intencionadas monitorem
+            o fluxo da informação, ou até se passem pelo autor original da mensagem. É uma arma poderosa contra hackers e
+            transforma um ambiente hostil (Internet) em um caminho seguro para o tráfego entre redes de computadores.</p>
 
         <div>
             <h2 id="referencias">5. Referências</h2>
