@@ -154,8 +154,13 @@
 
             <figure>
                 <img src="img/criptografia.png">
+<<<<<<< HEAD
                 <figcaption>Figura 2.1.1 - Esquema geral de uma comunicação criptografada que é interceptada por um invasor.
                 Adaptada de [KUROSE].</figcaption>
+=======
+                <figcaption>Figura 2.1.1 - Esquema geral de uma comunicação criptografada que é interceptada por um invasor. 
+                Adaptada de [<a href="#KUROSE">1</a>].</figcaption>
+>>>>>>> 417d9cf9a623096557aa0e16d0b0775119d1510d
             </figure>
 
             <h3 id="fhash">
@@ -185,7 +190,7 @@
             <figure>
                 <img src="img/mac.png">
                 <figcaption>Sistema de empregando o código de autenticação de mensagem para garantir
-                a integridade da mensagem (imagem adaptada de [KUROSE])</figcaption>
+                a integridade da mensagem (imagem adaptada de [<a href="#KUROSE">1</a>])</figcaption>
             </figure>
 
             <h3 id="assinatura">
@@ -233,7 +238,7 @@
             <figure align="center">
                 <img src="img/vpn.png">
                 <figcaption>
-                    Figura 3.1: Rede Virtual Privada (VPN). Adaptado de [KUROSE].
+                    Figura 3.1: Rede Virtual Privada (VPN). Adaptado de [<a href="#KUROSE">1</a>].
                 </figcaption>
             </figure>
 
@@ -267,10 +272,27 @@
             <figure align="center">
                 <img src="img/estrutura-geral.png" style="width:60%">
                 <figcaption>
-                    Figura 3.2: Estrutura Geral do IPsec. Adaptado de [JAMHOUR].
+                    Figura 3.2: Estrutura Geral do IPsec. Adaptada de [<a href="#ALSHAMRANI">11</a>].
                 </figcaption>
             </figure>
 
+<<<<<<< HEAD
+=======
+            <p>Alguns ataques que são evitados com o uso dos protocolos IPsec são:</p>
+
+            <ul>
+                <li>Ataques de repetição: um atacante que tem acesso a um fluxo de datagramas injeta datagramas
+                modificados. Com o IPsec, os datagramas possuem um digito verificador de sequência e um
+                algoritmo anti-repetição.</li>
+                <li>Particionamento de pacotes cifrados: o atacante obtém partes de pacotes cifrados 
+                e monta um pacote que pode ser aceito pelo destinatário. Existem campos no cabeçalho
+                IPsec que verificam a integridade do pacote</li>
+                <li>"Sniffer": quando o atacante obtém os pacotes que trafegam na rede em texto plano, obtendo 
+                informações que podem ser sigilosas. No IPsec, é possível criptografar as mensagens. Mesmo que
+                um atacante obtenha os pacotes, não terá acesso a informação, pois a mensagem encontra-se cifrada.</li>
+            </ul>
+            
+>>>>>>> 417d9cf9a623096557aa0e16d0b0775119d1510d
             <h3 id="ha">
                 3.1. Cabeçalho de Autenticação
             </h3>
@@ -279,7 +301,7 @@
             mensagem. O datagram original é modificado, ganhando um cabeçalho de autenticação que possui os campos
             vistos na figura 3.1.1. </p>
 
-            <p>As informações contidas em cada campo do cabeçalho de autenticação são listadas abaixo:</p>
+            <p>As informações contidas em cada campo do cabeçalho de autenticação (figura <a href="#esp-vs-ah">3.2.1</a>) são listadas abaixo:</p>
 
             <ul>
                 <li>Próximo Cabeçalho: Campo de 8 bits que indica o tipo de pacote (carga útil) subsequente ao cabeçalho
@@ -293,18 +315,18 @@
                 a SA do datagrama recebido.</li>
                 <li>Número de Sequência: Campo de 32 bits usado para identificar o datagrama e proteger o receptor de
                 ataques de repetição.</li>
-                <li>Valor de Checagem de Integridade: É utilizado para verificar a integridade e autenticidade do datagrama.
+                <li>Valor Verificador de Integridade: É utilizado para verificar a integridade e autenticidade do datagrama.
                 Como é gerado a partir da encriptação da carga útil, tem tamanho variável e, portanto, possui um enchimento
-                para ser múltiplo de 32 bits.
+                para ser múltiplo de 32 bits. Sem cálculo leva em consideração o cabeçalho IP.
                 </li>
             </ul>
 
-            <figure align="center">
+            <!-- <figure align="center">
                     <img src="img/headerah.png" style="width:400px">
                     <figcaption>
                         Figura 3.1.1:  Campos do Cabeçalho de Autenticação. Adaptado de [FRIEDL].
                     </figcaption>
-            </figure>
+            </figure> -->
 
             <!--figure align="center">
                 <img src="img/ah.png" style="width:400px">
@@ -323,6 +345,7 @@
                 3.2. Encapsulamento de Dados de Segurança
             </h3>
 
+<<<<<<< HEAD
             <p>O cabeçalho de Encapsulamento de Dados de Segurança (ESP) é responsável pela criptografia dos dados que são
             inseridos entre o cabeçalho IP e o restante do datagrama. Os campos de dados são alterados após serem
             criptografados simultaneamente com o ESP, e seguido com o SPI para informar ao recipiente do pacote como proceder
@@ -368,17 +391,41 @@
                 este tipo de ataque;</li>
                 <li>Sniffer, quando o atacante obtém os pacotes que trafegam na rede. A utilização da criptografia previne
                 este tipo de ataque.</li>
+=======
+            <p>O protocolo ESP oferece integridade, autenticação e sigilo. A autenticação do ESP é diferente da realizada 
+            pelo AH, pois não inclui o cabeçalho IP, apesar de encapsulá-lo no Modo Túnel (ver <a href="#mtunel">3.5.1</a>). 
+            O AH protege parte do cabeçalho IP, campos não mutáveis que não são modificados pelos roteadores do meio do 
+            caminho.</p>
+
+            <p>O campos do cabeçalho ESP são análogos aos do AH, com as seguintes ressalvas: </p>
+
+            <ul>
+                <li><b>Enchimento</b> (SPI): Campo com tamanho entre 0 a 255 bytes. Permite a utilização de 
+                algoritmos de criptografia em blocos, dividindo o datagrama em blocos e enchendo estes para que 
+                tenham tamanho múltiplo do tamanho definido pelo algoritmo.</li>
+                <li><b>Tamanho do Enchimento</b>: Campo de 8 bits que indica o tamanho do enchimento usado na
+                operação acima.</li>
+                <li><b>Próximo Cabeçalho</b>: Se difere do AH por apontar para trás, pois o campo é lido após
+                a carga útil (ver figura 3.2.1).</li>
+                <li><b>Valor Verificador de Integridade</b> (ICV): Semelhante ao do AH, porém, seu cálculo não 
+                leva em conta o cabeçalho IP.</li>
+>>>>>>> 417d9cf9a623096557aa0e16d0b0775119d1510d
             </ul>
 
-            <figure align="center">
-                    <img src="img/esp.png" style="width:400px">
-                    <figcaption>Figura 3.4:  Campos do cabeçalho ESP. Adaptado de [CISCO]</figcaption>
+            <figure id="esp-vs-ah" align="center">
+                    <img src="img/esp-vs-ah.png" style="width:100%">
+                    <figcaption>
+                        Figura 3.2.1:  Comparação entre os cabeçalhos AH (esquerda) e ESP (direita). Notar a direção
+                        para a qual o campo próximo cabeçalho aponta. Vale citar que a carga útil NÃO faz parte do cabeçalho.
+                        Adaptada de [<a href="#FRIEDL">13</a>]
+                    </figcaption>
             </figure>
 
             <h3 id="as">
                 3.3. Associações de Segurança
             </h3>
 
+<<<<<<< HEAD
             <p>Antes que seja possível o envio de datagramas, remetente e destinatário estabelecem uma conexão lógica na
             camada de rede, chamada <b>associação de segurança</b>(SA). Esta conexão é unidirecional, ou seja, caso duas
             entidades necessitem trocar datagramas IPsec, duas SAs serão necessárias (uma para cada direção). É importante
@@ -391,8 +438,23 @@
 
             <figure align="center">
                 <img src="img/sa.png" style="width:700px">
+=======
+            <p>Antes que seja possível o envio de datagramas, remetente e destinatário estabelecem uma conexão lógica na 
+            camada de rede, chamada <b>Associação de Segurança</b> (SA). Esta conexão é unidirecional, ou seja, caso duas
+            entidades necessitem trocar datagramas IPsec, duas SAs serão necessárias (uma para cada direção), como ilustra 
+            a figura <a href="#sa-pic">3.3.1</a>. É importante notar neste ponto que uma mesma entidade pode gerenciar 
+            diversas SAs, mantendo comunicações seguras, com diferentes entidades. Uma SA contém informações sobre origem 
+            e destino de um datagrama, o tipo de criptografia a ser usada a chave de criptografia, o tipo de verificação 
+            de integridade (seção <a href="#criptografia">2</a>), a chave de autenticação e um índice que identifica a SA 
+            (Índice de Parâmetros de Segurança - SPI). Para guardar todas essas informações, cada entidade mantém dois 
+            bancos de dados, o de políticas de segurança (SPD) e o de SAs (SAD).</p>
+
+            <figure id="sa-pic" align="center">
+                <img src="img/sa.png" style="width:50%">
+>>>>>>> 417d9cf9a623096557aa0e16d0b0775119d1510d
                 <figcaption>
-                    Figura 3.3.1:  Componentes de um SA
+                    Figura 3.3.1: Uma ilustração da conexão lógica e unidirecional conhecida por SA.
+                    Adaptada de [<a href="#CAMILO">10</a>]
                 </figcaption>
             </figure>
 
@@ -405,8 +467,20 @@
             ou não. Caso o sejam, consultam o SAD. Também especifica quais datagramas devem ser descartados, quais devem ser
             encaminhados ou aceitos mesmo sem proteção IPsec. </p>
 
+<<<<<<< HEAD
             <p>"De certa forma, as informações em um SPD indicam 'o que' fazer com um datagrama que está chegando; as
             informações no SAD indicam 'como' fazer isso"[KUROSE]</p>
+=======
+            <p>"De certa forma, as informações em um SPD indicam 'o que' fazer com um datagrama que está chegando; as 
+            informações no SAD indicam 'como' fazer isso"[<a href="#KUROSE">1</a>]</p>
+
+            <p>Naturalmente, as informações que circulam pela SA são também sensíveis e precisam ser protegidas. Para isso,
+            o IPsec se utiliza de outro protocolo, o IKE, responsável por gerar segredos, chaves de segurança, dígitos 
+            Diffie-Hellman (que são especialmente úteis para adicionar segurança à SA do IKE). A justificativa para as duas etapas
+            preliminares de negociação, é que o processo realizado pelo IKE é custoso e, portanto, só deve ser realizado uma vez.
+            Assim, entidades podem estabelecer diversas SAs IPsec (menos custosas computacionalmente) ao custo de apenas uma SA IKE.
+            Mais detalhes serão dados na seção a seguir.</p>
+>>>>>>> 417d9cf9a623096557aa0e16d0b0775119d1510d
 
             <h3 id="ike">
                 3.4. Internet Key Exchange
@@ -502,9 +576,27 @@
                     </figcaption>
             </figure>
 
+            <p>O protocolo ESP gera autenticação, integridade e confidencialidade encriptação do payload do pacote IP 
+            original no modo transporte. Mantem-se o IP header original, insere o header e o tailer do protocolo ESP 
+            para a proteção. Necessitando assim suporte ao IPsec o emissor e receptor da comunicação. Protegendo apenas 
+            os cabeçalhos superior, o cabeçalho IP mantém-se original, pois o cabeçalho IPsec é adicionado imediatamente 
+            após o cabeçalho IP, antes dos cabeçalhos dos protocolos das camadas superiores.</p>
+
+            <p>Os dados são criptografados e assinados no cabeçalho ESP, no cabeçalho de transporte e dados e o trailer 
+            de ESP, quando a criptografia e autenticação são selecionadas, sendo assim, a criptografia é realizada 
+            primeira.</p>
+
+            <figure align="center">
+                    <img src="img/mtransporte-esp.png" style="width:100%">
+                    <figcaption>
+                        Figura 3.3.1:  Protocolo ESP no modo transporte
+                    </figcaption>
+            </figure>
+
             <h4 id="mtunel">
-                3.5.1. Túnel
+                3.5.2. Túnel
             </h4>
+<<<<<<< HEAD
 
             <p>O Modo Túnel todo o pacote IP é autenticado ou criptografado, resultando apenas o cabeçalho IP externos
             visíveis, transmitindo o destino do gateway (roteador, firewall, etc), permanecendo todo o conteúdo interno
@@ -536,6 +628,55 @@
             entre uma gateway e um host. No método utilizado os equipamentos internos não precisam de suportar o IPsec,
             a encriptação e desencriptação ocorre nas IPsec Gateways. Um novo IP header é criado e o pacote IP original
             é totalmente protegido.</p>
+=======
+            
+            <p>O pacote IP no modo túnel é autenticado ou criptografado, tornando apenas o cabeçalho IP externo visível, 
+            transmitindo o destino do gateway roteador, firewall, subsistindo todo o conteúdo interno criptografado. 
+            Pode-se usar desse método para evitar a análise de tráfego devido ao fato de que o cabeçalho IP contém o 
+            endereço de destino e teoricamente as diretivas de roteamento e informação proveniente da opção hop-by-hop, 
+            sendo impossível transmitir o pacote IP criptografado dispondo prefixo de cabeçalho ESP, pois roteadores 
+            intermediários seriam incapazes de processar o pacote.</p>
+
+            <p>Será fundamental encapsular o bloco inteiro do cabeçalho ESP mais o pacote IP criptografado com um novo 
+            cabeçalho IP que deverá conter informações para o roteamento, não terá que ter análise de tráfego. No modo 
+            de transporte é adequado para proteger conexões entre estações que suportam o modo ESP. O modo túnel é 
+            utilizável numa configuração que apresente um firewall ou outro tipo de gateway de segurança que protege 
+            uma rede confiável das redes externas. Na proteção de uma rede confiável, a criptografia ocorre apenas entre 
+            uma estação externa e o gateway de segurança, ou entre dois gateways de segurança. Permitindo as estações 
+            da rede interna do processamento de criptografia e resumindo a tarefa do número de chaves pela redução do 
+            numero de chaves necessárias de distribuição e inibindo a análise de tráfego baseada no destino final.</p>
+
+            <p>O protocolo AH realizada autenticação e integridade de todo o pacote IP original. Um novo IP header e o 
+            header do protocolo é inserido no AH para a proteção. O IP header original contém os endereços IP de origem e 
+            destino da mensagem, enquanto o novo IP header contém os endereços IP dos gateways IPsec.</p>
+
+            <figure align="center">
+                    <img src="img/mtunel-ah.png" style="width:70%">
+                    <figcaption>
+                        Figura 3.3.1:  Protocolo AH no modo túnel.
+                    </figcaption>
+            </figure>
+
+            <p>O protocolo ESP efetua autenticação, integridade e confidencialidade do pacote IP original. Para proteção 
+            um ESP tailer é inserido e no ESP heard um novo IP. Enquanto o novo IP header original contém os endereços IP 
+            dos gateways IPsec, são inseridos nos endereços IPs de origem e destinos.</p>
+
+            <p>No modo túnel, o ESP assinará o cabeçalho de ESP, cabeçalho original de IP, cabeçalho de transporte de dados, 
+            o trailer de ESP.  A diferença para o modo de transporte está no datagrama de IP original que será́ todo 
+            criptografado. O Modo Túnel é o mais empregue e serve para criar uma ligação segura VPN entre duas gateways ou 
+            entre um gateway e um host. No dispositivo utilizado os equipamentos internos não precisam de suportar o IPsec, 
+            a encriptação e desencriptação ocorre nas IPsec gateways. Um novo IP header é criado e o pacote IP original é 
+            totalmente protegido.</p>
+
+            <figure align="center">
+                    <img src="img/mtunel-esp.png" style="width:70%">
+                    <figcaption>
+                        Figura 3.3.1:  Protocolo ESP no modo túnel.
+                    </figcaption>
+            </figure>
+
+
+>>>>>>> 417d9cf9a623096557aa0e16d0b0775119d1510d
         </div>
 
         <div>
@@ -545,20 +686,20 @@
         <div>
             <h2 id="referencias">5. Referências</h2>
             <ul>
-                <li>[1] KUROSE, James F. Redes de Computadores e a Internet - Uma abordagem Top-Down, 6ª Edição. Pearson Education India, 2014.</li>
-                <li>[2] PERLMAN, Radia; KAUFMAN, Charlie; SPECINER, Mike. Network security: Private Communication in a Public World, 2ª Ediçãp. Pearson Education India, 2016.</li>
-                <li>[3] KENT, S.; SEO, K. RFC 4301 "Security architecture for the internet protocol". Disponível em https://tools.ietf.org/html/rfc4301, 2005.</li>
-                <li>[4] KENT, S. RFC 4302 “IP Authentication Header”. Diponível em http://tools.ietf.org/html/rfc4302, 2005.</li>
-                <li>[5] KENT, S. RFC 4303 "IP Encapsulating Security Payload (ESP)". Diponível em http://tools.ietf.org/html/rfc4303, 2005.</li>
-                <li>[6] FRANKEL, S.; KRISHNAN, S. RFC 6071 "IP Security (IPsec) and Internet Key Exchange (IKE) Document Roadmap". Disponível em https://tools.ietf.org/pdf/rfc6071, 2011.</li>
-                <li>[7] KIVINEN, T., HOFFMAN, P., KAUFMAN, C., NIR, Y., ERONEN, P. RFC 7296 "Internet Key Exchange Protocol Version 2 (IKEv2)". Disponível em https://tools.ietf.org/pdf/rfc7296, 2014.</li>
-                <li>[8] FRANKEL, S.; KENT, K.; LEWKOWSKI, R.; OREBAUGH, A. D.; RITCHEY, R. W.; SHARMA, S. R. Guide to IPSec VPNs. NIST Special Publication, v. 800, 2005.</li>
-                <li>[9] OPPLIGER, R. Security at the internet layer. Computer, v. 31, n. 9, p.43{47, 1998.</li>
-                <li>[10] CAMILO, B. D. C. V. Análise da sobrecarga do ipsec no mapeamento de redes virtuais. 2015. (Projeto Final de Graduação) - Universidade Federal do Rio de Janeiro, 2015.</li>
-                <li>[11] ALSHAMRANI, H. Internet Protocol Security (IPsec) Mechanisms. International Journal of Scientific & Engineering Research, v. 5, n. 5, p.85{87, 2014.</li>
-                <li>[12] RICCI, B. Rede Segura: VPN Linux, 1ª Edição. Ciência Moderna, Rio de Janeiro, 2007.</li>
-                <li>[13] FRIEDL, S. J. An Illustrated Guide to IPsec. Disponível em htp://www.unixwiz.net/techtips/iguide-
-                <li>[14] BRAGNETTO, L. F. B., da SILVA, S. C., BARBOSA, L. A. M. IPsec - Segurança de Redes, 2003. Disponível em http://www.braghetto.eti.br/files/IPSec%20-%20Versao%20Final.pdf. Acessado em 18 de maio de 2018.  </li>
+                <li id="KUROSE">[1] KUROSE, James F. Redes de Computadores e a Internet - Uma abordagem Top-Down, 6ª Edição. Pearson Education India, 2014.</li>
+                <li id="PERLMAN">[2] PERLMAN, Radia; KAUFMAN, Charlie; SPECINER, Mike. Network security: Private Communication in a Public World, 2ª Ediçãp. Pearson Education India, 2016.</li>
+                <li id="RFC4301">[3] KENT, S.; SEO, K. RFC 4301 "Security architecture for the internet protocol". Disponível em https://tools.ietf.org/html/rfc4301, 2005.</li>
+                <li id="RFC4302">[4] KENT, S. RFC 4302 “IP Authentication Header”. Diponível em http://tools.ietf.org/html/rfc4302, 2005.</li>
+                <li id="RFC4303">[5] KENT, S. RFC 4303 "IP Encapsulating Security Payload (ESP)". Diponível em http://tools.ietf.org/html/rfc4303, 2005.</li>
+                <li id="RFC6071">[6] FRANKEL, S.; KRISHNAN, S. RFC 6071 "IP Security (IPsec) and Internet Key Exchange (IKE) Document Roadmap". Disponível em https://tools.ietf.org/pdf/rfc6071, 2011.</li>
+                <li id="RFC7296">[7] KIVINEN, T., HOFFMAN, P., KAUFMAN, C., NIR, Y., ERONEN, P. RFC 7296 "Internet Key Exchange Protocol Version 2 (IKEv2)". Disponível em https://tools.ietf.org/pdf/rfc7296, 2014.</li>
+                <li id="FRANKEL">[8] FRANKEL, S.; KENT, K.; LEWKOWSKI, R.; OREBAUGH, A. D.; RITCHEY, R. W.; SHARMA, S. R. Guide to IPSec VPNs. NIST Special Publication, v. 800, 2005.</li>
+                <li id="OPPLIGER">[9] OPPLIGER, R. Security at the internet layer. Computer, v. 31, n. 9, p.43{47, 1998.</li>
+                <li id="CAMILO">[10] CAMILO, B. D. C. V. Análise da sobrecarga do ipsec no mapeamento de redes virtuais. 2015. (Projeto Final de Graduação) - Universidade Federal do Rio de Janeiro, 2015.</li>
+                <li id="ALSHAMRANI">[11] ALSHAMRANI, H. Internet Protocol Security (IPsec) Mechanisms. International Journal of Scientific & Engineering Research, v. 5, n. 5, p.85{87, 2014.</li>
+                <li id="RICCI">[12] RICCI, B. Rede Segura: VPN Linux, 1ª Edição. Ciência Moderna, Rio de Janeiro, 2007.</li>
+                <li id="FRIEDL">[13] FRIEDL, S. J. An Illustrated Guide to IPsec. Disponível em htp://www.unixwiz.net/techtips/iguide-ipsec.html, acessado em maio de 2018
+                <li id="BRAGNETTO">[14] BRAGNETTO, L. F. B., da SILVA, S. C., BARBOSA, L. A. M. IPsec - Segurança de Redes, 2003. Disponível em http://www.braghetto.eti.br/files/IPSec%20-%20Versao%20Final.pdf. Acessado em 18 de maio de 2018.  </li>
                 <!--li>[7] FORTIO, R. M. S. Análise e implementação do protocolo de segurança IPsec na rede de acesso LTE. 2014 (Master Thesis) - Técnico Lisboa. 2014</li-->
                 <!--li>[2] FERGUSON, N.; SCHNEIER, B. A cryptographic evaluation of IPSec. Counterpane Internet Security, Inc, v. 3031, p. 14, 2000.</li-->
                 <!--li>[9] JAMHOUR, E. IPsec. Disponível em: <"https://www.ppgia.pucpr.br/~jamhour/">. Acesso em: 21 maio.2018.</li-->
