@@ -82,30 +82,38 @@
                 1. Introdução
             </h2>
 
-            <p>A Internet, na sua concepção originária, foi projetada de forma a ser a mais simples e genérica
-            possível, possibilitando assim a sua rápida expansão e crescimento.Toda essa simplicidade é, de fato,
-            percebida na facilidade de desenvolvimento e integração entre diversas redes. Contudo, grandes
-            modificações no kernel da Internet não são possíveis de serem feitas. Dessa forma, projetos atuais
-            que levam em consideração requisitos que não foram inicialmente pensados na concepção da Internet,
-            como por exemplo Segurança da Informação e Mobilidade de Hosts, possuem passos adicionais para serem
-            implementados de forma satisfatória, como a utilização de outros protocolos.</p>
+            <p>A Internet, na sua concepção, foi projetada de forma a ser a mais simples e genérica
+              possível, possibilitando assim a sua rápida expansão e crescimento. Toda essa simplicidade é, de fato,
+              percebida na facilidade de desenvolvimento e integração entre diversas redes e usuários. Contudo, grandes
+              modificações no kernel da Internet não são possíveis de serem feitas. Dessa forma, projetos atuais
+              que levam em consideração requisitos que não foram inicialmente pensados na origem da Internet,
+              como por exemplo a Segurança da Informação, se utilizam de protocolos adicionais
+              para garantirem as suas implementações de forma satisfatória .</p>
 
-            <p>Com o avanço da Globalização, grandes volumes de dados sensíveis trafegam diariamente por todo o
-            planeta através da Internet, como transações financeiras, dados bancários, informações governamentais
-            secretas, controle remoto de armas militares, etc. Começou-se a pensar, então, em métodos e protocolos
-            para evitar que tais informações fossem capturadas indevidamente.</p>
+              <p>Com o avanço da Globalização, grandes volumes de dados sensíveis trafegam diariamente por todo o
+              planeta através da Internet, como operações bancárias e dados governamentais. Começou-se a pensar,
+              então, em métodos para evitar que tais informações fossem capturadas indevidamente.</p>
+  
+              <p>O protocolo de Internet (IP) versão 6 (IPv6), quando em desenvolvimento, tinha como principais
+              objetivos a expansão do número possível de hosts e aumentar a segurança na camada de Rede. Percebeu-se
+              então, que estas técnicas de segurança também poderiam ser aplicadas ao IPv4, que é largamente difundido
+              e utilizado, além de que sua substituição pelo IPv6 está se dando a passos lentos. </p>
 
-            <p>O protocolo de Internet (IP) versão 6 (IPv6), quando em desenvolvimento, tinha como principais
-            objetivos a expansão do número possível de hosts e aumentar a segurança na camada de Rede. Percebeu-se
-            então, que estas técnicas de segurança também poderiam ser aplicadas ao IPv4, que é largamente difundido
-            e utilizado, além de que sua substituição pelo IPv6 está se dando a passos lentos. </p>
+              <p>O principal protocolo de segurança desenvolvido foi o IP Security Protocol (IPsec). Sua maior vantagem
+              é o fato de prover comunicação segura, ponto-a-ponto, para diferentes aplicações, de forma transparente
+              (operando na camada de Rede, como detalharemos a seguir), tanto para o remetente, quanto para o destinatário.
+              Além disso, as aplicações que utilizam IPsec, não precisam ser modificadas de nenhuma forma. Isso é particularmente
+              importante, quando se trabalha na segurança de um determinado serviço, porém não se possui o seu código fonte,
+              fato bem comum atualmente. </p>
 
-            <p>O principal protocolo de segurança desenvolvido foi o IP Security Protocol (IPSec). Sua maior vantagem
-            é o fato de prover serviço seguros de forma transparente, tanto para as aplicações, quanto para os usuários.
-            Além disso, as aplicações que usam IPSec, não precisam ser modificadas de nenhuma forma. Isso é
-            particularmente importante, quando se trabalha na segurança de uma determinada aplicação, porém não se
-            possui o seu código fonte, fato bem comum atualmente. O IPsec integra sistemas de autenticação, gestão e
-            distribuição de chaves de forma a estabelecer conexões mais seguras, como veremos nos tópicos a seguir.</p>
+              <p>Entrando no âmbito de quantificar e qualificar a segurança do tráfego de informações, <b>três quesitos</b> se fazem
+              presentes: Integridade, Autenticidade e Confiabilidade dos pacotes que trafegam em uma determinada infraestrutura
+              de rede, seja ela privada, como por exemplo uma VPN, ou não. Para atender tais requisitos, o protocolo IPsec integra
+              sistemas de autenticação, gerenciamento e distribuição de chaves. </p>
+
+              <p>Veremos nas seções seguintes, os conceitos fundamentais que estão embutidos em uma comunicação segura pela rede (como
+              criptografia e autenticação), quais protocolos estão embutidos no IPsec, como o datagrama original é alterado e detalhes
+              sobre a Arquitetura do protocolo e seus modos de operação. </p>
         </div>
 
         <div>
