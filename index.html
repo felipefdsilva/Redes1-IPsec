@@ -20,7 +20,7 @@
         <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/0A478A80-E68D-2643-BA05-9F59C9FA973C/main.js" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/C379AF9C95F9-50AB-3462-D86E-08A874A0/abn/main.css"/>
 
         <center>
-            <h1>IPSec - Segurança na Camada de Rede</h1>
+            <h1>IPsec - Segurança na Camada de Rede</h1>
             <h3>Felipe Ferreira, Silvia Caroline, William Macedo</h3>
             <h4>Redes de Computadores I - 2018.1</h4>
             <h4>Engenharia Eletrônica e de Computação</h4>
@@ -99,7 +99,7 @@
               então, que estas técnicas de segurança também poderiam ser aplicadas ao IPv4, que é largamente difundido
               e utilizado, além de que sua substituição pelo IPv6 está se dando a passos lentos. </p>
 
-              <p>O principal protocolo de segurança desenvolvido foi o IP Security Protocol (IPsec). Sua maior vantagem
+              <p>O principal protocolo de segurança desenvolvido foi o Protocolo de Segurança da Internet (IPsec). Sua maior vantagem
               é o fato de prover comunicação segura, ponto-a-ponto, para diferentes aplicações, de forma transparente
               (operando na camada de Rede, como detalharemos a seguir), tanto para o remetente, quanto para o destinatário.
               Além disso, as aplicações que utilizam IPsec, não precisam ser modificadas de nenhuma forma. Isso é particularmente
@@ -145,7 +145,7 @@
             Uma mensagem que passa por um algoritmo de criptografia passa a ter um conteúdo em texto cifrado, inteligível
             para um interceptor na transmissão.</p>
 
-            <p>Técnicas e algoritmos de transmissão são publicados e padronizados na Internet (p.ex as RFCs 1321, 3447, 2420).
+            <p>Técnicas e algoritmos de transmissão são publicados e padronizados na Internet (por exemplo as RFCs 1321, 3447, 2420).
             Independente da técnica usada, uma mensagem criptografada só pode ser descriptografada com uma <b>chave de
             segurança</b>. Esta chave (que pode ser a mesma para ambos ou exclusiva de cada um) serve de parâmetro para que o
             algoritmo de decriptação possa transformar a mensagem em texto cifrado em uma mensagem em texto plano. A figura
@@ -225,8 +225,8 @@
             que será usado pelo Roteador da filial para descriptografar o datagrama. Um cliente remoto (hospedeiro) também
             pode utilizar de uma VPN para se comunicar seguramente com a filial.</p>
 
-            <p>É interessante notar na figura como o IPsec é transparente tanto para a os roteadores da Internet, que enxegam
-            a mensagem como um datagram comum com um cabeçalho IP roteável, quanto para os dispositivos na redes locais,
+            <p>É interessante notar na figura como o IPsec é transparente tanto para a os roteadores da Internet, que enxergam
+            a mensagem como um datagrama comum com um cabeçalho IP roteável, quanto para os dispositivos na redes locais,
             que recebem e enviam pacotes descriptografados.</p>
 
             <figure align="center">
@@ -238,7 +238,7 @@
 
             <p>O IPsec utiliza três protocolos para cumprir sua função:
                 <ul>
-                    <li><b>Cabeçaçho de Autenticação</b> (AH), que provê autenticação e integridade.</li>
+                    <li><b>Cabeçalho de Autenticação</b> (AH), que provê autenticação e integridade.</li>
                     <li><b>Encapsulamento de Dados de Segurança</b> (ESP), que provê além de confidencialidade, além de
                         autenticação e integridade.
                     </li><b>Troca de Chaves da Internet</b> (IKE), que auxilia os protocolos acima estabelecendo um canal
@@ -289,7 +289,7 @@
             </h3>
 
             <p>O Cabeçalho de Autenticação (AH) é um protocolo que provê integridade e autenticidade de uma
-            mensagem. O datagram original é modificado, ganhando um cabeçalho de autenticação que possui os campos
+            mensagem. O datagrama original é modificado, ganhando um cabeçalho de autenticação que possui os campos
             vistos na figura 3.1.1. </p>
 
             <p>As informações contidas em cada campo do cabeçalho de autenticação (figura <a href="#esp-vs-ah">3.2.1</a>) são listadas abaixo:</p>
@@ -414,13 +414,12 @@
             hibrido, constituído pelo ISAKMP e pelo Oakley, sendo denominado IKE. Cria-se uma SA no IPsec para negociar
             politicas de segurança e organizar as trocas das chaves de sessão. </p>
 
-            <p>O IKE (Internet Key Exchange) supre o gerenciamento da segurança para o Security Association. Na conexão do
+            <p>O IKE (Internet Key Exchange) supre o gerenciamento da segurança para a SA. Na conexão do
             IPsec o IKE autentica cada ponto do host, gateway e servidores, negociando politicas de segurança e manipulando
             as trocas das chaves de sessão. Além disso, usa-se certificados X509v3 para a autenticação dos equipamentos
-            envolvidos durante a negociação do IKE. Permissão para comunicação com uma Autoridade Certificadora (CA –
-            Certificate Authority), gerencia os certificados incluindo o uso do SCEP (Simple Certificate Enrollment Protocol).
-            O certificado suporta uma estrutura hierárquica para o uso em uma infraestrutura de chaves públicas (PKI –
-            Public Key Infrastructure).</p>
+            envolvidos durante a negociação do IKE. Permissão para comunicação com uma Autoridade Certificadora (CA), gerencia 
+            os certificados incluindo o uso do SCEP (Simple Certificate Enrollment Protocol).
+            O certificado suporta uma estrutura hierárquica para o uso em uma infraestrutura de chaves públicas (PKI).</p>
 
             <p>Os componentes incluídos são os protocolos de chaves públicas Diffie-Hellman estabelecendo uma chave de sessão
             mesmo estando em um meio inseguro, que é a Internet.</p>
@@ -448,7 +447,7 @@
                 <li>Um algoritmo de hash para assinatura digital;</li>
                 <li>Um método de autenticação para assinar o hash; </li>
                 <li>Informação sobre qual grupo a troca Diffie-Hellman deve feita; </li>
-                <li>Especificação da função pseudorandômica para fazer o hash de certos.</li>
+                <li>Especificação da função pseudorrandômica para fazer o hash de certos.</li>
             </ul>
 
             <p>O IKE procede em duas fases. Na primeira fase, dois pares estabelecem um canal seguro para efetuar as operações do
@@ -457,10 +456,9 @@
             <h3 id="modos">
                 3.5. Modos de Operação
             </h3>
-            <p>O IPsec apresenta dois modos de funcionamentos: o Modo Transporte e o Modo Túnel, e dois tipos de protocolos:
-            o Authentication Header (AH) e Encapsulating Security Payload (ESP) para transferência segura de informação.</p>
+            <p>O IPsec apresenta dois modos de funcionamentos: o Modo Transporte e o Modo Túnel.</p>
 
-            <p>O terceiro protocolo é o Internet Key Exchange Protocol (IKE), sua função é realizar a autenticação das
+            <p>O terceiro protocolo é o IKE, sua função é realizar a autenticação das
             entidades envolvidas e gerir automaticamente as ligações IPsec. O Transporte IPsec trabalha em dois modos, modo
             de Transporte e modo Túnel. No modo de Transporte, apenas o segmento da camada de transporte é processado, ou
             seja, autenticado e criptografado. Este modo é adequado para implementações em servidores e gateways, protegendo
@@ -499,8 +497,8 @@
                     </figcaption>
             </figure>
 
-            <p>O protocolo ESP gera autenticação, integridade e confidencialidade encriptação do payload do pacote IP
-            original no modo transporte. Mantem-se o IP header original, insere o header e o tailer do protocolo ESP
+            <p>O protocolo ESP gera autenticação, integridade e confidencialidade encriptação da carga útil do pacote IP
+            original no modo transporte. Mantem-se o IP header original, insere o header e o trailer do protocolo ESP
             para a proteção. Necessitando assim suporte ao IPsec o emissor e receptor da comunicação. Protegendo apenas
             os cabeçalhos superior, o cabeçalho IP mantém-se original, pois o cabeçalho IPsec é adicionado imediatamente
             após o cabeçalho IP, antes dos cabeçalhos dos protocolos das camadas superiores.</p>
@@ -523,7 +521,7 @@
             <p>O pacote IP no modo túnel é autenticado ou criptografado, tornando apenas o cabeçalho IP externo visível,
             transmitindo o destino do gateway roteador, firewall, subsistindo todo o conteúdo interno criptografado.
             Pode-se usar desse método para evitar a análise de tráfego devido ao fato de que o cabeçalho IP contém o
-            endereço de destino e teoricamente as diretivas de roteamento e informação proveniente da opção hop-by-hop,
+            endereço de destino e teoricamente as diretivas de roteamento e informação proveniente da opção salto-a-salto,
             sendo impossível transmitir o pacote IP criptografado dispondo prefixo de cabeçalho ESP, pois roteadores
             intermediários seriam incapazes de processar o pacote.</p>
 
@@ -548,7 +546,7 @@
             </figure>
 
             <p>O protocolo ESP efetua autenticação, integridade e confidencialidade do pacote IP original. Para proteção
-            um ESP tailer é inserido e no ESP heard um novo IP. Enquanto o novo IP header original contém os endereços IP
+            um ESP trailer é inserido e no ESP herda um novo IP. Enquanto o novo IP header original contém os endereços IP
             dos gateways IPsec, são inseridos nos endereços IPs de origem e destinos.</p>
 
             <p>No modo túnel, o ESP assinará o cabeçalho de ESP, cabeçalho original de IP, cabeçalho de transporte de dados,
@@ -594,11 +592,11 @@
         <div>
             <h2 id="referencias">5. Referências</h2>
             <ul>
-                <li id="KUROSE">[1] KUROSE, James F. Redes de Computadores e a Internet - Uma abordagem Top-Down, 6ª Edição. Pearson Education India, 2014.</li>
-                <li id="PERLMAN">[2] PERLMAN, Radia; KAUFMAN, Charlie; SPECINER, Mike. Network security: Private Communication in a Public World, 2ª Ediçãp. Pearson Education India, 2016.</li>
+                <li id="KUROSE">[1] KUROSE, James F. Redes de Computadores e a Internet - Uma abordagem Top-Down, 6ª Edição. Pearson Education Índia, 2014.</li>
+                <li id="PERLMAN">[2] PERLMAN, Radia; KAUFMAN, Charlie; SPECINER, Mike. Network security: Private Communication in a Public World, 2ª Edição. Pearson Education Índia, 2016.</li>
                 <li id="RFC4301">[3] KENT, S.; SEO, K. RFC 4301 "Security architecture for the internet protocol". Disponível em https://tools.ietf.org/html/rfc4301, 2005.</li>
-                <li id="RFC4302">[4] KENT, S. RFC 4302 “IP Authentication Header”. Diponível em http://tools.ietf.org/html/rfc4302, 2005.</li>
-                <li id="RFC4303">[5] KENT, S. RFC 4303 "IP Encapsulating Security Payload (ESP)". Diponível em http://tools.ietf.org/html/rfc4303, 2005.</li>
+                <li id="RFC4302">[4] KENT, S. RFC 4302 “IP Authentication Header”. Disponível em http://tools.ietf.org/html/rfc4302, 2005.</li>
+                <li id="RFC4303">[5] KENT, S. RFC 4303 "IP Encapsulating Security Payload (ESP)". Disponível em http://tools.ietf.org/html/rfc4303, 2005.</li>
                 <li id="RFC6071">[6] FRANKEL, S.; KRISHNAN, S. RFC 6071 "IP Security (IPsec) and Internet Key Exchange (IKE) Document Roadmap". Disponível em https://tools.ietf.org/pdf/rfc6071, 2011.</li>
                 <li id="RFC7296">[7] KIVINEN, T., HOFFMAN, P., KAUFMAN, C., NIR, Y., ERONEN, P. RFC 7296 "Internet Key Exchange Protocol Version 2 (IKEv2)". Disponível em https://tools.ietf.org/pdf/rfc7296, 2014.</li>
                 <li id="FRANKEL">[8] FRANKEL, S.; KENT, K.; LEWKOWSKI, R.; OREBAUGH, A. D.; RITCHEY, R. W.; SHARMA, S. R. Guide to IPSec VPNs. NIST Special Publication, v. 800, 2005.</li>
@@ -606,7 +604,7 @@
                 <li id="CAMILO">[10] CAMILO, B. D. C. V. Análise da sobrecarga do ipsec no mapeamento de redes virtuais. 2015. (Projeto Final de Graduação) - Universidade Federal do Rio de Janeiro, 2015.</li>
                 <li id="ALSHAMRANI">[11] ALSHAMRANI, H. Internet Protocol Security (IPsec) Mechanisms. International Journal of Scientific & Engineering Research, v. 5, n. 5, p.85{87, 2014.</li>
                 <li id="RICCI">[12] RICCI, B. Rede Segura: VPN Linux, 1ª Edição. Ciência Moderna, Rio de Janeiro, 2007.</li>
-                <li id="FRIEDL">[13] FRIEDL, S. J. An Illustrated Guide to IPsec. Disponível em htp://www.unixwiz.net/techtips/iguide-ipsec.html, acessado em maio de 2018
+                <li id="FRIEDL">[13] FRIEDL, S. J. An Illustrated Guide to IPsec. Disponível em http://www.unixwiz.net/techtips/iguide-ipsec.html, acessado em maio de 2018
                 <li id="BRAGNETTO">[14] BRAGNETTO, L. F. B., da SILVA, S. C., BARBOSA, L. A. M. IPsec - Segurança de Redes, 2003. Disponível em http://www.braghetto.eti.br/files/IPSec%20-%20Versao%20Final.pdf. Acessado em 18 de maio de 2018.  </li>
                 <!--li>[7] FORTIO, R. M. S. Análise e implementação do protocolo de segurança IPsec na rede de acesso LTE. 2014 (Master Thesis) - Técnico Lisboa. 2014</li-->
                 <!--li>[2] FERGUSON, N.; SCHNEIER, B. A cryptographic evaluation of IPSec. Counterpane Internet Security, Inc, v. 3031, p. 14, 2000.</li-->
@@ -618,7 +616,7 @@
         <footer>
             <p>"Este trabalho foi totalmente produzido pelos autores que declaram não terem violado os direitos autorais
             de terceiros, sejam eles pessoas físicas ou jurídicas. Havendo textos, tabelas e figuras transcritos de obras
-            de terceiros com direitos autorais protegidos ou de domínio público tal como idéias e conceitos de terceiros,
+            de terceiros com direitos autorais protegidos ou de domínio público tal como ideias e conceitos de terceiros,
             mesmo que sejam encontrados na Internet, os mesmos estão com os devidos créditos aos autores originais e estão
             incluídas apenas com o intuito de deixar o trabalho autocontido. O(s) autor(es) tem(êm) ciência dos Artigos 297
             a 299 do Código Penal Brasileiro e também que o uso do artifício de copiar/colar texto de outras fontes e outras
