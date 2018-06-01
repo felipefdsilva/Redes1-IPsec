@@ -54,24 +54,32 @@
                                 </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav" class="nav-link js-scroll-trigger" href="#ipsec">3. Arquitetura</a>
-                                <ul>
-                                    <li><a class="nav" class="nav-link js-scroll-trigger" href="#ha">3.1. Cabeçalho de Autenticação</a></li>
-                                    <li><a class="nav" class="nav-link js-scroll-trigger" href="#esp">3.2. Encapsulamento de Dados de Segurança</a></li>
-                                    <li><a class="nav" class="nav-link js-scroll-trigger" href="#as">3.3. Associações de Segurança</a></li>
-                                    <li><a class="nav" class="nav-link js-scroll-trigger" href="#ike">3.4. Internet Key Exchange</a></li>
-                                    <li><a class="nav" class="nav-link js-scroll-trigger" href="#modos">3.5. Modos de Operação</a></li>
-                                    <ul>
-                                        <li><a class="nav" class="nav-link js-scroll-trigger" href="#mtransporte">3.5.1. Transporte</a></li>
-                                        <li><a class="nav" class="nav-link js-scroll-trigger" href="#mtunel">3.5.1. Túnel</a></li>
-                                    </ul>
-                                </ul>
+                            <a class="nav" class="nav-link js-scroll-trigger" href="#ipsec">3. Protocolos do IPsec</a>
+                            <ul>
+                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#ha">3.1. Cabeçalho de Autenticação</a></li>
+                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#esp">3.2. Encapsulamento de Dados de Segurança</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav" class="nav-link js-scroll-trigger" href="#finais">4. Considerações Finais</a>
+                            <a class="nav" class="nav-link js-scroll-trigger" href="#ike">4. Troca de Chaves da Internet</a></li>
+                            <ul>
+                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#sa-ike">4.1. Associação de Segurança IKE</a></li>
+                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#sa-ipsec">4.2. Associação de Segurança IPsec</a></li>
+                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#faseinfo">4.3. Fase Informacional</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav" class="nav-link js-scroll-trigger" href="#referencias">5. Referências</a>
+                            <a class="nav" class="nav-link js-scroll-trigger" href="#modos">5. Modos de Operação</a></li>
+                            <ul>
+                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#mtransporte">5.1. Transporte</a></li>
+                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#mtunel">5.2. Túnel</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav" class="nav-link js-scroll-trigger" href="#finais">6. Considerações Finais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav" class="nav-link js-scroll-trigger" href="#referencias">7. Referências</a>
                         </li>
                     </ul>
                 </div>
@@ -202,7 +210,7 @@
 
         <div>
             <h2 id="ipsec">
-                3. Arquitetura do IPsec
+                3. Protocolos do IPsec
             </h2>
 
             <p>O Protocolo de Segurança da Internet (mais conhecido por sua sigla, IPsec) é um modelo de comunicação
@@ -237,13 +245,13 @@
             </figure>
 
             <p>O IPsec utiliza três protocolos para cumprir sua função:
-                <ul>
-                    <li><b>Cabeçalho de Autenticação</b> (AH), que provê autenticação e integridade.</li>
-                    <li><b>Encapsulamento de Dados de Segurança</b> (ESP), que provê além de confidencialidade, além de
-                        autenticação e integridade.
-                    </li><b>Troca de Chaves da Internet</b> (IKE), que auxilia os protocolos acima estabelecendo um canal
-                    seguro para a troca de chaves entre remetente e destinatário.
-                </ul>
+            <ul>
+                <li><b>Cabeçalho de Autenticação</b> (AH), que provê autenticação e integridade.</li>
+                <li><b>Encapsulamento de Dados de Segurança</b> (ESP), que provê além de confidencialidade, além de
+                autenticação e integridade.
+                </li><b>Troca de Chaves da Internet</b> (IKE), que auxilia os protocolos acima estabelecendo um canal
+                seguro para a troca de chaves entre remetente e destinatário.
+            </ul>
 
             <p> Vale citar os principais algoritmos de criptografia e autenticação AES128, MD5 e SHA1, todos usados e combinados
             pelos protocolos de segurança listados acima.</p>
@@ -356,23 +364,95 @@
             </ul>
 
             <figure id="esp-vs-ah" align="center">
-                    <img src="img/esp-vs-ah.png" style="width:100%">
-                    <figcaption>
-                        Figura 3.2.1:  Comparação entre os cabeçalhos AH (esquerda) e ESP (direita). Notar a direção
-                        para a qual o campo próximo cabeçalho aponta. Vale citar que a carga útil NÃO faz parte do cabeçalho.
-                        Adaptada de [<a href="#FRIEDL">13</a>]
-                    </figcaption>
+                <img src="img/esp-vs-ah.png" style="width:100%">
+                <figcaption>
+                    Figura 3.2.1:  Comparação entre os cabeçalhos AH (esquerda) e ESP (direita). Notar a direção
+                    para a qual o campo próximo cabeçalho aponta. Vale citar que a carga útil NÃO faz parte do cabeçalho.
+                    Adaptada de [<a href="#FRIEDL">13</a>]
+                </figcaption>
             </figure>
 
-            <h3 id="as">
-                3.3. Associações de Segurança
+        <div>
+            <h2 id="ike">
+                4. Troca de Chaves da Internet
+            </h2>
+
+            <p>Protocolo mais conhecido por sua sigla, <b>IKE</b>, foi desenvolvido pelo IETF contemporaneamente ao IPsec,
+            estando atualmente na versão 2 (IKEv2). Apesar de não ter sido desenvolvido para o IPsec, é comumente usado para
+            este fim. O IKE provê um gerenciamento automatizado de chaves de segurança. Em teoria, uma conexão segura por 
+            IPsec pode ser configurada sem o IKE. Porém, em um cenário real, um servidor de VPNs (principal aplicação do IPsec)
+            lida com diversas comunicações simultâneas e, por consequência, é inviável um gerenciamento manual destas chaves.</p>
+
+            <p>Sua função no IPsec é negociar, criar e gerenciar <b>Associações de Segurança</b>. Estas são conexões lógicas
+            em que as entidades estabelecem parâmetros de segurança para a comunicação que está para acontecer (por exemplo, 
+            se identificam e autenticam, trocam chaves de segurança e negociam algoritmos de autenticação e criptografa).</p>
+
+            <p>Todo este processo encontra-se organizado em duas três fases:</p>
+
+            <ul>
+                <li><b>Fase 1 (Associação de Segurança IKE)</b>: Negociação de um canal seguro para a fase 2</li> 
+                <li><b>Fase 2 (Associação de Segurança IPsec)</b>: Negociação dos parâmetros de segurança da comunicação IPsec</li>
+                <li><b>Fase 3 (Fase Informacional)</b>: Troca de informações de controle, como mensagens de erro.</li>
+            </ul>
+
+            <p>As fases 1 e 2 são bastante similares, visto que ambas negociam parâmetros para uma comunicação futura. Uma 
+            diferença imediata é que parte da fase 1 acontece sem qualquer tipo de proteção. As trocas de mensagem passa a 
+            ter alguma proteção após a troca de grupos Diffie-Hellman (um segredo compartilhado usado para gerar chaves de 
+            segurança). Outra diferença é que a fase 1 é mais custosa computacionalmente que a fase 2. Como vimos, um 
+            servidor VPN em grande escala mantém diversas conexões simultâneas com outras entidades IPsec, lidando com a 
+            criação, manutenção e encerramento de diversas Associações de Segurança IPsec. Entidades que já trocaram chaves 
+            de segurança geralmente não precisam iniciar um nova Associação de Segurança IKE. Portanto, diversas SA IPsec
+            podem ser geradas ao custo de apenas uma SA IKE.</p>
+
+            <!--p>IKE mune quatro funcionalidades:</p>
+
+            <ul>
+                <li>Negocia quais protocolos, algoritmos e chaves serão usadas.</li>
+                <li>Garantir a identidade das partes, o cliente, quanto do servidor.</li>
+                <li>Gerencia as chaves após elas estarem em uso.</li>
+            </ul>
+
+            <p>Itens negociados na SA:</p>
+
+            <ul>
+                <li>O algoritmo de criptografia para proteger os dados;</li>
+                <li>Um algoritmo de hash para assinatura digital;</li>
+                <li>Um método de autenticação para assinar o hash; </li>
+                <li>Informação sobre qual grupo a troca Diffie-Hellman deve feita; </li>
+                <li>Especificação da função pseudorrandômica para fazer o hash de certos.</li>
+            </ul-->
+            <h3 id="sa-ike">
+                4.1. Associação de Segurança IKE
+            </h3>
+            <p>Como vimos, o propósito da SA IKE é gerar um canal seguro para a SA IPsec.A SA IKE é bidirecional, ou seja, 
+            as "regras" negociadas devem ser iguais para ambos. Esta negociação pode ocorrer de dois modos: um principal,
+            em que as negociações tomam três pares de mensagens, e um agressivo, que conclui a negociação com metade do
+            número de mensagens anterior. </p>
+
+            <p>No modo principal, o primeiro par de mensagens negocia o algoritmo de encriptação (p.ex. AES ou DES), o
+            algoritmo de proteção de integridade (HMAC-MD5 e HMAC-SHA1 são os mais comuns) e o método de autenticação
+            (chaves pré-compartilhadas, assinaturas digitais, criptografia da chave pública ou autenticação externa),
+            e finalmente, negocia o Grupo Diffie-Hellman. No segundo par de mensagens do modo principal acontece a troca 
+            das chaves geradas a partir do grupo Diffie-Hellman. No terceiro par, cada entidade autentica a outra.</p>
+
+            <p>No modo agressivo, a primeira entidade envia uma mensagem com todos os seus possíveis parâmetros de proteção,
+            sua porção da troca de chaves do grupo Diffie-Hellman, informações para verificação de integridade e sua
+            identidade. A segunda entidade então responde com os parâmetros escolhidos, sua parte da troca de chaves 
+            Diffie-Hellman, sua identidade e informações para verificação de integridade da mensagem e sua carga útil de 
+            autenticação (que depende do método de autenticação escolhido, hash criptogrático ou assinatura digital). Na 
+            primeira entidade então envia na terceira mensagem sua carga útil de autenticação.</p>
+
+            <p>O modo agressivo, apesar de mais rápido, é menos seguro, uma vez que as entidades não podem negociar o grupo 
+            Diffie-Hellman. Além disso, a identidade não é protegida por encriptação, a menos que chaves públicas tenham
+            sido previamente trocadas. O modo principal é geralmente o modo recomendado.</p>
+
+            <h3 id="sa-ipsec">
+                4.2. Associação de Segurança IPsec
             </h3>
 
-            <p>Antes que seja possível o envio de datagramas, remetente e destinatário estabelecem uma conexão lógica na
-            camada de rede, chamada <b>Associação de Segurança</b> (SA). Esta conexão é unidirecional, ou seja, caso duas
+            <p>A SA IPsec, por sua vez, é uma conexão lógica unidirecional, ou seja, caso duas
             entidades necessitem trocar datagramas IPsec, duas SAs serão necessárias (uma para cada direção), como ilustra
-            a figura <a href="#sa-pic">3.3.1</a>. É importante notar neste ponto que uma mesma entidade pode gerenciar
-            diversas SAs, mantendo comunicações seguras, com diferentes entidades. Uma SA contém informações sobre origem
+            a figura <a href="#sa-pic">3.3.1</a>. Uma SA contém informações sobre origem
             e destino de um datagrama, o tipo de criptografia a ser usada a chave de criptografia, o tipo de verificação
             de integridade (seção <a href="#criptografia">2</a>), a chave de autenticação e um índice que identifica a SA
             (Índice de Parâmetros de Segurança - SPI). Para guardar todas essas informações, cada entidade mantém dois
@@ -397,80 +477,23 @@
 
             <p>"De certa forma, as informações em um SPD indicam 'o que' fazer com um datagrama que está chegando; as
             informações no SAD indicam 'como' fazer isso"[<a href="#KUROSE">1</a>]</p>
+        </div>
 
-            <p>Naturalmente, as informações que circulam pela SA são também sensíveis e precisam ser protegidas. Para isso,
-            o IPsec se utiliza de outro protocolo, o IKE, responsável por gerar segredos, chaves de segurança, dígitos
-            Diffie-Hellman (que são especialmente úteis para adicionar segurança à SA do IKE). A justificativa para as duas etapas
-            preliminares de negociação, é que o processo realizado pelo IKE é custoso e, portanto, só deve ser realizado uma vez.
-            Assim, entidades podem estabelecer diversas SAs IPsec (menos custosas computacionalmente) ao custo de apenas uma SA IKE.
-            Mais detalhes serão dados na seção a seguir.</p>
-
-            <h3 id="ike">
-                3.4. Internet Key Exchange
-            </h3>
-
-            <p>A Internet Key Exchange (IKE) protocolo de gestão de chaves que usa a porta 500 UDP, cria, elimina e altera
-            as chaves para autenticação e validação de informações, o IKE caracteriza como regras de gestão do protocolo
-            hibrido, constituído pelo ISAKMP e pelo Oakley, sendo denominado IKE. Cria-se uma SA no IPsec para negociar
-            politicas de segurança e organizar as trocas das chaves de sessão. </p>
-
-            <p>O IKE (Internet Key Exchange) supre o gerenciamento da segurança para a SA. Na conexão do
-            IPsec o IKE autentica cada ponto do host, gateway e servidores, negociando politicas de segurança e manipulando
-            as trocas das chaves de sessão. Além disso, usa-se certificados X509v3 para a autenticação dos equipamentos
-            envolvidos durante a negociação do IKE. Permissão para comunicação com uma Autoridade Certificadora (CA), gerencia 
-            os certificados incluindo o uso do SCEP (Simple Certificate Enrollment Protocol).
-            O certificado suporta uma estrutura hierárquica para o uso em uma infraestrutura de chaves públicas (PKI).</p>
-
-            <p>Os componentes incluídos são os protocolos de chaves públicas Diffie-Hellman estabelecendo uma chave de sessão
-            mesmo estando em um meio inseguro, que é a Internet.</p>
-
-            <p>IKE mune quatro funcionalidades:</p>
-
-            <ul>
-                <li>Negocia quais protocolos, algoritmos e chaves serão usadas.</li>
-                <li>Garantir a identidade das partes, o cliente, quanto do servidor.</li>
-                <li>Gerencia as chaves após elas estarem em uso.</li>
-                <li>Garante que as trocas de mensagens que contém chaves sejam feitas por meios seguros.</li>
-            </ul>
-
-            <p>A configuração de uma SA pode ser feita manualmente em cada gateway por um administrador de segurança,
-            sendo alterada também pelo protocolo IKE dinamicamente, sendo assim, garantindo uma segurança ainda maior.</p>
-
-            <p>A gerencia de chaves é especificada pelo IPsec sendo implementada de modo manual ou automática. E o protocolo
-            IKE é responsável por implementar a gerência automática de chaves. O ISAKMP é o executor do estabelecimento,
-            negociação, modificação e exclusão das AS’s. Definindo o formato dos pacotes e os procedimentos. O OAKLEY
-            fornece o mecanismo de troca de chaves utilizado pelo ISAKMP. Sendo uma variação mais segura do algoritmo
-            Diffie-Hellman.</p>
-
-            <p>Para estabelecer uma associação segura IKE, a negociação deve ser feita pelo o modo propondo os seguintes itens:</p>
-                <li>O algoritmo de criptografia para proteger os dados;</li>
-                <li>Um algoritmo de hash para assinatura digital;</li>
-                <li>Um método de autenticação para assinar o hash; </li>
-                <li>Informação sobre qual grupo a troca Diffie-Hellman deve feita; </li>
-                <li>Especificação da função pseudorrandômica para fazer o hash de certos.</li>
-            </ul>
-
-            <p>O IKE procede em duas fases. Na primeira fase, dois pares estabelecem um canal seguro para efetuar as operações do
-            ISAKMP SA. Na segunda fase, os dois pares ajustam os SA de um plano geral.</p>
-
-            <h3 id="modos">
-                3.5. Modos de Operação
-            </h3>
+        <div>
+            <h2 id="modos">
+                5. Modos de Operação
+            </h2>
             <p>O IPsec apresenta dois modos de funcionamentos: o Modo Transporte e o Modo Túnel.</p>
 
-            <p>O terceiro protocolo é o IKE, sua função é realizar a autenticação das
-            entidades envolvidas e gerir automaticamente as ligações IPsec. O Transporte IPsec trabalha em dois modos, modo
-            de Transporte e modo Túnel. No modo de Transporte, apenas o segmento da camada de transporte é processado, ou
-            seja, autenticado e criptografado. Este modo é adequado para implementações em servidores e gateways, protegendo
-            camadas superiores de protocolos, além de cabeçalhos IP selecionados. O cabeçalho AH é implantado após o
-            cabeçalho IP e antes do protocolo de camada superior; TCP, UDP e ICMP, ou antes de outros cabeçalhos que o IPsec
-            tenha inserido. Na abertura para modificações os endereços de IP de origem e destinos caso os pacotes sejam
-            interceptados.</p>
+            <p>No Modo de Transporte, apenas o pacote da camada de transporte é processado, ou seja, autenticado e/ou 
+            criptografado. Este modo é adequado para implementações em servidores e gateways, protegendo
+            camadas superiores de protocolos. O cabeçalho AH é implantado após o cabeçalho IP e antes do protocolo de 
+            camada superior(p.ex. TCP, UDP ou ICMP).</p>
 
-            <p>Assegurando a segurança apenas dos dados oriundos das camadas superiores está o modo transporte que é empregado
-            para comunicação fim-a-fim entre computadores. Para conceder a segurança para a camada IP o modo túnel é aplicado
-            para comunicação entre roteadores. Sendo assim, ambos os protocolos AH e ESP podem funcionar no modo transporte e
-            túnel.</p>
+            <p>Assegurando a segurança apenas dos dados oriundos das camadas superiores está o Modo Túnel que é 
+            empregado para comunicação segura fim-a-fim. Também pode ser implementado entre roteadores, como visto
+            na figura <a href="vpn">3.1</a>, protegendo a mensagem apenas no meio público (internet). Sendo assim, 
+            ambos os protocolos AH e ESP podem funcionar no modo transporte e túnel.</p>
 
             <figure align="center">
                     <img src="img/modos.png" style="width:700px">
@@ -479,16 +502,12 @@
                     </figcaption>
             </figure>
 
-            <h4 id="mtransporte">
-                3.5.1. Transporte
-            </h4>
+            <h3 id="mtransporte">
+                5.1. Transporte
+            </h3>
 
-            <p>O Modo Transporte é utilizado para estabelecer ligações seguras entre hosts. Neste modo é mantido
-            o header original dos pacotes IP e apenas as informações das camadas superiores são protegidas. Os
-            hosts precisão aguentar a funcionalidade IPsec.</p>
-
-            <p>No Modo Transporte o protocolo AH efetiva o pacote dos dados do pacote IP original a sua autenticação
-            e integridade. Mantem-se o IP header original e insere o header do protocolo AH para a proteção.</p>
+            <p>Neste modo, mantem-se o cabeçalho IP original para roteamento e insere-se um cabeçalho AH que protege os
+            dados das camadas superiores.</p>
 
             <figure align="center">
                     <img src="img/ah-transporte.png" style="width:65%">
@@ -497,15 +516,7 @@
                     </figcaption>
             </figure>
 
-            <p>O protocolo ESP gera autenticação, integridade e confidencialidade encriptação da carga útil do pacote IP
-            original no modo transporte. Mantem-se o IP header original, insere o header e o trailer do protocolo ESP
-            para a proteção. Necessitando assim suporte ao IPsec o emissor e receptor da comunicação. Protegendo apenas
-            os cabeçalhos superior, o cabeçalho IP mantém-se original, pois o cabeçalho IPsec é adicionado imediatamente
-            após o cabeçalho IP, antes dos cabeçalhos dos protocolos das camadas superiores.</p>
-
-            <p>Os dados são criptografados e assinados no cabeçalho ESP, no cabeçalho de transporte e dados e o trailer
-            de ESP, quando a criptografia e autenticação são selecionadas, sendo assim, a criptografia é realizada
-            primeira.</p>
+            <p>Mantem-se o cabeçalho IP original, insere o header e o trailer do protocolo ESP, com os campos de proteção.</p>
 
             <figure align="center">
                     <img src="img/mtransporte-esp.png" style="width:100%">
@@ -514,29 +525,21 @@
                     </figcaption>
             </figure>
 
-            <h4 id="mtunel">
-                3.5.2. Túnel
-            </h4>
+            <h3 id="mtunel">
+                5.2. Túnel
+            </h3>
 
-            <p>O pacote IP no modo túnel é autenticado ou criptografado, tornando apenas o cabeçalho IP externo visível,
-            transmitindo o destino do gateway roteador, firewall, subsistindo todo o conteúdo interno criptografado.
-            Pode-se usar desse método para evitar a análise de tráfego devido ao fato de que o cabeçalho IP contém o
-            endereço de destino e teoricamente as diretivas de roteamento e informação proveniente da opção salto-a-salto,
-            sendo impossível transmitir o pacote IP criptografado dispondo prefixo de cabeçalho ESP, pois roteadores
-            intermediários seriam incapazes de processar o pacote.</p>
+            <p>Neste modo todo o datagrama é protegido e um novo cabeçalho IP é inserido, com endereço de destino sendo
+            uma entidade IPsec que é porta de entrada para um rede interna protegida.Pode-se usar desse método para evitar 
+            a análise de tráfego devido ao fato de que o cabeçalho IP original é protegido pelo cabeçalho IPsec.</p>
 
-            <p>Será fundamental encapsular o bloco inteiro do cabeçalho ESP mais o pacote IP criptografado com um novo
-            cabeçalho IP que deverá conter informações para o roteamento, não terá que ter análise de tráfego. No modo
-            de transporte é adequado para proteger conexões entre estações que suportam o modo ESP. O modo túnel é
-            utilizável numa configuração que apresente um firewall ou outro tipo de gateway de segurança que protege
-            uma rede confiável das redes externas. Na proteção de uma rede confiável, a criptografia ocorre apenas entre
-            uma estação externa e o gateway de segurança, ou entre dois gateways de segurança. Permitindo as estações
-            da rede interna do processamento de criptografia e resumindo a tarefa do número de chaves pela redução do
-            numero de chaves necessárias de distribuição e inibindo a análise de tráfego baseada no destino final.</p>
+            <p>Na proteção de uma rede confiável, a criptografia ocorre apenas entre
+            uma estação externa e o gateway de segurança, ou entre dois gateways de segurança. Privando as estações
+            da rede interna do processamento de criptografia e resumindo a tarefa de distribuição de chaves, devido a 
+            redução do numero de chaves necessárias para distribuição.</p>
 
-            <p>O protocolo AH realizada autenticação e integridade de todo o pacote IP original. Um novo IP header e o
-            header do protocolo é inserido no AH para a proteção. O IP header original contém os endereços IP de origem e
-            destino da mensagem, enquanto o novo IP header contém os endereços IP dos gateways IPsec.</p>
+            <p>O cabeçalho IP original contém os endereços de origem e destino da mensagem, enquanto o novo cabeçalho 
+            IP (o cabeçalho IPsec) contém os endereços IP dos gateways IPsec.</p>
 
             <figure align="center">
                     <img src="img/mtunel-ah.png" style="width:70%">
@@ -545,52 +548,41 @@
                     </figcaption>
             </figure>
 
-            <p>O protocolo ESP efetua autenticação, integridade e confidencialidade do pacote IP original. Para proteção
-            um ESP trailer é inserido e no ESP herda um novo IP. Enquanto o novo IP header original contém os endereços IP
-            dos gateways IPsec, são inseridos nos endereços IPs de origem e destinos.</p>
-
-            <p>No modo túnel, o ESP assinará o cabeçalho de ESP, cabeçalho original de IP, cabeçalho de transporte de dados,
-            o trailer de ESP.  A diferença para o modo de transporte está no datagrama de IP original que será́ todo
-            criptografado. O Modo Túnel é o mais empregue e serve para criar uma ligação segura VPN entre duas gateways ou
-            entre um gateway e um host. No dispositivo utilizado os equipamentos internos não precisam de suportar o IPsec,
-            a encriptação e desencriptação ocorre nas IPsec gateways. Um novo IP header é criado e o pacote IP original é
-            totalmente protegido.</p>
-
             <figure align="center">
                     <img src="img/mtunel-esp.png" style="width:70%">
                     <figcaption>
                         Figura 3.3.1:  Protocolo ESP no modo túnel.
                     </figcaption>
             </figure>
-
-
         </div>
 
         <div>
-            <h2 id="finais">4. Considerações Finais</h2>
-        </div>
+            <h2 id="finais">6. Considerações Finais</h2>
 
             <p>O IPsec, conforme pudemos observar, é um protocolo que opera na camada de rede e possibilita uma comunicação
             segura entre dois terminais de rede, sendo segurança equivalente à transferência de pacotes com integridade,
             autenticidade e possível confidencialidade. Vimos que uma comunicação neste protocolo se inicia com o
-            estabelecimento de chaves, algoritmos e protocolos que serão utilizados na sessão (SA IKE). Após isso, a associação
-            de segurança (SA IPsec) é estabelecida. Os principais métodos de proteção utilizados pelo IPsec são os protocolos AH
-            e ESP. O primeiro garante integridade (ou seja, que a mensagem não foi alterada) e autenticidade (garantia da autoria).
-            Já o segundo garante também confidencialidade, já que a carga útil trafega cifrada, e não em texto plano.</p>
+            estabelecimento de chaves, algoritmos e protocolos que serão utilizados na sessão (SA IKE). Após isso, a 
+            SA IPsec é estabelecida. Os principais métodos de proteção utilizados pelo IPsec são os protocolos AH
+            e ESP. O primeiro garante integridade (ou seja, que a mensagem não foi alterada) e autenticidade (garantia 
+            da autoria). Já o segundo garante também confidencialidade, já que a carga útil trafega cifrada, e não em 
+            texto plano.</p>
 
-            <p>Dois modos de operação são possíveis no IPsec. No Modo Transporte, o cabeçalho IP original é mantido (camada de
-            transporte) e o resto do pacote é aplicado ao ESP. No Modo Túnel, o cabeçalho IP original é aplicado também ao
-            protocolo ESP. Um novo cabeçalho IP é anexado ao datagrama, de forma que o endereço final também está protegido.
-            A mesma explicação é válida para o caso de utilizarmos o protocolo AH, ou uma combinação de ambos.</p>
+            <p>Dois modos de operação são possíveis no IPsec. No Modo Transporte, o cabeçalho IP original é mantido (camada
+            de transporte) e o resto do pacote é aplicado ao ESP. No Modo Túnel, o cabeçalho IP original é aplicado também 
+            ao protocolo ESP. Um novo cabeçalho IP é anexado ao datagrama, de forma que o endereço final também está 
+            protegido. A mesma explicação é válida para o caso de utilizarmos o protocolo AH, ou uma combinação de ambos.</p>
 
             <p>Concluímos que o IPsec é um protocolo que fornece uma tecnologia poderosa em termos de segurança da informação
-            que trafega em uma rede IP. Sua arquitetura permite uma implementação de forma invisível para as camadas inferiores,
-            operando de forma transparente. Suas configurações permitem evitar que pessoas má intencionadas monitorem
-            o fluxo da informação, ou até se passem pelo autor original da mensagem. É uma arma poderosa contra hackers e
-            transforma um ambiente hostil (Internet) em um caminho seguro para o tráfego entre redes de computadores.</p>
+            que trafega em uma rede IP. Sua arquitetura permite uma implementação de forma invisível para as camadas 
+            inferiores, operando de forma transparente. Suas configurações permitem evitar que pessoas má intencionadas 
+            monitorem o fluxo da informação, ou até se passem pelo autor original da mensagem. É uma arma poderosa contra 
+            hackers e transforma um ambiente hostil (Internet) em um caminho seguro para o tráfego entre redes de 
+            computadores.</p>
+        </div>
 
         <div>
-            <h2 id="referencias">5. Referências</h2>
+            <h2 id="referencias">7. Referências</h2>
             <ul>
                 <li id="KUROSE">[1] KUROSE, James F. Redes de Computadores e a Internet - Uma abordagem Top-Down, 6ª Edição. Pearson Education Índia, 2014.</li>
                 <li id="PERLMAN">[2] PERLMAN, Radia; KAUFMAN, Charlie; SPECINER, Mike. Network security: Private Communication in a Public World, 2ª Edição. Pearson Education Índia, 2016.</li>
@@ -606,9 +598,9 @@
                 <li id="RICCI">[12] RICCI, B. Rede Segura: VPN Linux, 1ª Edição. Ciência Moderna, Rio de Janeiro, 2007.</li>
                 <li id="FRIEDL">[13] FRIEDL, S. J. An Illustrated Guide to IPsec. Disponível em http://www.unixwiz.net/techtips/iguide-ipsec.html, acessado em maio de 2018
                 <li id="BRAGNETTO">[14] BRAGNETTO, L. F. B., da SILVA, S. C., BARBOSA, L. A. M. IPsec - Segurança de Redes, 2003. Disponível em http://www.braghetto.eti.br/files/IPSec%20-%20Versao%20Final.pdf. Acessado em 18 de maio de 2018.  </li>
-                <!--li>[7] FORTIO, R. M. S. Análise e implementação do protocolo de segurança IPsec na rede de acesso LTE. 2014 (Master Thesis) - Técnico Lisboa. 2014</li-->
-                <!--li>[2] FERGUSON, N.; SCHNEIER, B. A cryptographic evaluation of IPSec. Counterpane Internet Security, Inc, v. 3031, p. 14, 2000.</li-->
+                <li id="FERGUSON">[15] FERGUSON, N.; SCHNEIER, B. A cryptographic evaluation of IPSec. Counterpane Internet Security, Inc, v. 3031, p. 14, 2000.</li>
                 <!--li>[9] JAMHOUR, E. IPsec. Disponível em: <"https://www.ppgia.pucpr.br/~jamhour/">. Acesso em: 21 maio.2018.</li-->
+                <!--li>[7] FORTIO, R. M. S. Análise e implementação do protocolo de segurança IPsec na rede de acesso LTE. 2014 (Master Thesis) - Técnico Lisboa. 2014</li-->
             </ul>
         </div>
 
