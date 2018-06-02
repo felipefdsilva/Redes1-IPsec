@@ -56,7 +56,7 @@
                         <li class="nav-item">
                             <a class="nav" class="nav-link js-scroll-trigger" href="#ipsec">3. Protocolos do IPsec</a>
                             <ul>
-                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#ha">3.1. Cabeçalho de Autenticação</a></li>
+                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#ah">3.1. Cabeçalho de Autenticação</a></li>
                                 <li><a class="nav" class="nav-link js-scroll-trigger" href="#esp">3.2. Encapsulamento de Dados de Segurança</a></li>
                             </ul>
                         </li>
@@ -90,38 +90,28 @@
                 1. Introdução
             </h2>
 
-            <p>A Internet, na sua concepção, foi projetada de forma a ser a mais simples e genérica
-              possível, possibilitando assim a sua rápida expansão e crescimento. Toda essa simplicidade é, de fato,
-              percebida na facilidade de desenvolvimento e integração entre diversas redes e usuários. Contudo, grandes
-              modificações no kernel da Internet não são possíveis de serem feitas. Dessa forma, projetos atuais
-              que levam em consideração requisitos que não foram inicialmente pensados na origem da Internet,
-              como por exemplo a Segurança da Informação, se utilizam de protocolos adicionais
-              para garantirem as suas implementações de forma satisfatória .</p>
+            <p>Na pilha de protocolos que regem a Rede de computadores, certamente a camada de rede (modelo TCP/IP) é a 
+            mais genérica. Seu único protocolo, o IP (Protocolo da Internet) suporta qualquer protocolo das camadas 
+            adjacentes. Atualmente existe uma variedade de aplicações que em sua base utilizam o protocolo IP
+            para rotear sua mensagens pela internet e entregar serviços ao usuários. Alterações a atualizações do mesmo 
+            são extremamente evitadas, pois além de possivelmente afetar algumas das inúmeras aplicações existentes, 
+            também implica em alterações no núcleo da rede de computadores, com alterações nos equipamentos dos fornecedores
+            de acesso a Internet.</p>
+            
+            <p>Porém, com o crescimento de aplicações cresceu também a variedade de informações que trafegam pela Rede.
+            Não tardou para que informações sensíveis (como dados bancários) necessitassem de proteção para trafegar
+            num ambiente público como a Internet. Após anos de desenvolvimento, o IETF publicou o IPsec (Segurança do 
+            Protocolo de Internet), um sistema de segurança que se mune de algoritmos de criptografia e autenticação 
+            para garantir comunicações sigilosas e confiáveis na camada de rede.</p>
 
-              <p>Com o avanço da Globalização, grandes volumes de dados sensíveis trafegam diariamente por todo o
-              planeta através da Internet, como operações bancárias e dados governamentais. Começou-se a pensar,
-              então, em métodos para evitar que tais informações fossem capturadas indevidamente.</p>
+            <p>Originalmente o IPsec foi desenvolvido para a sexta versão do Protocolo de Internet (IPv6). Porém, a adoção
+            do IPv6 mostrou-se muito lenta com o tempo, e o IPsec teve que ser retrabalhado (ainda em seu desenvolvimento) 
+            para ser compatível também com a versão 4 (IPv4). Isto explica algumas incompatibilidades que o sistema apresenta
+            com NAT (Tradução de Endereço de Rede). Neste texto discute-se conceitos básicos de segurança de informação, 
+            como introdução aos protocolos utilizados pelo IPsec. Após, aprofunda-se a discussão nestes protocolos, 
+            como funcionam, o que oferecem e seus modos de operação. Breves contextualizações estão presentes ao longo do 
+            texto, para melhor compreensão.</p>
 
-              <p>O protocolo de Internet (IP) versão 6 (IPv6), quando em desenvolvimento, tinha como principais
-              objetivos a expansão do número possível de hosts e aumentar a segurança na camada de Rede. Percebeu-se
-              então, que estas técnicas de segurança também poderiam ser aplicadas ao IPv4, que é largamente difundido
-              e utilizado, além de que sua substituição pelo IPv6 está se dando a passos lentos. </p>
-
-              <p>O principal protocolo de segurança desenvolvido foi o Protocolo de Segurança da Internet (IPsec). Sua maior vantagem
-              é o fato de prover comunicação segura, ponto-a-ponto, para diferentes aplicações, de forma transparente
-              (operando na camada de Rede, como detalharemos a seguir), tanto para o remetente, quanto para o destinatário.
-              Além disso, as aplicações que utilizam IPsec, não precisam ser modificadas de nenhuma forma. Isso é particularmente
-              importante, quando se trabalha na segurança de um determinado serviço, porém não se possui o seu código fonte,
-              fato bem comum atualmente. </p>
-
-              <p>Entrando no âmbito de quantificar e qualificar a segurança do tráfego de informações, <b>três quesitos</b> se fazem
-              presentes: Integridade, Autenticidade e Confiabilidade dos pacotes que trafegam em uma determinada infraestrutura
-              de rede, seja ela privada, como por exemplo uma VPN, ou não. Para atender tais requisitos, o protocolo IPsec integra
-              sistemas de autenticação, gerenciamento e distribuição de chaves. </p>
-
-              <p>Veremos nas seções seguintes, os conceitos fundamentais que estão embutidos em uma comunicação segura pela rede (como
-              criptografia e autenticação), quais protocolos estão embutidos no IPsec, como o datagrama original é alterado e detalhes
-              sobre a Arquitetura do protocolo e seus modos de operação. </p>
         </div>
 
         <div>
@@ -237,7 +227,7 @@
             a mensagem como um datagrama comum com um cabeçalho IP roteável, quanto para os dispositivos na redes locais,
             que recebem e enviam pacotes descriptografados.</p>
 
-            <figure align="center">
+            <figure id ="vpn" align="center">
                 <img src="img/vpn.png">
                 <figcaption>
                     Figura 3.1: Rede Virtual Privada (VPN). Adaptado de [<a href="#KUROSE">1</a>].
@@ -292,7 +282,7 @@
                 um atacante obtenha os pacotes, não terá acesso a informação, pois a mensagem encontra-se cifrada.</li>
             </ul>
 
-            <h3 id="ha">
+            <h3 id="ah">
                 3.1. Cabeçalho de Autenticação
             </h3>
 
@@ -319,23 +309,6 @@
                 para ser múltiplo de 32 bits. Sem cálculo leva em consideração o cabeçalho IP.
                 </li>
             </ul>
-
-            <!-- <figure align="center">
-                    <img src="img/headerah.png" style="width:400px">
-                    <figcaption>
-                        Figura 3.1.1:  Campos do Cabeçalho de Autenticação. Adaptado de [FRIEDL].
-                    </figcaption>
-            </figure> -->
-
-            <!--figure align="center">
-                <img src="img/ah.png" style="width:400px">
-                <figcaption>Figura 3.3:  Datagrama com Cabeçalho de Autenticação. Adaptado de [RICCI]</figcaption>
-            </figure-->
-
-            <p>O AH não oferece confidencialidade. <font color=red>O algoritmo de
-            hashing é responsável por criar o ICV. Ao realizar um hash das partes do cabeçalho de IP e das partes dos dados
-            do pacote, somente os dados do cabeçalho serão utilizados, por serem incorporados somente no cabeçalho e não
-            serem identificados até que sejam calculados.</font></p>
 
             <p>O destinatário autentica o emissor através de uma assinatura digital, conforme discutido na seção
             <a href="#assinatura">2.4</a>.</p>
@@ -483,78 +456,85 @@
             <h2 id="modos">
                 5. Modos de Operação
             </h2>
-            <p>O IPsec apresenta dois modos de funcionamentos: o Modo Transporte e o Modo Túnel.</p>
+            <p> Os dois protocolos de segurança do IPsec operam em dois modos: <b>Transporte</b> e 
+            <b>Túnel</b>. O primeiro protege o pacote da camada de transporte e mantém o cabeçalho IP 
+            original. O segundo encapsula o datagrama completamente e gera um novo cabeçalho IP. Dependendo 
+            da arquitetura de implementação do IPsec (hospedeiro a roteador, roteador a roteador ou hospedeiro 
+            a hospedeiro), um modo é mais usado. Por exemplo, o modo transporte é mais usado na arquitetura
+            hospedeiro a hospedeiro, pois este modo não altera o endereço de destino. O modo Túnel
+            é mais usado em arquitetura roteador a roteador, protegendo o datagrama apenas fora das redes 
+            locais.</p>
 
-            <p>No Modo de Transporte, apenas o pacote da camada de transporte é processado, ou seja, autenticado e/ou 
-            criptografado. Este modo é adequado para implementações em servidores e gateways, protegendo
-            camadas superiores de protocolos. O cabeçalho AH é implantado após o cabeçalho IP e antes do protocolo de 
-            camada superior(p.ex. TCP, UDP ou ICMP).</p>
-
-            <p>Assegurando a segurança apenas dos dados oriundos das camadas superiores está o Modo Túnel que é 
-            empregado para comunicação segura fim-a-fim. Também pode ser implementado entre roteadores, como visto
-            na figura <a href="vpn">3.1</a>, protegendo a mensagem apenas no meio público (internet). Sendo assim, 
-            ambos os protocolos AH e ESP podem funcionar no modo transporte e túnel.</p>
-
-            <figure align="center">
-                    <img src="img/modos.png" style="width:700px">
+            <figure align="center" id="modos-img">
+                    <img src="img/modos.png" style="width:100%">
                     <figcaption>
-                        Figura 3.3.1:  Estrutura de um datagrama IPsec nos diferentes modos
+                        Figura 5.1: O datagrama original e nos modos transporte e túnel. 
                     </figcaption>
             </figure>
+
+            <p>Como dito anteriormente (seção <a href="ah">3.1</a>), o protocolo AH pode proteger campos não mutáveis do 
+            cabeçalho IP. Neste sentido, a figura <a href="#modos-img">5.1</a></p> pode confundir o leitor, pois dá a 
+            ideia que o cabeçalho protege apenas os campos à sua direita. Mais detalhes são dados nas subseções seguintes.</p>
 
             <h3 id="mtransporte">
-                5.1. Transporte
+                5.1. Modo Transporte
             </h3>
 
-            <p>Neste modo, mantem-se o cabeçalho IP original para roteamento e insere-se um cabeçalho AH que protege os
-            dados das camadas superiores.</p>
+            <p>Neste modo, mantem-se o cabeçalho IP original e insere-se um cabeçalho do protocolo de 
+            segurança (AH ou ESP) antes do cabeçalho do protocolo de transporte. Naturalmente, o protocolo ESP é 
+            mandatório caso sigilo seja um requisito, pois é o protocolo que oferece criptografia.</p>
+
+            <p>Detalhe importante citado no início desta seção, o protocolo AH pode proteger alguns campos não mutáveis
+            do cabeçalho IP. Os cabeçalhos mutáveis para o protocolo AH são:</p>
+            <ul>
+                <li>Tipo de serviço - indica o tratamento dado pelos roteadores ao longo do percurso do datagrama.</li>
+                <li>Flag - controle da fragmentação do objeto.</li>
+                <li>Offset de Fragmento - indica a posição dos dados do datagrama.</li>
+                <li>Tempo de vida ("TTL") - reduzido por cada roteador do percurso. Ao chegar a zero, o pacote é descartado.</li>
+                <li>Soma de Verificação do Cabeçalho ("Header Checksum")- campo de proteção contra erros. Muda a cada roteador,
+                pois seu calculo leva em conta o TTL.
+                </li>
+            </ul>
+
+            <p>É importante notar que os campos que indicam os endereços de destino e origem são protegidos. Isso impede que 
+            o modo transporte com protocolo AH funcione com NAT (Tradução de Endereço de Rede), sistema cujo a ideia básica 
+            é justamente alterar o endereço de origem (de um IP não roteável para um IP roteável). Como o AH protege esse 
+            campo, o NAT falha. Segundo [<a href="#PERLMAN">2</a>], esta incompatibilidade (que também acontece com o 
+            ESP no modo túnel) é intencional, pois o IPsec foi idealizado para ser um recurso do IPv6, que evolui muito 
+            lentamente desde sua publicação, em grande parte graças ao NAT. A intenção é que o IPsec seja um incentivo
+            para a transição de IPv4 para IPv6. Porém, o geralmente acontece na prática é o uso de NAT com outras opções
+            de segurança (que é geralmente a solução mais simples e barata).</p>
+
+            A figura a seguir mostram os datagramas no modo transporte dos dois protocolos de segurança. Também indica 
+            os campos que são protegidos com criptografia e os que são protegidos com autenticação e integridade.
 
             <figure align="center">
-                    <img src="img/ah-transporte.png" style="width:65%">
+                    <img src="img/modo-transporte.png" style="width:110%">
                     <figcaption>
-                        Figura 3.3.1:  Estrutura de um datagrama IPsec nos diferentes modos
-                    </figcaption>
-            </figure>
-
-            <p>Mantem-se o cabeçalho IP original, insere o header e o trailer do protocolo ESP, com os campos de proteção.</p>
-
-            <figure align="center">
-                    <img src="img/mtransporte-esp.png" style="width:100%">
-                    <figcaption>
-                        Figura 3.3.1:  Protocolo ESP no modo transporte
+                        Figura 5.5.1:  Estrutura de um datagrama IP no modo transporte. Acima, o datagrama protegido pelo AH.
+                        Abaixo, o datagrama protegido pelo ESP. Notar que o protocolo AH protege todo o datagrama.
                     </figcaption>
             </figure>
 
             <h3 id="mtunel">
-                5.2. Túnel
+                5.2. Modo Túnel
             </h3>
 
             <p>Neste modo todo o datagrama é protegido e um novo cabeçalho IP é inserido, com endereço de destino sendo
-            uma entidade IPsec que é porta de entrada para um rede interna protegida.Pode-se usar desse método para evitar 
-            a análise de tráfego devido ao fato de que o cabeçalho IP original é protegido pelo cabeçalho IPsec.</p>
-
-            <p>Na proteção de uma rede confiável, a criptografia ocorre apenas entre
-            uma estação externa e o gateway de segurança, ou entre dois gateways de segurança. Privando as estações
-            da rede interna do processamento de criptografia e resumindo a tarefa de distribuição de chaves, devido a 
-            redução do numero de chaves necessárias para distribuição.</p>
-
-            <p>O cabeçalho IP original contém os endereços de origem e destino da mensagem, enquanto o novo cabeçalho 
-            IP (o cabeçalho IPsec) contém os endereços IP dos gateways IPsec.</p>
+            uma entidade com suporte a IPsec. Ou seja, neste caso o destinatário final da mensagem não necessariamente 
+            oferece suporte a IPSec, assim como vimos na figura <a href="#vpn">3.1</a>. O modo túnel é geralmente usado 
+            na arquitetura roteador a roteador, em que considera-se que atrás do roteador encontra-se um rede local segura. 
+            Também no modo túnel, como o cabeçalho IP original é protegido, evita-se também análise de tráfego, em outras 
+            palavras, há um sigilo quanto a natureza da comunicação. Simplificando: o cabeçalho IP original contém os 
+            endereços de origem e destino da mensagem, enquanto o novo cabeçalho IP contém os endereços dos pontos de 
+            acesso das redes locais protegidas.</p>
 
             <figure align="center">
-                    <img src="img/mtunel-ah.png" style="width:70%">
+                    <img src="img/modo-tunel.png" style="width:110%">
                     <figcaption>
-                        Figura 3.3.1:  Protocolo AH no modo túnel.
+                        Figura 5.2.1:  Protocolos no modo túnel.
                     </figcaption>
             </figure>
-
-            <figure align="center">
-                    <img src="img/mtunel-esp.png" style="width:70%">
-                    <figcaption>
-                        Figura 3.3.1:  Protocolo ESP no modo túnel.
-                    </figcaption>
-            </figure>
-        </div>
 
         <div>
             <h2 id="finais">6. Considerações Finais</h2>
