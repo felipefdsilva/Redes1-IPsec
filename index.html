@@ -90,13 +90,13 @@
                 1. Introdução
             </h2>
 
-            <p>Na pilha de protocolos que regem a Rede de computadores, certamente a camada de rede (modelo TCP/IP) é a 
+            <p>Na pilha de protocolos que regem a rede de computadores, certamente a camada de rede (modelo TCP/IP) é a 
             mais genérica. Seu único protocolo, o IP (Protocolo da Internet) suporta qualquer protocolo das camadas 
             adjacentes. Atualmente existe uma variedade de aplicações que em sua base utilizam o protocolo IP
             para rotear sua mensagens pela internet e entregar serviços ao usuários. Alterações a atualizações do mesmo 
             são extremamente evitadas, pois além de possivelmente afetar algumas das inúmeras aplicações existentes, 
-            também implica em alterações no núcleo da rede de computadores, com alterações nos equipamentos dos fornecedores
-            de acesso a Internet.</p>
+            também implica em alterações no núcleo da rede de computadores, com alterações nos equipamentos dos Fornecedores
+            de Acesso a Internet (SPIs).</p>
             
             <p>Porém, com o crescimento de aplicações cresceu também a variedade de informações que trafegam pela Rede.
             Não tardou para que informações sensíveis (como dados bancários) necessitassem de proteção para trafegar
@@ -123,14 +123,14 @@
             roteador. Portanto, a menos que seja explicitado, quando fala-se em <b>entidade</b>, subentende-se que
             trata-se de qualquer uma das entidades da camada de rede.</p>
 
-            <p>Considerando que duas entidades queriam se comunicar de forma segura através de um meio público como a
-            Internet, algumas propriedade são desejáveis, conforme indicado em [KUROSE]:</p>
+            <p>Considerando que duas entidades queiram se comunicar de forma segura através de um meio público como a
+            Internet, segundo [<a href="#KUROSE">1</a>], as seguintes propriedades são desejáveis:</p>
 
             <ul>
                 <li><b>Confidencialidade</b> - apenas remetente e destinatário tem acesso a mensagem descodificada</li>
-                <li><b>Integridade da Mensagem</b> - Confiança de que a mensagem não foi alterada durante a transmissão</li>
-                <li><b>Autenticação de Ponto Final</b> - Remetente deve confirmar a identidade do destinatário e vice-versa</li>
-                <li><b>Segurança Operacional</b> - O ambiente em que a mensagem é escrita deve estar bem protegido. Esta
+                <li><b>Integridade da Mensagem</b> - garantia de que a mensagem foi inalterada durante a transmissão</li>
+                <li><b>Autenticação de Ponto Final</b> - remetente deve confirmar a identidade do destinatário e vice-versa</li>
+                <li><b>Segurança Operacional</b> - o ambiente em que a mensagem é escrita deve estar bem protegido. Esta
                     característica não envolve o IPsec, e está além do escopo deste trabalho. Porém, é característica
                     fundamental de uma comunicação segura.</li>
             </ul>
@@ -139,32 +139,38 @@
                 2.1. Criptografia
             </h3>
 
-            <p>Uma mensagem sem codificação, tem seu conteúdo em texto plano (também conhecido como texto claro ou aberto).
-            Uma mensagem que passa por um algoritmo de criptografia passa a ter um conteúdo em texto cifrado, inteligível
-            para um interceptor na transmissão.</p>
+            <p>Uma mensagem sem codificação, tem seu conteúdo em <b>texto plano</b> (também conhecido como texto claro ou 
+            aberto). Uma mensagem que passa por um algoritmo de criptografia passa a ter um conteúdo em <b>texto cifrado</b>, 
+            ininteligível para um interceptor na transmissão. A informação da mensagem só é recuperada após o processo de 
+            decriptação.</p>
 
-            <p>Técnicas e algoritmos de transmissão são publicados e padronizados na Internet (por exemplo as RFCs 1321, 3447, 2420).
-            Independente da técnica usada, uma mensagem criptografada só pode ser descriptografada com uma <b>chave de
-            segurança</b>. Esta chave (que pode ser a mesma para ambos ou exclusiva de cada um) serve de parâmetro para que o
-            algoritmo de decriptação possa transformar a mensagem em texto cifrado em uma mensagem em texto plano. A figura
-            2.1.1 ilustra os componentes básicos de um sistema de criptografia.</p>
+            <p>Técnicas e algoritmos de transmissão são publicados e padronizados na Internet (por exemplo as RFCs 1321, 
+            3447, 2420). Independente da técnica usada, uma mensagem criptografada geralmente só pode ser descriptografada 
+            com uma <b>chave de segurança</b>. Esta chave (que pode ser a mesma para ambos ou exclusiva de cada um) serve 
+            de parâmetro de entrada para que, junto a mensagem cifrada, o algoritmo de decriptação possa transformar a 
+            mensagem em texto cifrado em uma mensagem em texto plano. A figura <a href="#img-cript">2.1.1</a> ilustra os 
+            componentes básicos de um sistema de criptografia.</p>
 
-            <figure>
+            <figure id="img-cript">
                 <img src="img/criptografia.png">
                 <figcaption>Figura 2.1.1 - Esquema geral de uma comunicação criptografada que é interceptada por um invasor.
                 Adaptada de [<a href="#KUROSE">1</a>].</figcaption>
             </figure>
 
+
             <h3 id="fhash">
                 2.2. Funções de Hash criptográficas
             </h3>
 
-            <p>Funções hash criptográficas são usadas para atender a propriedade de integridade da mensagem em uma
-            comunicação segura, pois garante-se que a mensagem não foi alterada no meio do caminho.</p>
+            <p>Funções hash mapeiam dados de comprimento variável em uma cadeia de dados de comprimento fixo. Ou seja, 
+            uma mensagem "m" de tamanho x é mapeada em H(m) de tamanho fixo K. Uma função hash criptográfica é especial pois,
+            dadas duas mensagens diferentes m<sub>1</sub> e m<sub>2</sub>, H(m<sub>1</sub>) sempre será diferente de 
+            H(m<sub>2</sub>).</p>
 
-            <p>Se diferem das funções hash comuns por serem funções bijetoras, ou seja, sempre há um único hash para a
-            mensagem escrita. Em outras palavras um invasor não consegue reproduzir o mesmo hash desconhecendo a mensagem
-            em texto plano. Algoritmos de hash criptografados bem conhecidos são o MD5[RFC 1321] e o SHA-1[FIPS, 1995].</p>
+            <p>Funções hash criptográficas são usadas para atender a propriedade de integridade da mensagem em uma
+            comunicação segura, pois caso a mensagem seja alterada no meio do caminho, será impossível que o receptor
+            reproduza o mesmo hash desconhecendo a mensagem em texto plano e a função hash criptográfica utilizada. 
+            Algoritmos de hash criptografados mais utilizados são o MD5[RFC 1321] e o SHA-1[FIPS, 1995].</p>
 
             <h3 id="autenticacaoMsg">
                 2.3. Código de Autenticação de Mensagem
@@ -185,17 +191,35 @@
                 a integridade da mensagem (imagem adaptada de [<a href="#KUROSE">1</a>])</figcaption>
             </figure>
 
+            Como ilustrado, a mensagem enviada pela Internet tem um campo com o valor do hash criptográfico resultante
+            da soma da mensagem com o segredo. Ao receber a mensagem, o destinatário soma o segredo ao campo da mensagem e 
+            recalcula o hash. Finalmente, o receptor compara com o valor do hash recebido, e reconhece se a mensagem foi 
+            alterada ou não.
+
             <h3 id="assinatura">
                 2.4. Assinatura Digital
             </h3>
 
-            <p>Têm-se até aqui, garantias de confidencialidade e integridade. Resta identificar um usuário. Ou seja,
-            garantir que aquela mensagem válida foi enviada pelo usuário X e somente ele poderia ter enviado essa mensagem.
-            Neste caso, uma alternativa é usar um par de chaves (uma pública e uma privada). A chave pública conhecida por
-            todos, inclusive pelo destinatário. O remetente "assina" sua mensagem utilizando sua chave privada no hash citado
-            na seção 2.2. O destinatário utiliza a chave pública do remetente para chegar ao hash da mensagem e utiliza a
-            mensagem para chegar ao hash da mensagem (como explicado na seção 2.3). Caso o valor obtido nos dois processos
-            seja o mesmo, o remetente está identificado.</p>
+            <p>Têm-se até aqui, garantias de confidencialidade e integridade. O último passo é identificar um usuário. 
+            Ou seja, garantir que a mensagem válida foi enviada pelo usuário X e somente ele poderia ter enviado essa 
+            mensagem. Neste caso, uma alternativa é usar um par de chaves (uma pública e uma privada). A chave pública 
+            é conhecida por todos, inclusive pelo destinatário. </p>
+            
+            <p>No processo conhecido como Assinatura Digital, o remetente "assina" sua mensagem utilizando sua chave privada 
+            e o hash discutido na seção <a href="#fhash">2.2</a> num algoritmo criptográfico. Esta nova cadeia de caracteres 
+            é enviada no lugar do hash, junto com a mensagem, para o destinatário. Para autenticar o remetente, o destinatário 
+            executa a seguinte rotina:</p>
+            <ol>
+                <li>Utiliza a chave pública do remetente para descriptografar o hash.</li>
+                <li>Utiliza a mensagem recebida para recalcular o hash</li>
+                <li>Compara o hash calculado com o hash obtido com a chave pública do remetente</li>
+                <li>Compara os dois hashes.</li>
+
+            </ol>
+            <p>Apenas o remetente pode ter enviado esta mensagem, pois ao descriptografar o hash recebido com a chave 
+            pública, o destinatário concluiu que aquele era um hash válido gerado a partir da mensagem anexada. Apenas 
+            o destinatário, que conhece a chave privada, pode gerar uma cadeia de caracteres que, ao ser descriptografada 
+            com sua chave pública, chega ao hash criptográfico garantidor da integridade da mensagem</p>
         </div>
 
         <div>
@@ -203,7 +227,7 @@
                 3. Protocolos do IPsec
             </h2>
 
-            <p>O Protocolo de Segurança da Internet (mais conhecido por sua sigla, IPsec) é um modelo de comunicação
+            <p>O Protocolo de Segurança da Internet (de agora em diante, IPsec) é um modelo de comunicação
             segura de ponta a ponta através da Internet. Por ser implementado junto ao Protocolo da Internet (IP) na
             camada de rede, é um sistema de segurança transparente às outras camadas da pilha de protocolos, ou seja,
             o IPsec não prejudica o suporte já oferecido pelo IP aos diversos protocolos das camadas de transporte
@@ -216,16 +240,14 @@
 
             <p>A aplicação mais comum do IPsec é em Redes Privadas Virtuais (VPNs), um serviço de tunelamento que garante
             integridade e sigilo de informações enviadas pela Internet. Existem diferentes tipos de VPNs, implementadas
-            com alternativas ao IPsec, como os protocolos SSL/TLS, PPTP e L2TP. <font color='red'>PÔR NOTA DE "RODAPÉ?"</font></p>
+            com alternativas ao IPsec, como os protocolos SSL/TLS (RFC 5246), PPTP(criado pela Microsoft, obsoleto) e L2TP 
+            (RFC2661), que pertencem a outras camadas da pilha de protocolos.</p>
 
-            <p>No exemplo da figura 3.1, retirado de [KUROSE], a sede de uma instituição qualquer se comunica com sua filial através
-            da Internet. Seu roteador com suporte a IPsec, criptografa a mensagem (carga útil) e adiciona um cabeçalho IPsec,
-            que será usado pelo Roteador da filial para descriptografar o datagrama. Um cliente remoto (hospedeiro) também
-            pode utilizar de uma VPN para se comunicar seguramente com a filial.</p>
-
-            <p>É interessante notar na figura como o IPsec é transparente tanto para a os roteadores da Internet, que enxergam
-            a mensagem como um datagrama comum com um cabeçalho IP roteável, quanto para os dispositivos na redes locais,
-            que recebem e enviam pacotes descriptografados.</p>
+            <p>No exemplo da figura 3.1, retirado de [<a href="#KUROSE">1</a>], a sede de uma instituição qualquer se comunica 
+            com sua filial através da Internet. Seu roteador com suporte a IPsec, criptografa a mensagem (carga útil) e 
+            adiciona um cabeçalho IPsec, que será usado pelo Roteador da filial para descriptografar o datagrama (arquitetura 
+            roteador a roteador). Um cliente remoto (hospedeiro) também pode utilizar de uma VPN para se comunicar seguramente 
+            com a filial (arquitetura hospereiro a roteador).</p>
 
             <figure id ="vpn" align="center">
                 <img src="img/vpn.png">
@@ -234,7 +256,12 @@
                 </figcaption>
             </figure>
 
+            <p>É interessante notar na figura como o IPsec é transparente tanto para a os roteadores da Internet, que enxergam
+            a mensagem como um datagrama comum com um cabeçalho IP roteável, quanto para os dispositivos na redes locais,
+            que recebem e enviam pacotes descriptografados.</p>
+
             <p>O IPsec utiliza três protocolos para cumprir sua função:
+
             <ul>
                 <li><b>Cabeçalho de Autenticação</b> (AH), que provê autenticação e integridade.</li>
                 <li><b>Encapsulamento de Dados de Segurança</b> (ESP), que provê além de confidencialidade, além de
@@ -243,25 +270,29 @@
                 seguro para a troca de chaves entre remetente e destinatário.
             </ul>
 
-            <p> Vale citar os principais algoritmos de criptografia e autenticação AES128, MD5 e SHA1, todos usados e combinados
-            pelos protocolos de segurança listados acima.</p>
+            <p> Vale citar os principais algoritmos de criptografia e autenticação AES128, HMAC-MD5 e HMAC-SHA1, 
+            todos usados pelos protocolos de segurança listados acima.</p>
 
-            <p>A figura abaixo ilustra o sistema IPsec. A comunicação se inicia com uma conexão lógica, definida pelo protocolo
-            IKE e chamada de Associação de Segurança IKE ou simplesmente SA IKE (não confundir com a Associação de Segurança
-            do IPsec, que será explicada com detalhes mais a frente. Na RFC 7296, a SA do IPsec é definida como "Child SA").
-            Na SA IKE acontecem <i>requisições</i> e <i>respostas</i>. São trocadas informações de controle e chaves
-            Diffie-Hellman (ver <a href="#ike">3.4</a>) que servirão para estabelecer outra conexão lógica, a SA
-            do IPsec. Nesta SA, é negociada a criptografia da mensagem e outras políticas de segurança.
-            Em outras palavras, para que as parte de uma comunicação criptografada se entendam, é preciso uma troca de
-            informações prévia. Em outras palavras, antes de se ter uma conversa em código, é preciso combinar o código.</p>
+            <p>A figura <a href="#estrutura">3.2</a> ilustra o sistema IPsec. A comunicação se inicia com uma conexão lógica, 
+            definida pelo protocolo IKE e chamada de Associação de Segurança IKE ou simplesmente SA IKE.
+            Nela, acontecem <i>requisições</i> e <i>respostas</i>, ou seja, trocas de informações de controle e segurança,
+            como o Grupo Diffie-Hellman (um segredo compartilhado para gerar as chaves de segurança - seção 
+            <a href="#sa-ike">4.1</a>) que servirá para estabelecer outra conexão lógica, a SA IPsec.</p>
+            
+            <p>Na SA IPsec, é negociado o algortimo de criptografia, parâmetros de autenticação e outras políticas de 
+            segurança. Cada entidade com suporte a IPsec pode adotar todas ou algumas das soluções de segurança oferecidas 
+            pelo IPsec. Resumindo, a SA IPsec existe para que as parte de uma comunicação criptografada se entendam, dando 
+            oportunidade para que as entidades combinem o código das suas mensagens sigilosas.</p>
 
-            <p>Todas as informações trocadas são guardadas em bancos de dados nomeados SPD (Banco de Dados de políticas
-            de segurança) e SPA (Banco de Dados de Associações de Segurança). Esses bancos são sempre consultados pela
-            entidade para que ela saiba como manipular um datagrama IPsec (ver <a href="#sa">3.3</a>). Com as regras
-            estabelecidas e banco de dados consultados ou atualizados, é usado um dos protocolos (AH ou ESP) ou ambos.
+            <p>Todas as informações trocadas durante a SA IPSec são guardadas em bancos de dados nomeados SPD (Banco de Dados 
+            de políticas de Segurança) e SPA (Banco de Dados de Associações de Segurança). Esses bancos são sempre 
+            consultados pela entidade para que ela saiba como manipular um datagrama IPsec (seção <a href="#sa-ipsec">4.2</a>). 
+            Finalmente, com as regras estabelecidas e os banco de dados consultados ou atualizados, chega a etapa da 
+            comunicação em si, ou da troca de informação acontece. Neste momento, o remetente se utiliza de um dos protocolos 
+            (AH ou ESP) ou ambos, para proteger o mensagem e gerar o datagrama que será enviado para o destinatário.
             Uma vez que o ESP provê as mesmas funcionalidade do AH, o segundo tem caído em desuso.</p>
 
-            <figure align="center">
+            <figure id="estrutura" align="center">
                 <img src="img/estrutura-geral.png" style="width:60%">
                 <figcaption>
                     Figura 3.2: Estrutura Geral do IPsec. Adaptada de [<a href="#ALSHAMRANI">11</a>].
@@ -271,13 +302,13 @@
             <p>Alguns ataques que são evitados com o uso dos protocolos IPsec são:</p>
 
             <ul>
-                <li>Ataques de repetição: um atacante que tem acesso a um fluxo de datagramas injeta datagramas
+                <li><b>Ataques de repetição</b>: um atacante que tem acesso a um fluxo de datagramas injeta datagramas
                 modificados. Com o IPsec, os datagramas possuem um digito verificador de sequência e um
                 algoritmo anti-repetição.</li>
-                <li>Particionamento de pacotes cifrados: o atacante obtém partes de pacotes cifrados
+                <li><b>Particionamento de pacotes cifrados</b>: o atacante obtém partes de pacotes cifrados
                 e monta um pacote que pode ser aceito pelo destinatário. Existem campos no cabeçalho
                 IPsec que verificam a integridade do pacote</li>
-                <li>"Sniffer": quando o atacante obtém os pacotes que trafegam na rede em texto plano, obtendo
+                <li><b>"Sniffer"</b>: quando o atacante obtém os pacotes que trafegam na rede em texto plano, obtendo
                 informações que podem ser sigilosas. No IPsec, é possível criptografar as mensagens. Mesmo que
                 um atacante obtenha os pacotes, não terá acesso a informação, pois a mensagem encontra-se cifrada.</li>
             </ul>
@@ -288,29 +319,30 @@
 
             <p>O Cabeçalho de Autenticação (AH) é um protocolo que provê integridade e autenticidade de uma
             mensagem. O datagrama original é modificado, ganhando um cabeçalho de autenticação que possui os campos
-            vistos na figura 3.1.1. </p>
+            vistos no lado esquerdo da figura <a href="esp-vs-ah">3.2.1</a>.</p>
 
-            <p>As informações contidas em cada campo do cabeçalho de autenticação (figura <a href="#esp-vs-ah">3.2.1</a>) são listadas abaixo:</p>
+            <p>As informações contidas em cada campo do cabeçalho de autenticação (figura <a href="#esp-vs-ah">3.2.1</a>) 
+            são listadas abaixo:</p>
 
             <ul>
-                <li>Próximo Cabeçalho: Campo de 8 bits que indica o tipo de pacote (carga útil) subsequente ao cabeçalho
+                <li><b>Próximo Cabeçalho</b>: Campo de 8 bits que indica o tipo de pacote (carga útil) subsequente ao cabeçalho
                 de autenticação. Sendo o cabeçalho AH um cabeçalho da camada de rede, o cabeçalho subsequente pertence
                 a um protocolo da camada imediatamente superior, o que no modelo TCP/IP é a camada de transporte. Neste caso
                 o próximo cabeçalho poderia ser TCP ou UDP (cada cabeçalho possui um digito correspondente, que o representa
                 neste campo. O protocolo TCP por exemplo, é representado pelo dígito 8).</li>
-                <li>Tamanho do Cabeçalho: Campo de 8 bits que especifica o tamanho do cabeçalho AH</li>
-                <li>Reservado: Campo de 16 bits reservados para atualizações futuras. Atualmente é preenchido com zeros.</li>
-                <li>SPI: O Índice de Parâmetros de Segurança é um campo de 32 bits usado pelo receptor para identificar
+                <li><b>Tamanho do Cabeçalho</b>: Campo de 8 bits que especifica o tamanho do cabeçalho AH</li>
+                <li><b>Reservado</b>: Campo de 16 bits reservados para atualizações futuras. Atualmente é preenchido com zeros.</li>
+                <li><b>Índice de Parâmetros de Segurança (SPI)</b>: Campo de 32 bits usado pelo receptor para identificar
                 a SA do datagrama recebido.</li>
-                <li>Número de Sequência: Campo de 32 bits usado para identificar o datagrama e proteger o receptor de
+                <li><b>Número de Sequência</b>: Campo de 32 bits usado para identificar o datagrama e proteger o receptor de
                 ataques de repetição.</li>
-                <li>Valor Verificador de Integridade: É utilizado para verificar a integridade e autenticidade do datagrama.
-                Como é gerado a partir da encriptação da carga útil, tem tamanho variável e, portanto, possui um enchimento
-                para ser múltiplo de 32 bits. Sem cálculo leva em consideração o cabeçalho IP.
+                <li><b>Valor Verificador de Integridade (ICV)</b>: É utilizado para verificar a integridade e autenticidade do 
+                datagrama. Como é gerado a partir da encriptação da carga útil, tem tamanho variável e, portanto, possui um 
+                enchimento para ser múltiplo de 32 bits. Seu cálculo leva em consideração o cabeçalho IP.
                 </li>
             </ul>
 
-            <p>O destinatário autentica o emissor através de uma assinatura digital, conforme discutido na seção
+            <p>No AH, a autenticação do remetente é feita através de uma assinatura digital, conforme discutido na seção
             <a href="#assinatura">2.4</a>.</p>
 
             <h3 id="esp">
@@ -318,9 +350,9 @@
             </h3>
 
             <p>O protocolo ESP oferece integridade, autenticação e sigilo. A autenticação do ESP é diferente da realizada
-            pelo AH, pois não inclui o cabeçalho IP, apesar de encapsulá-lo no Modo Túnel (ver <a href="#mtunel">3.5.1</a>).
+            pelo AH, pois não inclui o cabeçalho IP, apesar de encapsulá-lo no Modo Túnel (seção <a href="#mtunel">5.2</a>).
             O AH protege parte do cabeçalho IP, campos não mutáveis que não são modificados pelos roteadores do meio do
-            caminho.</p>
+            caminho (caso protegesse esses campos mutáveis, seu campo ICV chegaria ao destinatário inválido).</p>
 
             <p>O campos do cabeçalho ESP são análogos aos do AH, com as seguintes ressalvas: </p>
 
@@ -331,7 +363,7 @@
                 <li><b>Tamanho do Enchimento</b>: Campo de 8 bits que indica o tamanho do enchimento usado na
                 operação acima.</li>
                 <li><b>Próximo Cabeçalho</b>: Se difere do AH por apontar para trás, pois o campo é lido após
-                a carga útil (ver figura 3.2.1).</li>
+                a carga útil (figura <a href="#esp-vs-ah">3.2.1</a>).</li>
                 <li><b>Valor Verificador de Integridade</b> (ICV): Semelhante ao do AH, porém, seu cálculo não
                 leva em conta o cabeçalho IP.</li>
             </ul>
@@ -340,8 +372,8 @@
                 <img src="img/esp-vs-ah.png" style="width:100%">
                 <figcaption>
                     Figura 3.2.1:  Comparação entre os cabeçalhos AH (esquerda) e ESP (direita). Notar a direção
-                    para a qual o campo próximo cabeçalho aponta. Vale citar que a carga útil NÃO faz parte do cabeçalho.
-                    Adaptada de [<a href="#FRIEDL">13</a>]
+                    para a qual o campo Próximo Cabeçalho aponta em cada caso. Vale citar que a carga útil NÃO faz parte 
+                    do cabeçalho. Adaptada de [<a href="#FRIEDL">13</a>]
                 </figcaption>
             </figure>
 
@@ -358,34 +390,34 @@
 
             <p>Sua função no IPsec é negociar, criar e gerenciar <b>Associações de Segurança</b>. Estas são conexões lógicas
             em que as entidades estabelecem parâmetros de segurança para a comunicação que está para acontecer (por exemplo, 
-            se identificam e autenticam, trocam chaves de segurança e negociam algoritmos de autenticação e criptografa).</p>
+            se identificam e autenticam, trocam chaves de segurança e negociam algoritmos de autenticação e criptografia).</p>
 
             <p>Todo este processo encontra-se organizado em duas três fases:</p>
 
             <ul>
                 <li><b>Fase 1 (Associação de Segurança IKE)</b>: Negociação de um canal seguro para a fase 2</li> 
-                <li><b>Fase 2 (Associação de Segurança IPsec)</b>: Negociação dos parâmetros de segurança da comunicação IPsec</li>
+                <li><b>Fase 2 (Associação de Segurança IPsec)</b>: Negociação dos parâmetros de segurança para a comunicação IPsec</li>
                 <li><b>Fase 3 (Fase Informacional)</b>: Troca de informações de controle, como mensagens de erro.</li>
             </ul>
 
             <p>As fases 1 e 2 são bastante similares, visto que ambas negociam parâmetros para uma comunicação futura. Uma 
-            diferença imediata é que parte da fase 1 acontece sem qualquer tipo de proteção. As trocas de mensagem passa a 
-            ter alguma proteção após a troca de grupos Diffie-Hellman (um segredo compartilhado usado para gerar chaves de 
+            diferença imediata é que parte da fase 1 acontece sem qualquer tipo de proteção. As trocas de mensagem passam a 
+            ter alguma proteção após a troca de Grupos Diffie-Hellman (um segredo compartilhado usado para gerar chaves de 
             segurança). Outra diferença é que a fase 1 é mais custosa computacionalmente que a fase 2. Como vimos, um 
             servidor VPN em grande escala mantém diversas conexões simultâneas com outras entidades IPsec, lidando com a 
             criação, manutenção e encerramento de diversas Associações de Segurança IPsec. Entidades que já trocaram chaves 
             de segurança geralmente não precisam iniciar um nova Associação de Segurança IKE. Portanto, diversas SA IPsec
             podem ser geradas ao custo de apenas uma SA IKE.</p>
 
-            <!--p>IKE mune quatro funcionalidades:</p>
+            <p>Em resumo, o IKE mune três funcionalidades:</p>
 
-            <ul>
+            <ol>
                 <li>Negocia quais protocolos, algoritmos e chaves serão usadas.</li>
-                <li>Garantir a identidade das partes, o cliente, quanto do servidor.</li>
-                <li>Gerencia as chaves após elas estarem em uso.</li>
-            </ul>
+                <li>Autentica remetente e destinatário.</li>
+                <li>Gerencia a criação e manutenção da chaves de segurança.</li>
+            </ol>
 
-            <p>Itens negociados na SA:</p>
+            <!--p>Itens negociados na SA:</p>
 
             <ul>
                 <li>O algoritmo de criptografia para proteger os dados;</li>
@@ -397,12 +429,12 @@
             <h3 id="sa-ike">
                 4.1. Associação de Segurança IKE
             </h3>
-            <p>Como vimos, o propósito da SA IKE é gerar um canal seguro para a SA IPsec.A SA IKE é bidirecional, ou seja, 
-            as "regras" negociadas devem ser iguais para ambos. Esta negociação pode ocorrer de dois modos: um principal,
-            em que as negociações tomam três pares de mensagens, e um agressivo, que conclui a negociação com metade do
+            <p>Como vimos, o propósito da SA IKE é gerar um canal seguro para a SA IPsec. A SA IKE é bidirecional, ou seja, 
+            as "regras" negociadas devem ser iguais para ambos. Esta negociação pode ocorrer de dois modos: o <b>principal</b>,
+            em que as negociações tomam três pares de mensagens, e o <b>agressivo</b>, que conclui a negociação com metade do
             número de mensagens anterior. </p>
 
-            <p>No modo principal, o primeiro par de mensagens negocia o algoritmo de encriptação (p.ex. AES ou DES), o
+            <p>No modo principal, o primeiro par de mensagens negocia o algoritmo de criptografia (p.ex. AES ou DES), o
             algoritmo de proteção de integridade (HMAC-MD5 e HMAC-SHA1 são os mais comuns) e o método de autenticação
             (chaves pré-compartilhadas, assinaturas digitais, criptografia da chave pública ou autenticação externa),
             e finalmente, negocia o Grupo Diffie-Hellman. No segundo par de mensagens do modo principal acontece a troca 
@@ -412,12 +444,12 @@
             sua porção da troca de chaves do grupo Diffie-Hellman, informações para verificação de integridade e sua
             identidade. A segunda entidade então responde com os parâmetros escolhidos, sua parte da troca de chaves 
             Diffie-Hellman, sua identidade e informações para verificação de integridade da mensagem e sua carga útil de 
-            autenticação (que depende do método de autenticação escolhido, hash criptogrático ou assinatura digital). Na 
-            primeira entidade então envia na terceira mensagem sua carga útil de autenticação.</p>
+            autenticação (que depende do método de autenticação escolhido). A primeira entidade então envia na terceira 
+            mensagem sua carga útil de autenticação.</p>
 
             <p>O modo agressivo, apesar de mais rápido, é menos seguro, uma vez que as entidades não podem negociar o grupo 
             Diffie-Hellman. Além disso, a identidade não é protegida por encriptação, a menos que chaves públicas tenham
-            sido previamente trocadas. O modo principal é geralmente o modo recomendado.</p>
+            sido previamente trocadas.</p>
 
             <h3 id="sa-ipsec">
                 4.2. Associação de Segurança IPsec
@@ -425,7 +457,7 @@
 
             <p>A SA IPsec, por sua vez, é uma conexão lógica unidirecional, ou seja, caso duas
             entidades necessitem trocar datagramas IPsec, duas SAs serão necessárias (uma para cada direção), como ilustra
-            a figura <a href="#sa-pic">3.3.1</a>. Uma SA contém informações sobre origem
+            a figura <a href="#sa-pic">4.2.1</a>. Uma SA contém informações sobre origem
             e destino de um datagrama, o tipo de criptografia a ser usada a chave de criptografia, o tipo de verificação
             de integridade (seção <a href="#criptografia">2</a>), a chave de autenticação e um índice que identifica a SA
             (Índice de Parâmetros de Segurança - SPI). Para guardar todas essas informações, cada entidade mantém dois
@@ -434,14 +466,15 @@
             <figure id="sa-pic" align="center">
                 <img src="img/sa.png" style="width:50%">
                 <figcaption>
-                    Figura 3.3.1: Uma ilustração da conexão lógica e unidirecional conhecida por SA.
+                    Figura 4.2.1: Uma ilustração da conexão lógica e unidirecional conhecida por SA.
                     Adaptada de [<a href="#CAMILO">10</a>]
                 </figcaption>
             </figure>
 
             <p>O SAD é consultado pelo remetente quando este precisa enviar um datagrama de acordo com o estabelecido
             previamente com o emissor. O SAD provê o SPI, as chaves e os algoritmos que citamos anteriormente. O SAD
-            diz ao emissor como construir o datagrama IPsec que esperado pelo receptor.</p>
+            diz ao emissor como construir o datagrama IPsec que é esperado pelo receptor. Uma SA IPsec é unicamente
+            identicada pelo SPI, o endereço IP de destino e o protocolo de segurança (AH ou ESP).</p>
 
             <p>O SPD funciona como uma espécie de firewall. Ele identifica os datagramas pelo remetente, destinatário e
             tipo de protocolo de transporte (UDP, TCP, ICMP, etc) e especifica se devem ser convertidos em datagramas IPsec,
@@ -473,7 +506,7 @@
             </figure>
 
             <p>Como dito anteriormente (seção <a href="ah">3.1</a>), o protocolo AH pode proteger campos não mutáveis do 
-            cabeçalho IP. Neste sentido, a figura <a href="#modos-img">5.1</a></p> pode confundir o leitor, pois dá a 
+            cabeçalho IP. Neste sentido, a figura <a href="#modos-img">5.1</a> pode confundir o leitor, pois dá a 
             ideia que o cabeçalho protege apenas os campos à sua direita. Mais detalhes são dados nas subseções seguintes.</p>
 
             <h3 id="mtransporte">
@@ -489,9 +522,9 @@
             <ul>
                 <li>Tipo de serviço - indica o tratamento dado pelos roteadores ao longo do percurso do datagrama.</li>
                 <li>Flag - controle da fragmentação do objeto.</li>
-                <li>Offset de Fragmento - indica a posição dos dados do datagrama.</li>
-                <li>Tempo de vida ("TTL") - reduzido por cada roteador do percurso. Ao chegar a zero, o pacote é descartado.</li>
-                <li>Soma de Verificação do Cabeçalho ("Header Checksum")- campo de proteção contra erros. Muda a cada roteador,
+                <li>Offset de Fragmento - indica a posição dos fragmentos do datagrama.</li>
+                <li>Tempo de vida (TTL) - reduzido por cada roteador do percurso. Ao chegar a zero, o pacote é descartado.</li>
+                <li>Soma de Verificação do Cabeçalho ("Header Checksum") - campo de proteção contra erros. Muda a cada roteador,
                 pois seu calculo leva em conta o TTL.
                 </li>
             </ul>
@@ -505,10 +538,10 @@
             para a transição de IPv4 para IPv6. Porém, o geralmente acontece na prática é o uso de NAT com outras opções
             de segurança (que é geralmente a solução mais simples e barata).</p>
 
-            A figura a seguir mostram os datagramas no modo transporte dos dois protocolos de segurança. Também indica 
-            os campos que são protegidos com criptografia e os que são protegidos com autenticação e integridade.
+            A figura <a href="#transp-ah-esp">5.5.1</a> mostra o datagrama no modo transporte dos dois protocolos de segurança. 
+            Também indica os campos que são protegidos com criptografia e os que são protegidos com autenticação e integridade.
 
-            <figure align="center">
+            <figure id="transp-ah-esp" align="center">
                     <img src="img/modo-transporte.png" style="width:110%">
                     <figcaption>
                         Figura 5.5.1:  Estrutura de um datagrama IP no modo transporte. Acima, o datagrama protegido pelo AH.
@@ -522,12 +555,12 @@
 
             <p>Neste modo todo o datagrama é protegido e um novo cabeçalho IP é inserido, com endereço de destino sendo
             uma entidade com suporte a IPsec. Ou seja, neste caso o destinatário final da mensagem não necessariamente 
-            oferece suporte a IPSec, assim como vimos na figura <a href="#vpn">3.1</a>. O modo túnel é geralmente usado 
+            oferece suporte a IPsec, assim como vimos na figura <a href="#vpn">3.1</a>. O modo túnel é geralmente usado 
             na arquitetura roteador a roteador, em que considera-se que atrás do roteador encontra-se um rede local segura. 
-            Também no modo túnel, como o cabeçalho IP original é protegido, evita-se também análise de tráfego, em outras 
-            palavras, há um sigilo quanto a natureza da comunicação. Simplificando: o cabeçalho IP original contém os 
-            endereços de origem e destino da mensagem, enquanto o novo cabeçalho IP contém os endereços dos pontos de 
-            acesso das redes locais protegidas.</p>
+            Também no modo túnel, como o cabeçalho IP original é protegido, evita-se análise de tráfego, ou seja, há um 
+            sigilo quanto a natureza da comunicação. Simplificando: o cabeçalho IP original contém os endereços de origem e 
+            destino da mensagem, enquanto o novo cabeçalho IP contém os endereços dos <b>pontos de acesso</b> das redes 
+            locais protegidas.</p>
 
             <figure align="center">
                     <img src="img/modo-tunel.png" style="width:110%">
@@ -539,26 +572,25 @@
         <div>
             <h2 id="finais">6. Considerações Finais</h2>
 
-            <p>O IPsec, conforme pudemos observar, é um protocolo que opera na camada de rede e possibilita uma comunicação
-            segura entre dois terminais de rede, sendo segurança equivalente à transferência de pacotes com integridade,
-            autenticidade e possível confidencialidade. Vimos que uma comunicação neste protocolo se inicia com o
-            estabelecimento de chaves, algoritmos e protocolos que serão utilizados na sessão (SA IKE). Após isso, a 
-            SA IPsec é estabelecida. Os principais métodos de proteção utilizados pelo IPsec são os protocolos AH
-            e ESP. O primeiro garante integridade (ou seja, que a mensagem não foi alterada) e autenticidade (garantia 
-            da autoria). Já o segundo garante também confidencialidade, já que a carga útil trafega cifrada, e não em 
-            texto plano.</p>
+            <p>O IPsec é um protocolo que opera na camada de rede e possibilita uma comunicação segura entre dois terminais 
+            da Rede, sendo que uma comunicação segura possui três requisitos básicos: integridade, autenticidade e 
+            confidencialidade. O IPsec se utiliza do protocolo IKE para troca e gerenciamento de chaves entre remetente e 
+            destinatário, assim como para estabelecimento algoritmos e protocolos que serão utilizados na troca de mensagens. 
+            Os dois protocolos de segurança utilizados são o AH e o ESP. O primeiro provê apenas integridade e autenticidade
+            enquanto o segundo garante também confidencialidade. O AH é o único protocolo que protege o cabeçalho IP (porém, 
+            no modo túnel, o protocolo ESP encapsula o cabeçalho IP original).</p>
 
-            <p>Dois modos de operação são possíveis no IPsec. No Modo Transporte, o cabeçalho IP original é mantido (camada
-            de transporte) e o resto do pacote é aplicado ao ESP. No Modo Túnel, o cabeçalho IP original é aplicado também 
-            ao protocolo ESP. Um novo cabeçalho IP é anexado ao datagrama, de forma que o endereço final também está 
-            protegido. A mesma explicação é válida para o caso de utilizarmos o protocolo AH, ou uma combinação de ambos.</p>
+            <p>Ambos os protocolos possuem dois modos de operação: Transporte, em que cabeçalho IP original é mantido e o 
+            pacote da camada de transporte é encapsulado; e Túnel, em que todo o datagrama é encapsulado pelo protocolo de 
+            segurança e um novo cabeçalho IP é gerado. </p>
 
-            <p>Concluímos que o IPsec é um protocolo que fornece uma tecnologia poderosa em termos de segurança da informação
-            que trafega em uma rede IP. Sua arquitetura permite uma implementação de forma invisível para as camadas 
-            inferiores, operando de forma transparente. Suas configurações permitem evitar que pessoas má intencionadas 
-            monitorem o fluxo da informação, ou até se passem pelo autor original da mensagem. É uma arma poderosa contra 
-            hackers e transforma um ambiente hostil (Internet) em um caminho seguro para o tráfego entre redes de 
-            computadores.</p>
+            <p>O IPsec é um protocolo que fornece uma tecnologia poderosa em termos de segurança da informação
+            que trafega pela Internet. Porém, possui vários arranjos diferentes, muitas opções de configuração e sofre 
+            críticas tanto no que diz respeito a sua possível insegurança (quanto mais simples e robusto, mais seguro um 
+            sistema é) quanto pela sua incompatibilidade com NAT. Autores como [1], [2] e [15] argumentam que o IPsec 
+            seria melhorado com a retirada do protocolo AH e alteração do protocolo ESP para opcionalmente proteger 
+            campos não mutáveis do cabeçalho IP. Também argumentam que o modo transporte não tem razão de ser, pois 
+            o modo túnel pode atender às mesmas finalidades (com um pequeno custo de um cabeçalho IP a mais).</p>
         </div>
 
         <div>
