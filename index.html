@@ -247,7 +247,7 @@
             com sua filial através da Internet. Seu roteador com suporte a IPsec, criptografa a mensagem (carga útil) e 
             adiciona um cabeçalho IPsec, que será usado pelo Roteador da filial para descriptografar o datagrama (arquitetura 
             roteador a roteador). Um cliente remoto (hospedeiro) também pode utilizar de uma VPN para se comunicar seguramente 
-            com a filial (arquitetura hospereiro a roteador).</p>
+            com a filial (arquitetura hospedeiro a roteador).</p>
 
             <figure id ="vpn" align="center">
                 <img src="img/vpn.png">
@@ -279,7 +279,7 @@
             como o Grupo Diffie-Hellman (um segredo compartilhado para gerar as chaves de segurança - seção 
             <a href="#sa-ike">4.1</a>) que servirá para estabelecer outra conexão lógica, a SA IPsec.</p>
             
-            <p>Na SA IPsec, é negociado o algortimo de criptografia, parâmetros de autenticação e outras políticas de 
+            <p>Na SA IPsec, é negociado o algoritmo de criptografia, parâmetros de autenticação e outras políticas de 
             segurança. Cada entidade com suporte a IPsec pode adotar todas ou algumas das soluções de segurança oferecidas 
             pelo IPsec. Resumindo, a SA IPsec existe para que as parte de uma comunicação criptografada se entendam, dando 
             oportunidade para que as entidades combinem o código das suas mensagens sigilosas.</p>
@@ -474,7 +474,7 @@
             <p>O SAD é consultado pelo remetente quando este precisa enviar um datagrama de acordo com o estabelecido
             previamente com o emissor. O SAD provê o SPI, as chaves e os algoritmos que citamos anteriormente. O SAD
             diz ao emissor como construir o datagrama IPsec que é esperado pelo receptor. Uma SA IPsec é unicamente
-            identicada pelo SPI, o endereço IP de destino e o protocolo de segurança (AH ou ESP).</p>
+            identificada pelo SPI, o endereço IP de destino e o protocolo de segurança (AH ou ESP).</p>
 
             <p>O SPD funciona como uma espécie de firewall. Ele identifica os datagramas pelo remetente, destinatário e
             tipo de protocolo de transporte (UDP, TCP, ICMP, etc) e especifica se devem ser convertidos em datagramas IPsec,
