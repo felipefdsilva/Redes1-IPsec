@@ -7,8 +7,8 @@ body {
 @media (min-width: 992px) {
     body {
         padding-top: 0;
-        padding-left: 26rem;
-        padding-right: 5rem;
+        padding-left: 29rem;
+        padding-right: 4rem;
     }
 }
 
@@ -37,67 +37,29 @@ h4 {
     font-size: 1.5rem;
     line-height: 1.5rem;
 }
-/*.subheading {
-    text-transform: uppercase;
-    font-weight: 500;
-    font-family: 'Saira Extra Condensed', serif;
-    font-size: 1.35rem;
-}*/
-
-/*.list-social-icons a {
-    color: #495057;
-}*/
-
-/*.list-social-icons a:hover {
-    color: #BD5D38;
-}*/
-
-/*.list-social-icons a .fa-lg {
-    font-size: 1.75rem;
-}*/
-
-/*.list-icons {
-    font-size: 3rem;
-}*/
-
-/*.list-icons .list-inline-item i:hover {
-    color: #BD5D38;
-}*/
-
-#sideNav .navbar-nav .nav-item .nav-link {
-    font-weight: 600;
-    text-decoration: none;
-    /*text-transform: uppercase;*/
-}
 
 @media (min-width: 992px) {
     #sideNav {
         text-align: left;
         position: fixed;
-        top: 0;
-        left: 0;
-        display: flex;
+        top: 1;
+        bottom: 0;
+        left:0;
+        display: inline-block;
         flex-direction: column;
-        width: 23rem;
-        height: 120vh;
+        width: 25rem;
+        height: 100vh;
+        overflow: scroll;
     }
     #sideNav .navbar-brand {
         display: flex;
-        margin: auto auto 0;
-        padding: 1.5rem;
-    }
-    #sideNav .navbar-brand .img-profile {
-        max-width: 10rem;
-        max-height: 10rem;
-        border: 0.5rem solid rgba(255, 255, 255, 0.2);
     }
     #sideNav .navbar-collapse {
         display: flex;
         align-items: flex-start;
-        flex-grow: 0;
         width: 95%;
-        margin-bottom: auto;
-    }
+        margin-bottom: 0;
+    }*/
     #sideNav .navbar-collapse .navbar-nav {
         flex-direction: column;
         width: 100%;
@@ -109,16 +71,6 @@ h4 {
     #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
         display: block;
     }
-}
-
-section.resume-section {
-    border-bottom: 1px solid #dee2e6;
-    padding-top: 0rem !important;
-    padding-bottom: 5rem !important;
-}
-
-section.resume-section .resume-item .resume-date {
-    min-width: none;
 }
 
 @media (min-width: 768px) {
@@ -140,10 +92,6 @@ section.resume-section .resume-item .resume-date {
 .bg-primary {
     background-color: rgba(0, 0, 0, 0.822) !important;
 }
-
-/*.text-primary {
-    color: #BD5D38 !important;
-}*/
 
 a.nav {
     color: rgb(255, 253, 253);
@@ -173,18 +121,3 @@ img {
     margin-right: auto;
     width: 100%;
 }
-
-#references li {
-    padding-bottom: 10px;
-}
-figure.atlas {
-    float: right;
-    width: 22%;
-    text-align: center;
-    font-style: italic;
-    font-size: 0.2em;
-    text-indent: 0;
-    border: thin;
-    margin: none;
-    padding: 0.5em;
-  }

@@ -34,11 +34,6 @@
                     <img src="img/ipseclogo.png" style="width:300px;">
                 </a>
 
-                <!--button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon">IPsec</span>
-                </button-->
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -58,15 +53,15 @@
                             <ul>
                                 <li><a class="nav" class="nav-link js-scroll-trigger" href="#ah">3.1. Cabeçalho de Autenticação</a></li>
                                 <li><a class="nav" class="nav-link js-scroll-trigger" href="#esp">3.2. Encapsulamento de Dados de Segurança</a></li>
+                                <a class="nav" class="nav-link js-scroll-trigger" href="#ike">3.3. Troca de Chaves da Internet</a></li>
+                                <ul>
+                                    <li><a class="nav" class="nav-link js-scroll-trigger" href="#sa-ike">3.3.1. Fase 1</a></li>
+                                    <li><a class="nav" class="nav-link js-scroll-trigger" href="#sa-ipsec">3.3.2. Fase 1</a></li>
+                                </ul>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav" class="nav-link js-scroll-trigger" href="#ike">4. Troca de Chaves da Internet</a></li>
-                            <ul>
-                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#sa-ike">4.1. Associação de Segurança IKE</a></li>
-                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#sa-ipsec">4.2. Associação de Segurança IPsec</a></li>
-                                <li><a class="nav" class="nav-link js-scroll-trigger" href="#faseinfo">4.3. Fase Informacional</a></li>
-                            </ul>
+                            <a class="nav" class="nav-link js-scroll-trigger" href="#sa">4. Associação de Segurança</a></li>
                         </li>
                         <li class="nav-item">
                             <a class="nav" class="nav-link js-scroll-trigger" href="#modos">5. Modos de Operação</a></li>
@@ -96,7 +91,7 @@
             para rotear sua mensagens pela internet e entregar serviços ao usuários. Alterações a atualizações do mesmo 
             são extremamente evitadas, pois além de possivelmente afetar algumas das inúmeras aplicações existentes, 
             também implica em alterações no núcleo da rede de computadores, com alterações nos equipamentos dos Fornecedores
-            de Acesso a Internet (SPIs).</p>
+            de Acesso a Internet (ISPs).</p>
             
             <p>Porém, com o crescimento de aplicações cresceu também a variedade de informações que trafegam pela Rede.
             Não tardou para que informações sensíveis (como dados bancários) necessitassem de proteção para trafegar
@@ -285,7 +280,7 @@
             oportunidade para que as entidades combinem o código das suas mensagens sigilosas.</p>
 
             <p>Todas as informações trocadas durante a SA IPSec são guardadas em bancos de dados nomeados SPD (Banco de Dados 
-            de políticas de Segurança) e SPA (Banco de Dados de Associações de Segurança). Esses bancos são sempre 
+            de políticas de Segurança) e SAD (Banco de Dados de Associações de Segurança). Esses bancos são sempre 
             consultados pela entidade para que ela saiba como manipular um datagrama IPsec (seção <a href="#sa-ipsec">4.2</a>). 
             Finalmente, com as regras estabelecidas e os banco de dados consultados ou atualizados, chega a etapa da 
             comunicação em si, ou da troca de informação acontece. Neste momento, o remetente se utiliza de um dos protocolos 
@@ -377,83 +372,89 @@
                 </figcaption>
             </figure>
 
-        <div>
-            <h2 id="ike">
-                4. Troca de Chaves da Internet
-            </h2>
+            <h3 id="ike">
+                    3.3. Troca de Chaves da Internet
+            </h3>
+    
+                <p>Protocolo mais conhecido por sua sigla, <b>IKE</b>, foi desenvolvido pelo IETF como componente do IPsec para 
+                gerecimento da troca de chaves de segurança, estando atualmente na versão 2 (IKEv2). Em teoria, uma conexão segura por 
+                IPsec pode ser configurada sem o IKE. Porém, em um cenário real, um servidor de VPNs (principal aplicação do IPsec)
+                lida com diversas comunicações simultâneas e, por consequência, é inviável um gerenciamento manual de chaves.</p>
+    
+                <p>Sua função no IPsec é negociar, criar e gerenciar <b>Associações de Segurança (SA)</b>. Estas são conexões lógicas
+                em que as entidades estabelecem parâmetros de segurança para a comunicação que está para acontecer (por exemplo, 
+                se identificam e autenticam, trocam chaves de segurança e negociam algoritmos de autenticação e criptografia).</p>
+    
+                <p>Todo este processo encontra-se organizado em duas fases:</p>
+    
+                <ul>
+                    <li><b>Fase 1</b>: Negociação de um canal seguro para a negociação das SAs</li> 
+                    <li><b>Fase 2</b>: Negociação das SAa do IPsec</li>
+                </ul>
+    
+                <p>As fases 1 e 2 são bastante similares, visto que ambas negociam parâmetros para uma comunicação futura. Uma 
+                diferença imediata é que parte da fase 1 acontece sem qualquer tipo de proteção. As trocas de mensagem passam a 
+                ter alguma proteção após a troca de Grupos Diffie-Hellman (um segredo compartilhado usado para gerar chaves de 
+                segurança). Outra diferença é que a fase 1 é mais custosa computacionalmente que a fase 2, por lidar com a 
+                geração de chaves criptográficas. Como vimos, um servidor VPN em grande escala mantém diversas conexões 
+                simultâneas com outras entidades IPsec, lidando com a criação, manutenção e encerramento de diversas SAs. 
+                Entidades que já trocaram chaves de segurança geralmente não precisam refazer a fase 1.</p>
+    
+                <p>Em resumo, o IKE mune três funcionalidades:</p>
+    
+                <ol>
+                    <li>Negocia quais protocolos, algoritmos e chaves serão usadas.</li>
+                    <li>Autentica remetente e destinatário.</li>
+                    <li>Gerencia a criação e manutenção da chaves de segurança.</li>
+                </ol>
 
-            <p>Protocolo mais conhecido por sua sigla, <b>IKE</b>, foi desenvolvido pelo IETF contemporaneamente ao IPsec,
-            estando atualmente na versão 2 (IKEv2). Apesar de não ter sido desenvolvido para o IPsec, é comumente usado para
-            este fim. O IKE provê um gerenciamento automatizado de chaves de segurança. Em teoria, uma conexão segura por 
-            IPsec pode ser configurada sem o IKE. Porém, em um cenário real, um servidor de VPNs (principal aplicação do IPsec)
-            lida com diversas comunicações simultâneas e, por consequência, é inviável um gerenciamento manual destas chaves.</p>
+            <h4 id="sa-ike">
+                    3.3.1. Fase 1
+            </h4>
 
-            <p>Sua função no IPsec é negociar, criar e gerenciar <b>Associações de Segurança</b>. Estas são conexões lógicas
-            em que as entidades estabelecem parâmetros de segurança para a comunicação que está para acontecer (por exemplo, 
-            se identificam e autenticam, trocam chaves de segurança e negociam algoritmos de autenticação e criptografia).</p>
+            <p>Como vimos, o propósito da fase 1 é gerar um canal seguro para as negociações que acontecem na fase 2. Esta 
+            negociação é bidirecional, ou seja, as "regras" negociadas devem ser iguais para ambos. Esta fase pode proceder 
+            de dois modos: a <b>principal</b>, em que as negociações tomam três pares de mensagens, e o <b>agressivo</b>, 
+            que conclui a negociação com metade do número de mensagens anterior. Apesar de mais rápido, o modo agressivo 
+            é menos seguro, pois as entidades enviam parte dos parâmetros sigilosos (como suas identidades) em texto plano.</p>
 
-            <p>Todo este processo encontra-se organizado em duas três fases:</p>
-
+            <p>Basicamente, o processo de negociação da fase 1 se dá como se segue:</p>
+            
             <ul>
-                <li><b>Fase 1 (Associação de Segurança IKE)</b>: Negociação de um canal seguro para a fase 2</li> 
-                <li><b>Fase 2 (Associação de Segurança IPsec)</b>: Negociação dos parâmetros de segurança para a comunicação IPsec</li>
-                <li><b>Fase 3 (Fase Informacional)</b>: Troca de informações de controle, como mensagens de erro.</li>
-            </ul>
+                <li>Negociação do algoritmo de criptografia, do algoritmo de proteção de integridade, do método de autenticação
+                e de um segredo compartilhado (Grupo Diffie-Hellman).</li>
+                <li>Troca de identidades e certificados (ambos criptografados)</li>
+                <li>O par de entidades se autentica</li>
+            </ul> 
 
-            <p>As fases 1 e 2 são bastante similares, visto que ambas negociam parâmetros para uma comunicação futura. Uma 
-            diferença imediata é que parte da fase 1 acontece sem qualquer tipo de proteção. As trocas de mensagem passam a 
-            ter alguma proteção após a troca de Grupos Diffie-Hellman (um segredo compartilhado usado para gerar chaves de 
-            segurança). Outra diferença é que a fase 1 é mais custosa computacionalmente que a fase 2. Como vimos, um 
-            servidor VPN em grande escala mantém diversas conexões simultâneas com outras entidades IPsec, lidando com a 
-            criação, manutenção e encerramento de diversas Associações de Segurança IPsec. Entidades que já trocaram chaves 
-            de segurança geralmente não precisam iniciar um nova Associação de Segurança IKE. Portanto, diversas SA IPsec
-            podem ser geradas ao custo de apenas uma SA IKE.</p>
+            <p>Ao fim da fase um, está criado um canal seguro para a negociação do parâmetros de segurança do comunicação 
+            IPsec</p>
 
-            <p>Em resumo, o IKE mune três funcionalidades:</p>
+            <h4 id="sa-ipsec">
+                3.3.2. Fase 2
+            </h4>    
 
-            <ol>
-                <li>Negocia quais protocolos, algoritmos e chaves serão usadas.</li>
-                <li>Autentica remetente e destinatário.</li>
-                <li>Gerencia a criação e manutenção da chaves de segurança.</li>
-            </ol>
+            <p>Nesta fase, são negociados os parâmetros da SA, que como veremos na seção <a href="#sa">4</a> estabelece 
+            os parâmetros de segurança para a comunicação protegida. Os parâmetros negociados na fase 2 são naturalmente 
+            semelhantes aos da fase um, com a diferença de que nesta fase não é preciso gerar mais chaves de criptografia.
+            Com isso, há um economia de custo computacional, pois a fase 2 pode ser repetidas várias vezes ao custo de 
+            apenas uma fase um.</p>
 
-            <!--p>Itens negociados na SA:</p>
+            <p>Os itens negociados na fase 2 são:</p>
 
             <ul>
                 <li>O algoritmo de criptografia para proteger os dados;</li>
                 <li>Um algoritmo de hash para assinatura digital;</li>
                 <li>Um método de autenticação para assinar o hash; </li>
-                <li>Informação sobre qual grupo a troca Diffie-Hellman deve feita; </li>
                 <li>Especificação da função pseudorrandômica para fazer o hash de certos.</li>
-            </ul-->
-            <h3 id="sa-ike">
-                4.1. Associação de Segurança IKE
-            </h3>
-            <p>Como vimos, o propósito da SA IKE é gerar um canal seguro para a SA IPsec. A SA IKE é bidirecional, ou seja, 
-            as "regras" negociadas devem ser iguais para ambos. Esta negociação pode ocorrer de dois modos: o <b>principal</b>,
-            em que as negociações tomam três pares de mensagens, e o <b>agressivo</b>, que conclui a negociação com metade do
-            número de mensagens anterior. </p>
+            </ul>
 
-            <p>No modo principal, o primeiro par de mensagens negocia o algoritmo de criptografia (p.ex. AES ou DES), o
-            algoritmo de proteção de integridade (HMAC-MD5 e HMAC-SHA1 são os mais comuns) e o método de autenticação
-            (chaves pré-compartilhadas, assinaturas digitais, criptografia da chave pública ou autenticação externa),
-            e finalmente, negocia o Grupo Diffie-Hellman. No segundo par de mensagens do modo principal acontece a troca 
-            das chaves geradas a partir do grupo Diffie-Hellman. No terceiro par, cada entidade autentica a outra.</p>
 
-            <p>No modo agressivo, a primeira entidade envia uma mensagem com todos os seus possíveis parâmetros de proteção,
-            sua porção da troca de chaves do grupo Diffie-Hellman, informações para verificação de integridade e sua
-            identidade. A segunda entidade então responde com os parâmetros escolhidos, sua parte da troca de chaves 
-            Diffie-Hellman, sua identidade e informações para verificação de integridade da mensagem e sua carga útil de 
-            autenticação (que depende do método de autenticação escolhido). A primeira entidade então envia na terceira 
-            mensagem sua carga útil de autenticação.</p>
+        <div>
 
-            <p>O modo agressivo, apesar de mais rápido, é menos seguro, uma vez que as entidades não podem negociar o grupo 
-            Diffie-Hellman. Além disso, a identidade não é protegida por encriptação, a menos que chaves públicas tenham
-            sido previamente trocadas.</p>
-
-            <h3 id="sa-ipsec">
-                4.2. Associação de Segurança IPsec
-            </h3>
+            <h2 id="sa">
+                4. Associação de Segurança
+            </h2>
 
             <p>A SA IPsec, por sua vez, é uma conexão lógica unidirecional, ou seja, caso duas
             entidades necessitem trocar datagramas IPsec, duas SAs serão necessárias (uma para cada direção), como ilustra
@@ -482,8 +483,7 @@
             encaminhados ou aceitos mesmo sem proteção IPsec. </p>
 
             <p>"De certa forma, as informações em um SPD indicam 'o que' fazer com um datagrama que está chegando; as
-            informações no SAD indicam 'como' fazer isso"[<a href="#KUROSE">1</a>]</p>
-        </div>
+            informações no SAD indicam 'como' fazer isso"[<a href="#KUROSE">1</a>].</p>
 
         <div>
             <h2 id="modos">
