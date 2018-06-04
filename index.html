@@ -238,7 +238,7 @@
             com alternativas ao IPsec, como os protocolos SSL/TLS (RFC 5246), PPTP(criado pela Microsoft, obsoleto) e L2TP 
             (RFC2661), que pertencem a outras camadas da pilha de protocolos.</p>
 
-            <p>No exemplo da figura 3.1, retirado de [<a href="#KUROSE">1</a>], a sede de uma instituição qualquer se comunica 
+            <p>No exemplo da figura <a href="#vpn">3.1</a>, a sede de uma instituição qualquer se comunica 
             com sua filial através da Internet. Seu roteador com suporte a IPsec, criptografa a mensagem (carga útil) e 
             adiciona um cabeçalho IPsec, que será usado pelo Roteador da filial para descriptografar o datagrama (arquitetura 
             roteador a roteador). Um cliente remoto (hospedeiro) também pode utilizar de uma VPN para se comunicar seguramente 
@@ -272,18 +272,18 @@
             definida pelo protocolo IKE e chamada de Associação de Segurança IKE ou simplesmente SA IKE.
             Nela, acontecem <i>requisições</i> e <i>respostas</i>, ou seja, trocas de informações de controle e segurança,
             como o Grupo Diffie-Hellman (um segredo compartilhado para gerar as chaves de segurança - seção 
-            <a href="#sa-ike">4.1</a>) que servirá para estabelecer outra conexão lógica, a SA IPsec.</p>
+            <a href="#sa-ike">3.2.1</a>) que servirá para estabelecer outra conexão lógica, a SA IPsec.</p>
             
             <p>Na SA IPsec, é negociado o algoritmo de criptografia, parâmetros de autenticação e outras políticas de 
             segurança. Cada entidade com suporte a IPsec pode adotar todas ou algumas das soluções de segurança oferecidas 
             pelo IPsec. Resumindo, a SA IPsec existe para que as parte de uma comunicação criptografada se entendam, dando 
             oportunidade para que as entidades combinem o código das suas mensagens sigilosas.</p>
 
-            <p>Todas as informações trocadas durante a SA IPSec são guardadas em bancos de dados nomeados SPD (Banco de Dados 
+            <p>Todos os parâmetros negociados durante a SA IPSec são guardados em bancos de dados nomeados SPD (Banco de Dados 
             de políticas de Segurança) e SAD (Banco de Dados de Associações de Segurança). Esses bancos são sempre 
-            consultados pela entidade para que ela saiba como manipular um datagrama IPsec (seção <a href="#sa-ipsec">4.2</a>). 
+            consultados pela entidade para que ela saiba como manipular um datagrama IPsec (seção <a href="#sa">4</a>). 
             Finalmente, com as regras estabelecidas e os banco de dados consultados ou atualizados, chega a etapa da 
-            comunicação em si, ou da troca de informação acontece. Neste momento, o remetente se utiliza de um dos protocolos 
+            comunicação em si, em que a troca da informação acontece. Neste momento, o remetente se utiliza de um dos protocolos 
             (AH ou ESP) ou ambos, para proteger o mensagem e gerar o datagrama que será enviado para o destinatário.
             Uma vez que o ESP provê as mesmas funcionalidade do AH, o segundo tem caído em desuso.</p>
 
@@ -314,10 +314,9 @@
 
             <p>O Cabeçalho de Autenticação (AH) é um protocolo que provê integridade e autenticidade de uma
             mensagem. O datagrama original é modificado, ganhando um cabeçalho de autenticação que possui os campos
-            vistos no lado esquerdo da figura <a href="esp-vs-ah">3.2.1</a>.</p>
+            vistos no lado esquerdo da figura <a href="#esp-vs-ah">3.2.1</a>.</p>
 
-            <p>As informações contidas em cada campo do cabeçalho de autenticação (figura <a href="#esp-vs-ah">3.2.1</a>) 
-            são listadas abaixo:</p>
+            <p>As informações contidas em cada campo do cabeçalho de autenticação são listadas abaixo:</p>
 
             <ul>
                 <li><b>Próximo Cabeçalho</b>: Campo de 8 bits que indica o tipo de pacote (carga útil) subsequente ao cabeçalho
@@ -446,7 +445,7 @@
                 <li>O algoritmo de criptografia para proteger os dados;</li>
                 <li>Um algoritmo de hash para assinatura digital;</li>
                 <li>Um método de autenticação para assinar o hash; </li>
-                <li>Especificação da função pseudorrandômica para fazer o hash de certos.</li>
+                <li>Especificação da função pseudorrandômica usada como base para algoritmos criptográficos.</li>
             </ul>
 
 
@@ -458,7 +457,7 @@
 
             <p>A SA IPsec, por sua vez, é uma conexão lógica unidirecional, ou seja, caso duas
             entidades necessitem trocar datagramas IPsec, duas SAs serão necessárias (uma para cada direção), como ilustra
-            a figura <a href="#sa-pic">4.2.1</a>. Uma SA contém informações sobre origem
+            a figura <a href="#sa-pic">4.1</a>. Uma SA contém informações sobre origem
             e destino de um datagrama, o tipo de criptografia a ser usada a chave de criptografia, o tipo de verificação
             de integridade (seção <a href="#criptografia">2</a>), a chave de autenticação e um índice que identifica a SA
             (Índice de Parâmetros de Segurança - SPI). Para guardar todas essas informações, cada entidade mantém dois
@@ -467,7 +466,7 @@
             <figure id="sa-pic" align="center">
                 <img src="img/sa.png" style="width:50%">
                 <figcaption>
-                    Figura 4.2.1: Uma ilustração da conexão lógica e unidirecional conhecida por SA.
+                    Figura 4.1: Uma ilustração da conexão lógica e unidirecional conhecida por SA.
                     Adaptada de [<a href="#CAMILO">10</a>]
                 </figcaption>
             </figure>
@@ -538,13 +537,13 @@
             para a transição de IPv4 para IPv6. Porém, o geralmente acontece na prática é o uso de NAT com outras opções
             de segurança (que é geralmente a solução mais simples e barata).</p>
 
-            A figura <a href="#transp-ah-esp">5.5.1</a> mostra o datagrama no modo transporte dos dois protocolos de segurança. 
+            A figura <a href="#transp-ah-esp">5.1.1</a> mostra o datagrama no modo transporte dos dois protocolos de segurança. 
             Também indica os campos que são protegidos com criptografia e os que são protegidos com autenticação e integridade.
 
             <figure id="transp-ah-esp" align="center">
                     <img src="img/modo-transporte.png" style="width:110%">
                     <figcaption>
-                        Figura 5.5.1:  Estrutura de um datagrama IP no modo transporte. Acima, o datagrama protegido pelo AH.
+                        Figura 5.1.1:  Estrutura de um datagrama IP no modo transporte. Acima, o datagrama protegido pelo AH.
                         Abaixo, o datagrama protegido pelo ESP. Notar que o protocolo AH protege todo o datagrama.
                     </figcaption>
             </figure>
