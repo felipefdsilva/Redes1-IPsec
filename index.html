@@ -623,23 +623,25 @@
             posteriormente pelo IKE para autenticar as entidades entre si e encriptar mensagens da etapa negociação de parâmetros
             de segurança do IPsec.</p>
 
-            <p><b>3 - Quais a principal crítica feita ao IPsec?</b></p>
+            <!--p><b>3 - Quais a principal crítica feita ao IPsec?</b></p>
             <p>Sua complexidade. Afirma-se que por ter muitas configurações, pode possuir também várias inconsistências, que
-            servem como brechas para ataques. </p>
+            servem como brechas para ataques.</p-->
 
-            <p><b>4 - Porque o IPsec é, em muitas configurações, incompatível com o NAT?</b></p>
+            <p><b>3 - Porque o IPsec é, em muitas configurações, incompatível com o NAT?</b></p>
             <p>Seus protocolos de segurança protegem campos do cabeçalho IP, que são alterados pelo NAT. O NAT é um sistema
             que permite que várias entidades em uma mesma rede local (cada uma com um IP não roteável) utilize apenas um IP
             público para conexão com a Internet. Como o IPsec foi idealizado como um recurso exclusivo do IPv6, que teve seu
             avanço atrasado pelo NAT, afirma-se que essa incompatibilidade é intencional.</p>
 
-            <p><b>5 - Quais são os modos de operação do IPsec e suas características? Dê um exemplo de aplicação do
-            protocolo.</b></p>
-            <p>Modo Transporte e Módo Túnel. No primeiro, o cabeçalho IP do datagrama original não é alterado, e somente o
-            resto do conteúdo é encapsulado pelos protocolos de segurança (AH/ESP). Já no Modo Túnel, o datagrama é completamente
-            encapsulado, e um novo cabeçalho IP é adicionado. Uma aplicação comum do IPsec é na realização de VPNs.</p>
+            <p><b>4 - Quais são os modos de operação do IPsec e suas características? Em qual arquitetura cada modo é mais 
+            usado?</b></p>
+            <p>Modo Transporte e Modo Túnel. No primeiro, o cabeçalho IP do datagrama original não é alterado, e somente o
+            resto do conteúdo é encapsulado pelos protocolos de segurança (AH/ESP), sendo mais usado em comunicações 
+            hospedeiro-a-hospedeiro (host-to-host). Já no Modo Túnel, o datagrama é completamente
+            encapsulado, e um novo cabeçalho IP é adicionado. Geralmente utilizado na arquitetura roteador-a-roteador
+            (gateway-to-gateway).</p>
 
-            <p><b>6 - Quais são os bancos de dados do IPsec? Como eles são utilizados na troca de mensagens?</b></p>
+            <p><b>5 - Quais são os bancos de dados do IPsec? Como eles são utilizados na troca de mensagens?</b></p>
             <p>SPD e SAD. O SPD funciona como um firewall, especificando para a entidade qual ação deverá ser tomada
             em relação ao datagrama em análise. Caso o datagrama seja IPsec, o SPD aciona o SAD para realização dos Algoritmos
             de segurança para leitura/transmissão.</p>
