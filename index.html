@@ -21,9 +21,10 @@
 
         <center>
             <h1>IPsec - Segurança na Camada de Rede</h1>
-            <h3>Felipe Ferreira, Silvia Caroline, William Macedo</h3>
+            <h3>Felipe Ferreira<sup>1</sup>, Silvia Caroline<sup>2</sup>, William Macedo<sup>1</sup></h3>
             <h4>Redes de Computadores I - 2018.1</h4>
-            <h4>Engenharia Eletrônica e de Computação</h4>
+            <h4><sup>1</sup> Engenharia Eletrônica e de Computação</h4>
+            <h4><sup>2</sup> Engenharia de Computação e Informação</h4>
             <h4>Departamento de Engenharia Eletrônica</h4>
         </center>
     </head>
@@ -74,12 +75,24 @@
                             <a class="nav" class="nav-link js-scroll-trigger" href="#finais">6. Considerações Finais</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav" class="nav-link js-scroll-trigger" href="#referencias">7. Referências</a>
+                            <a class="nav" class="nav-link js-scroll-trigger" href="#qea">7. Questões e Respostas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav" class="nav-link js-scroll-trigger" href="#referencias">8. Referências</a>
                         </li>
                     </ul>
                 </div>
         </nav>
 
+        <div>
+            <h2>Resumo</h2>
+            <p>Este trabalho aborda o tema de segurança da informação apresentando um estudo sobre o IPsec, um sistema de segurança 
+            da camada de rede do modelo TCP/IP da pilha de protocolos. Apresenta conceitos básicos de criptografia, que servem 
+            como base para os termos que aparecerem por todo restante do texto, como assinatura digital e o próprio ato de criptografar 
+            uma mensagem. Ilustra e define os campos dos protocolos de segurança usados pelo IPsec e seus modos de funcionamento.
+            Descreve também o funcionamento de seu protocolo de gerenciamento de chaves de segurança. Apresenta algumas questões que 
+            prejudicam a ampla adoção do sistema e cita alternativas mais populares.</p>
+        </div>
         <div>
             <h2 id="intro">
                 1. Introdução
@@ -590,6 +603,36 @@
             seria melhorado com a retirada do protocolo AH e alteração do protocolo ESP para opcionalmente proteger 
             campos não mutáveis do cabeçalho IP. Também argumentam que o modo transporte não tem razão de ser, pois 
             o modo túnel pode atender às mesmas finalidades (com um pequeno custo de um cabeçalho IP a mais).</p>
+        </div>
+
+        <div>
+            <h2 id="qea">
+                Questões e Respostas
+            </h2>
+            <p><b>1 -Quais os principais protocolos de segurança do IPsec? Quais são suas características principais?</b></p>
+
+            <ul>
+                <li>Cabeçalho de Autenticação (AH) - protocolo que oferece serviços de autenticação da e verficação de integridade 
+                    da mensagem. Protege campos não mutáveis do cabeçalho IP. Não oferece o serviço de criptografia.</li>
+                <li>Encapsulamento de Dados de Segurança (ESP): Oferece autenticação (da mensagem e do emissor), verificação 
+                    de integridade e sigilo (através de criptografia). Não protege o cabeçalho IP.
+                </li>
+            </ul>
+            <p><b>2- Qual objetivo do algoritmo Diffie-Hellman utilizado pelo protocolo IKE?</b></p>
+            <p>Possibilitar que duas entidades troquem segredos de forma sigilosa em um canal inseguro. Esse segredo é usado 
+            posteriormente pelo IKE para autenticar as entidades entre si e encriptar mensagens da etapa negociação de parâmetros 
+            de segurança do IPsec.</p>
+
+            <p><b>3- Quais a principal crítica feita ao IPsec?</b></p>
+            <p>Sua complexidade. Afirma-se que por ter muitas configurações, pode possuir também várias inconsistências, que 
+            servem como brechas para ataques. </p>
+
+            <p><b>4- Porque o IPsec é, em muitas configurações, incompatível com o NAT?</b></p>
+            <p>Seus protocolos de segurança protegem campos do cabeçalho IP, que são alterados pelo NAT. O NAT é um sistema 
+            que permite que várias entidades em uma mesma rede local (cada uma com um IP não roteável) utilize apenas um IP 
+            público para conexão com a Internet. Como o IPsec foi idealizado como um recurso exclusivo do IPv6, que teve seu
+            avanço atrasado pelo NAT, afirma-se que essa incompatibilidade é intencional.</p>
+
         </div>
 
         <div>
